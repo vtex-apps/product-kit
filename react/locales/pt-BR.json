@@ -1,0 +1,11 @@
+{
+  "editor.productKit.title": "Kit de Produtos",
+  "editor.productKit.description": "O componente de kit de produtos exibe uma lista horizontal de produtos que pertencem ao kit",
+  "editor.productKit.showListPrice": "Mostrar lista de preços",
+  "editor.productKit.showLabels": "Mostrar rótulos",
+  "editor.productKit.showInstallments": "Mostrar parcelamentos",
+  "editor.productKit.showBadge": "Mostrar badge",
+  "editor.productKit.badgeText": "Texto da badge",
+  "productKit.numberOfProductsTitle": "Compre os {numberOfItems} produtos",
+  "productKit.buyTogether": "Comprar Junto"
+}
