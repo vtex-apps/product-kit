@@ -91,24 +91,22 @@ export default class ProductKit extends Component {
     } = this.props
 
     return (
-      <div className="vtex-product-kit flex items-center justify-center">
-        <div className="inline-flex items-center">
-          {
-            products.slice(0, DEFAULT_MAX_ITEMS).map((product, index) => (
-              <Fragment key={index}>
-                { index > 0 &&
-                  <ProductKitSeparator>
-                    <span>+</span>
-                  </ProductKitSeparator>
-                }
-                <ProductKitItem
-                  product={product}
-                  summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
-                />
-              </Fragment>
-            ))
-          }
-        </div>
+      <div className="vtex-product-kit inline-flex items-center justify-center">
+        {
+          products.slice(0, DEFAULT_MAX_ITEMS).map((product, index) => (
+            <Fragment key={index}>
+              { index > 0 &&
+                <ProductKitSeparator>
+                  <span>+</span>
+                </ProductKitSeparator>
+              }
+              <ProductKitItem
+                product={product}
+                summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
+              />
+            </Fragment>
+          ))
+        }
         <ProductKitSeparator>
           <span>=</span>
         </ProductKitSeparator>
