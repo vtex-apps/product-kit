@@ -16,7 +16,7 @@
   ],
   "settingsSchema": {},
   "scripts": {
-    "postreleasy": "vtex publish --public"
+    "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
     "vtex.product-summary": "0.x",

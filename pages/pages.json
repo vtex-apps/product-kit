@@ -1,7 +1,7 @@
 {
   "pages": {
     "product-kit": {
-      "path": "/product-kit"
+      "path": "/_v/product-kit"
     }
   },
   "extensions": {

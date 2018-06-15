@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import ProductSummary from 'vtex.product-summary/ProductSummary'
+import { ProductSummary } from 'vtex.product-summary'
 
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'

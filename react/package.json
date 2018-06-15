@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@vtex/styleguide": "^4.1.0"
+    "@vtex/styleguide": "4.x"
   }
 }

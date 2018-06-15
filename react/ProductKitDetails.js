@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 
 import { FormattedMessage } from 'react-intl'
 
-import ProductPrice from 'vtex.store-components/ProductPrice'
-import BuyButton from 'vtex.store-components/BuyButton'
+import { ProductPrice, BuyButton } from 'vtex.store-components'
 
 /**
  * Product Kit Details component.
