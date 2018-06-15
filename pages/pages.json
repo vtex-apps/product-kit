@@ -1,0 +1,12 @@
+{
+  "pages": {
+    "product-kit": {
+      "path": "/product-kit"
+    }
+  },
+  "extensions": {
+    "product-kit": {
+      "component": "ProductKit"
+    }
+  }
+}
