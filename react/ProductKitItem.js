@@ -26,7 +26,7 @@ export default class ProductKitItem extends Component {
         <ProductSummary
           product={product}
           {...summaryProps}
-          hideBuyButton={true}
+          hideBuyButton
         />
       </div>
     )
