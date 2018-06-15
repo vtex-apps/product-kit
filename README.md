@@ -14,14 +14,9 @@ You can check if others are experiencing similar issues [here](https://github.co
 | ------------------ | ----------------- | -------------------------------------------------------------------- |
 | `price`            | `Number!`         | Price of the kit                                                     |
 | `products`         | `Array(Product)!` | Array of products which composes the kit                             |
-| `summaryProps`     | `Shape`           | Props of the Product Summary component                               |
+| `showListPrice`    | `Boolean`         | Shows the product list price                                         |
+| `showLabels`       | `Boolean`         | Set pricing label's visibility                                       |
+| `showInstallments` | `Boolean`         | Set installment's visibility                                         |
+| `showBadge`        | `Boolean`         | Set the discount badge's visibility                                  |
+| `badgeText`        | `String`          | Text shown on badge                                                  |
 
-### Summary Props
-
-| Prop name          | Type       | Description                                                                 |
-| ------------------ | ---------- | --------------------------------------------------------------------------- |
-| `showListPrice`    | `Boolean`  | Shows the product list price                                                |
-| `showLabels`       | `Boolean`  | Set pricing labels' visibility                                              |
-| `showInstallments` | `Boolean`  | Set installments' visibility                                                |
-| `showBadge`        | `Boolean`  | Set the discount badge's visibility                                         |
-| `badgeText`        | `String`   | Text shown on badge                                                         |

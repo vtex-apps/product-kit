@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { ProductSummary } from 'vtex.product-summary'
@@ -23,45 +23,79 @@ export default class ProductKit extends Component {
     products: PropTypes.arrayOf(
       ProductSummary.propTypes.product
     ).isRequired,
-    /** Props of the Product Summary component */
-    summaryProps: PropTypes.shape({
-      /** Shows the product list price */
-      showListPrice: PropTypes.bool,
-      /** Set pricing labels' visibility */
-      showLabels: PropTypes.bool,
-      /** Set installments' visibility  */
-      showInstallments: PropTypes.bool,
-      /** Set the discount badge's visibility */
-      showBadge: PropTypes.bool,
-      /** Text shown on badge */
-      badgeText: PropTypes.string,
-    }),
+    /** Shows the product list price */
+    showListPrice: PropTypes.bool,
+    /** Set pricing labels' visibility */
+    showLabels: PropTypes.bool,
+    /** Set installments' visibility  */
+    showInstallments: PropTypes.bool,
+    /** Set the discount badge's visibility */
+    showBadge: PropTypes.bool,
+    /** Text shown on badge */
+    badgeText: PropTypes.string,
   }
 
   static defaultProps = {
     price: 0,
     products: [],
-    summaryProps: {
-      showListPrice: true,
-      showLabels: false,
-      showInstallments: false,
-      showBadge: false,
-      badgeText: '',
-    },
+    showListPrice: true,
+    showLabels: false,
+    showInstallments: false,
+    showBadge: false,
+    badgeText: '',
+  }
+
+  static getSchema = ({ showBadge }) => {
+    return {
+      title: 'editor.productKit.title',
+      description: 'editor.productKit.description',
+      type: 'object',
+      properties: {
+        showListPrice: {
+          type: 'boolean',
+          title: 'editor.productKit.showListPrice',
+          default: true,
+        },
+        showLabels: {
+          type: 'boolean',
+          title: 'editor.productKit.showLabels',
+          default: false,
+        },
+        showInstallments: {
+          type: 'boolean',
+          title: 'editor.productKit.showInstallments',
+          default: false,
+        },
+        showBadge: {
+          type: 'boolean',
+          title: 'editor.productKit.showBadge',
+          default: false,
+        },
+        badgeText: showBadge ? {
+          type: 'string',
+          title: 'editor.productKit.badgeText',
+        } : {},
+      },
+    }
   }
 
   render() {
     const {
       price,
       products,
-      summaryProps,
+      showListPrice,
+      showLabels,
+      showInstallments,
+      showBadge,
+      badgeText,
     } = this.props
+
     return (
       <div className="vtex-product-kit flex items-center justify-center">
-        <div className="inline-flex">
+        <div className="inline-flex items-center">
           {
             products.slice(0, DEFAULT_MAX_ITEMS).map((product, index) => (
-              <div className="flex items-center" key={index}>
+              <Fragment key={index}>
                 { index > 0 &&
                   <ProductKitSeparator>
                     <span>+</span>
@@ -69,9 +103,9 @@ export default class ProductKit extends Component {
                 }
                 <ProductKitItem
                   product={product}
-                  summaryProps={summaryProps}
+                  summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
                 />
-              </div>
+              </Fragment>
             ))
           }
         </div>

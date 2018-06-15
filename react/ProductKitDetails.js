@@ -29,9 +29,9 @@ export default class ProductKitDetails extends PureComponent {
     } = this.props
 
     return (
-      <div className="vtex-product-kit__details flex flex-column items-center justify-center">
+      <div className="vtex-product-kit__details flex flex-column items-center justify-center mh7">
         <FormattedMessage
-          id="product-kit.numberOfProductsTitle"
+          id="productKit.numberOfProductsTitle"
           values={{ numberOfItems }}
         />
         <div className="pv4">
@@ -43,7 +43,7 @@ export default class ProductKitDetails extends PureComponent {
         </div>
         <BuyButton>
           <FormattedMessage
-            id="product-kit.buyTogether"
+            id="productKit.buyTogether"
           />
         </BuyButton>
       </div>

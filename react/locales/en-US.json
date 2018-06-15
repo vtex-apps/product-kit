@@ -1,4 +1,11 @@
 {
-  "product-kit.numberOfProductsTitle": "Buy this {numberOfItems} products",
-  "product-kit.buyTogether": "Buy Together"
+  "editor.productKit.title": "Product Kit",
+  "editor.productKit.description": "The Product Kit component display a horizontal list of Products of the kit",
+  "editor.productKit.showListPrice": "Show list price",
+  "editor.productKit.showLabels": "Show labels",
+  "editor.productKit.showInstallments": "Show installments",
+  "editor.productKit.showBadge": "Show badge",
+  "editor.productKit.badgeText": "Badge Text",
+  "productKit.numberOfProductsTitle": "Buy this {numberOfItems} products",
+  "productKit.buyTogether": "Buy Together"
 }
