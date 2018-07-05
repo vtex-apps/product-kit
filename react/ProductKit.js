@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-
-import { ProductSummary } from 'vtex.product-summary'
 
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 import ProductKitSeparator from './ProductKitSeparator'
+
+import ProductKitPropTypes from './propTypes'
 
 import './global.css'
 
@@ -15,29 +14,10 @@ const DEFAULT_MAX_ITEMS = 3
  * Product Kit component.
  * Display a horizontal list of items which composes a kit.
  */
-export default class ProductKit extends Component {
-  static propTypes = {
-    /** Price of the kit */
-    price: PropTypes.number.isRequired,
-    /** Array of products which composes the kit */
-    products: PropTypes.arrayOf(
-      ProductSummary.propTypes.product
-    ).isRequired,
-    /** Shows the product list price */
-    showListPrice: PropTypes.bool,
-    /** Set pricing labels' visibility */
-    showLabels: PropTypes.bool,
-    /** Set installments' visibility  */
-    showInstallments: PropTypes.bool,
-    /** Set the discount badge's visibility */
-    showBadge: PropTypes.bool,
-    /** Text shown on badge */
-    badgeText: PropTypes.string,
-  }
+class ProductKit extends Component {
+  static propTypes = ProductKitPropTypes
 
   static defaultProps = {
-    price: 0,
-    products: [],
     showListPrice: true,
     showLabels: false,
     showInstallments: false,
@@ -79,10 +59,18 @@ export default class ProductKit extends Component {
     }
   }
 
+  calculateKitPrice = kitItems => {
+    let kitPrice = 0
+    kitItems.slice(0, DEFAULT_MAX_ITEMS).map(kitItem => {
+      const { discount, product: { items: [ { sellers: [ { commertialOffer: { Price } } ] } ] } } = kitItem
+      kitPrice += Price * (100.0 - discount) / 100.0
+    })
+    return kitPrice
+  }
+
   render() {
     const {
-      price,
-      products,
+      kit,
       showListPrice,
       showLabels,
       showInstallments,
@@ -90,31 +78,37 @@ export default class ProductKit extends Component {
       badgeText,
     } = this.props
 
+    const kitItems = kit.items
+
     return (
-      <div className="vtex-product-kit inline-flex items-center justify-center">
-        {
-          products.slice(0, DEFAULT_MAX_ITEMS).map((product, index) => (
-            <Fragment key={index}>
-              { index > 0 &&
-                <ProductKitSeparator>
-                  <span>+</span>
-                </ProductKitSeparator>
-              }
-              <ProductKitItem
-                product={product}
-                summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
-              />
-            </Fragment>
-          ))
-        }
-        <ProductKitSeparator>
-          <span>=</span>
-        </ProductKitSeparator>
-        <ProductKitDetails
-          numberOfItems={products.length}
-          price={price}
-        />
+      <div className="vtex-product-kit flex items-center justify-center">
+        <div className="inline-flex items-center justify-center">
+          {
+            kitItems.slice(0, DEFAULT_MAX_ITEMS).map((item, index) => (
+              <Fragment key={index}>
+                { index > 0 &&
+                  <ProductKitSeparator>
+                    <span>+</span>
+                  </ProductKitSeparator>
+                }
+                <ProductKitItem
+                  product={item.product}
+                  summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
+                />
+              </Fragment>
+            ))
+          }
+          <ProductKitSeparator>
+            <span>=</span>
+          </ProductKitSeparator>
+          <ProductKitDetails
+            numberOfItems={Math.min(DEFAULT_MAX_ITEMS, kitItems.length)}
+            price={this.calculateKitPrice(kitItems)}
+          />
+        </div>
       </div>
     )
   }
 }
+
+export default ProductKit
