@@ -87,7 +87,7 @@ class ProductKit extends Component {
     const kitItems = benefit.items
 
     return (
-      <div className="vtex-product-kit flex flex-column items-center justify-center dn db-ns">
+      <div className="vtex-product-kit flex flex-column items-center justify-center">
         <h1 className="pv3 ph3">
           <FormattedMessage id="productKit.buyTogether" />
         </h1>
