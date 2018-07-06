@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import propTypes from './propTypes'
 import { ProductSummary } from 'vtex.product-summary'
 
 /**
@@ -10,7 +11,7 @@ import { ProductSummary } from 'vtex.product-summary'
 export default class ProductKitItem extends Component {
   static propTypes = {
     /** Product to be displayed as an item of the kit */
-    product: ProductSummary.propTypes.product,
+    product: propTypes.product,
     /** Props of Product Summary */
     summaryProps: PropTypes.any.isRequired,
   }

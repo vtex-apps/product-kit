@@ -7,6 +7,7 @@ import ProductKitSeparator from './ProductKitSeparator'
 import ProductKitPropTypes from './propTypes'
 
 import './global.css'
+import { FormattedMessage } from 'react-intl';
 
 const DEFAULT_MAX_ITEMS = 3
 
@@ -70,7 +71,7 @@ class ProductKit extends Component {
 
   render() {
     const {
-      kit,
+      product,
       showListPrice,
       showLabels,
       showInstallments,
@@ -78,10 +79,18 @@ class ProductKit extends Component {
       badgeText,
     } = this.props
 
-    const kitItems = kit.items
+    if (!product.benefits.length) {
+      return ( <Fragment></Fragment> )
+    }
+
+    const { benefits: [ benefit] } = product
+    const kitItems = benefit.items
 
     return (
-      <div className="vtex-product-kit flex items-center justify-center">
+      <div className="vtex-product-kit flex flex-column items-center justify-center">
+        <h1 className="pv3 ph3">
+          <FormattedMessage id="productKit.buyTogether" />
+        </h1>
         <div className="inline-flex items-center justify-center">
           {
             kitItems.slice(0, DEFAULT_MAX_ITEMS).map((item, index) => (
