@@ -9,11 +9,11 @@ import ProductKitPropTypes from './propTypes'
 import './global.css'
 import { FormattedMessage } from 'react-intl';
 
-const DEFAULT_MAX_ITEMS = 3
+const MAX_ITEMS = 3
 
 /**
  * Product Kit component.
- * Display a horizontal list of items which composes a kit.
+ * Display a list of items which composes a kit.
  */
 class ProductKit extends Component {
   static propTypes = ProductKitPropTypes
@@ -65,11 +65,53 @@ class ProductKit extends Component {
     }
   }
 
-  calculateKitPrice = kitItems => {
+  /**
+   * Extract and format the required information of a Product to be used into the 
+   * ProductKitItem component.
+   */
+  prepareProduct = kitProduct => {
+    const { benefitProduct, discount } = kitProduct
+    const newProduct = { ...benefitProduct }
+
+    if (newProduct.items && newProduct.items.length) {
+      newProduct.sku = { ...newProduct.items[0] }
+      if (newProduct.sku.sellers && newProduct.sku.sellers.length) {
+        newProduct.sku.seller = newProduct.sku.sellers[0]
+      } else {
+        newProduct.sku.seller = {
+          commertialOffer: {
+            Price: 0,
+            ListPrice: 0,
+          },
+        }
+      }
+      if (newProduct.sku.images && newProduct.sku.images.length) {
+        newProduct.sku.image = { ...newProduct.sku.images[0] }
+        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl
+          .replace('http:', '')
+          .replace('https:', '')
+      }
+      newProduct.sku.referenceId = (newProduct.sku.referenceId &&
+        newProduct.sku.referenceId[0]) || {
+        Value: '',
+      }
+      delete newProduct.sku.sellers
+      delete newProduct.sku.images
+      delete newProduct.items
+    }
+    
+    return { ...newProduct, discount }
+  }
+
+  /**
+   * Calculates the Kit Price according to the products that are being displayed. 
+   * The price itself is calculated based on the discount that each product have separately.
+   */
+  calculatePrice = kitProducts => {
     let kitPrice = 0
-    kitItems.slice(0, DEFAULT_MAX_ITEMS).map(kitItem => {
-      const { discount, product: { items: [ { sellers: [ { commertialOffer: { Price } } ] } ] } } = kitItem
-      kitPrice += Price * (100.0 - discount) / 100.0
+    kitProducts.map(kitProduct => {
+      const price = kitProduct.sku.seller.commertialOffer.Price
+      kitPrice += price * (100.0 - kitProduct.discount) / 100.0
     })
     return kitPrice
   }
@@ -85,20 +127,25 @@ class ProductKit extends Component {
     } = this.props
 
     if (!product.benefits.length) {
-      return ( <Fragment></Fragment> )
+      return ( 
+        <Fragment></Fragment>
+      )
     }
 
-    const { benefits: [ benefit] } = product
-    const kitItems = benefit.items
+    const { benefits: [ benefit ] } = product
+    
+    const kitProducts = benefit.items.slice(0, MAX_ITEMS).map(item => (
+      this.prepareProduct(item)
+    ))
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center">
         <h1 className="pv3 ph3">
           <FormattedMessage id="productKit.buyTogether" />
         </h1>
-        <div className="inline-flex items-center justify-center">
+        <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
           {
-            kitItems.slice(0, DEFAULT_MAX_ITEMS).map((item, index) => (
+            kitProducts.map((kitProduct, index) => (
               <Fragment key={index}>
                 { index > 0 &&
                   <ProductKitSeparator>
@@ -106,9 +153,16 @@ class ProductKit extends Component {
                   </ProductKitSeparator>
                 }
                 <ProductKitItem
-                  product={item.product}
-                  summaryProps={{ showListPrice, showLabels, showInstallments, showBadge, badgeText }}
-                />
+                  product={kitProduct}
+                  summaryProps={
+                    { 
+                      showListPrice, 
+                      showLabels, 
+                      showInstallments,
+                      showBadge, 
+                      badgeText,
+                    }
+                  } />
               </Fragment>
             ))
           }
@@ -116,9 +170,8 @@ class ProductKit extends Component {
             <span>=</span>
           </ProductKitSeparator>
           <ProductKitDetails
-            numberOfItems={Math.min(DEFAULT_MAX_ITEMS, kitItems.length)}
-            price={this.calculateKitPrice(kitItems)}
-          />
+            numberOfItems={kitProducts.length}
+            price={this.calculatePrice(kitProducts)} />
         </div>
       </div>
     )
