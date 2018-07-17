@@ -4,7 +4,7 @@ import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 import ProductKitSeparator from './ProductKitSeparator'
 
-import ProductKitPropTypes from './propTypes'
+import ProductKitPropTypes from './productKitPropTypes'
 
 import './global.css'
 import { FormattedMessage } from 'react-intl';
@@ -70,7 +70,7 @@ class ProductKit extends Component {
    * ProductKitItem component.
    */
   prepareProduct = kitProduct => {
-    const { benefitProduct, discount } = kitProduct
+    const { benefitProduct, discount, minQuantity } = kitProduct
     const newProduct = { ...benefitProduct }
 
     if (newProduct.items && newProduct.items.length) {
@@ -87,9 +87,7 @@ class ProductKit extends Component {
       }
       if (newProduct.sku.images && newProduct.sku.images.length) {
         newProduct.sku.image = { ...newProduct.sku.images[0] }
-        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl
-          .replace('http:', '')
-          .replace('https:', '')
+        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl.replace(/^https?:/, '')
       }
       newProduct.sku.referenceId = (newProduct.sku.referenceId &&
         newProduct.sku.referenceId[0]) || {
@@ -100,20 +98,7 @@ class ProductKit extends Component {
       delete newProduct.items
     }
     
-    return { ...newProduct, discount }
-  }
-
-  /**
-   * Calculates the Kit Price according to the products that are being displayed. 
-   * The price itself is calculated based on the discount that each product have separately.
-   */
-  calculatePrice = kitProducts => {
-    let kitPrice = 0
-    kitProducts.map(kitProduct => {
-      const price = kitProduct.sku.seller.commertialOffer.Price
-      kitPrice += price * (100.0 - kitProduct.discount) / 100.0
-    })
-    return kitPrice
+    return { ...newProduct, discount, minQuantity }
   }
 
   render() {
@@ -127,16 +112,11 @@ class ProductKit extends Component {
     } = this.props
 
     if (!product.benefits.length) {
-      return ( 
-        <Fragment></Fragment>
-      )
+      return null
     }
 
     const { benefits: [ benefit ] } = product
-    
-    const kitProducts = benefit.items.slice(0, MAX_ITEMS).map(item => (
-      this.prepareProduct(item)
-    ))
+    const kitProducts = benefit.items.slice(0, MAX_ITEMS).map(this.prepareProduct)
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center">
@@ -147,7 +127,8 @@ class ProductKit extends Component {
           {
             kitProducts.map((kitProduct, index) => (
               <Fragment key={index}>
-                { index > 0 &&
+                { 
+                  index > 0 &&
                   <ProductKitSeparator>
                     <span>+</span>
                   </ProductKitSeparator>
@@ -162,16 +143,15 @@ class ProductKit extends Component {
                       showBadge, 
                       badgeText,
                     }
-                  } />
+                  }
+                />
               </Fragment>
             ))
           }
           <ProductKitSeparator>
             <span>=</span>
           </ProductKitSeparator>
-          <ProductKitDetails
-            numberOfItems={kitProducts.length}
-            price={this.calculatePrice(kitProducts)} />
+          <ProductKitDetails kitProducts={kitProducts} />
         </div>
       </div>
     )
