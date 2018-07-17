@@ -11,8 +11,9 @@ export default {
   showBadge: PropTypes.bool,
   /** Text shown on badge */
   badgeText: PropTypes.string,
-  /** Main Product of the Kit */
+  /** Product Query Data */
   productQuery: PropTypes.shape({
+    /** Main Product of the Kit */
     product: PropTypes.shape({
       /** Product's id */
       productId: PropTypes.string.isRequired,
