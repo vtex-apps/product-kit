@@ -103,7 +103,7 @@ class ProductKit extends Component {
 
   render() {
     const {
-      product,
+      productQuery: { product },
       showListPrice,
       showLabels,
       showInstallments,
