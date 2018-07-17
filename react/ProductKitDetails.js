@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
 import { FormattedMessage } from 'react-intl'
 
+import propTypes from './productKitItemPropTypes'
 import { ProductPrice, BuyButton } from 'vtex.store-components'
+
 
 /**
  * Product Kit Details component.
@@ -11,40 +12,58 @@ import { ProductPrice, BuyButton } from 'vtex.store-components'
  */
 export default class ProductKitDetails extends PureComponent {
   static propTypes = {
-    /** Price of the kit */
-    price: PropTypes.number.isRequired,
-    /** Number of items in the kit */
-    numberOfItems: PropTypes.number.isRequired,
+    kitProducts: PropTypes.arrayOf(
+      propTypes.product
+    ).isRequired
   }
 
   static defaultProps = {
-    price: 0,
-    numberOfItems: 0,
+    kitProducts: [],
+  }
+
+  /**
+   * Calculates the Kit Price according to the products that are being displayed. 
+   * The price itself is calculated based on the discount that each product have separately.
+   */
+  calculatePrice = kitProducts => {
+    return kitProducts.reduce((kitPrice, kitProduct) => {
+      const price = kitProduct.sku.seller.commertialOffer.Price
+      return kitPrice + price * (100.0 - kitProduct.discount) / 100.0
+    }, 0)
+  }
+
+  /**
+   * Extract the information required of the KitProduct to be passed to the BuyButton 
+   * component.
+   */
+  getSkuItems = kitProducts => {
+    return kitProducts.map(kitProduct => {
+      return {
+        skuId: String(kitProduct.sku.itemId),
+        quantity: kitProduct.minQuantity,
+        seller: parseInt(kitProduct.sku.seller.sellerId),
+      }
+    })
   }
 
   render() {
-    const {
-      price,
-      numberOfItems,
-    } = this.props
+    const { kitProducts } = this.props
+    const numberOfItems = kitProducts.length
 
     return (
       <div className="vtex-product-kit__details flex flex-column items-center justify-center mh7">
         <FormattedMessage
           id="productKit.numberOfProductsTitle"
-          values={{ numberOfItems }}
-        />
+          values={{ numberOfItems }} />
         <div className="pv4">
           <ProductPrice
-            sellingPrice={price}
+            sellingPrice={this.calculatePrice(kitProducts)}
             showInstallments={false}
             showListPrice={false}
           />
         </div>
-        <BuyButton>
-          <FormattedMessage
-            id="productKit.buyTogether"
-          />
+        <BuyButton skuItems={this.getSkuItems(kitProducts)}>
+          <FormattedMessage id="productKit.buyTogether" />
         </BuyButton>
       </div>
     )
