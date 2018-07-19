@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - abstraction of received propTypes.
+- add loading validation before rendering component
 
 ## [0.1.1] - 2018-07-17
 ### Fixed
