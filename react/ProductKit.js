@@ -7,7 +7,7 @@ import ProductKitSeparator from './ProductKitSeparator'
 import ProductKitPropTypes from './productKitPropTypes'
 
 import './global.css'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl'
 
 const MAX_ITEMS = 3
 
@@ -56,17 +56,19 @@ class ProductKit extends Component {
           default: false,
           isLayout: true,
         },
-        badgeText: showBadge ? {
-          type: 'string',
-          title: 'editor.productKit.badgeText',
-          isLayout: false,
-        } : {},
+        badgeText: showBadge
+          ? {
+            type: 'string',
+            title: 'editor.productKit.badgeText',
+            isLayout: false,
+          }
+          : {},
       },
     }
   }
 
   /**
-   * Extract and format the required information of a Product to be used into the 
+   * Extract and format the required information of a Product to be used into the
    * ProductKitItem component.
    */
   prepareProduct = kitProduct => {
@@ -87,7 +89,10 @@ class ProductKit extends Component {
       }
       if (newProduct.sku.images && newProduct.sku.images.length) {
         newProduct.sku.image = { ...newProduct.sku.images[0] }
-        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl.replace(/^https?:/, '')
+        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl.replace(
+          /^https?:/,
+          ''
+        )
       }
       newProduct.sku.referenceId = (newProduct.sku.referenceId &&
         newProduct.sku.referenceId[0]) || {
@@ -97,13 +102,13 @@ class ProductKit extends Component {
       delete newProduct.sku.images
       delete newProduct.items
     }
-    
+
     return { ...newProduct, discount, minQuantity }
   }
 
   render() {
     const {
-      productQuery: { product },
+      productQuery: { product, loading },
       showListPrice,
       showLabels,
       showInstallments,
@@ -111,12 +116,16 @@ class ProductKit extends Component {
       badgeText,
     } = this.props
 
-    if (!product.benefits.length) {
+    if (loading || !product.benefits || product.benefits.length === 0) {
       return null
     }
 
-    const { benefits: [ benefit ] } = product
-    const kitProducts = benefit.items.slice(0, MAX_ITEMS).map(this.prepareProduct)
+    const {
+      benefits: [benefit],
+    } = product
+    const kitProducts = benefit.items
+      .slice(0, MAX_ITEMS)
+      .map(this.prepareProduct)
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center">
@@ -124,30 +133,25 @@ class ProductKit extends Component {
           <FormattedMessage id="productKit.buyTogether" />
         </h1>
         <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
-          {
-            kitProducts.map((kitProduct, index) => (
-              <Fragment key={index}>
-                { 
-                  index > 0 &&
-                  <ProductKitSeparator>
-                    <span>+</span>
-                  </ProductKitSeparator>
-                }
-                <ProductKitItem
-                  product={kitProduct}
-                  summaryProps={
-                    { 
-                      showListPrice, 
-                      showLabels, 
-                      showInstallments,
-                      showBadge, 
-                      badgeText,
-                    }
-                  }
-                />
-              </Fragment>
-            ))
-          }
+          {kitProducts.map((kitProduct, index) => (
+            <Fragment key={index}>
+              {index > 0 && (
+                <ProductKitSeparator>
+                  <span>+</span>
+                </ProductKitSeparator>
+              )}
+              <ProductKitItem
+                product={kitProduct}
+                summaryProps={{
+                  showListPrice,
+                  showLabels,
+                  showInstallments,
+                  showBadge,
+                  badgeText,
+                }}
+              />
+            </Fragment>
+          ))}
           <ProductKitSeparator>
             <span>=</span>
           </ProductKitSeparator>
