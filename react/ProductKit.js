@@ -116,7 +116,7 @@ class ProductKit extends Component {
       badgeText,
     } = this.props
 
-    if (loading || !product.benefits || product.benefits.length === 0) {
+    if (loading || !product.benefits || !product.benefits.length) {
       return null
     }
 
