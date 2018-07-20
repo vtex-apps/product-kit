@@ -108,7 +108,7 @@ class ProductKit extends Component {
 
   render() {
     const {
-      productQuery: { product, loading },
+      productQuery: { product },
       showListPrice,
       showLabels,
       showInstallments,
@@ -116,7 +116,7 @@ class ProductKit extends Component {
       badgeText,
     } = this.props
 
-    if (loading || !product.benefits || !product.benefits.length) {
+    if (!product || !product.benefits || !product.benefits.length) {
       return null
     }
 
