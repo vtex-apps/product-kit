@@ -2,3 +2,15 @@
   width: 40px;
   height: 40px;
 }
+
+.vtex-product-kit__details .vtex-price-list__container--loader {
+  height: 0;
+}
+
+.vtex-product-kit__details .vtex-price-installments--loader {
+  height: 0;
+}
+
+.vtex-product-kit__details .vtex-price-selling--loader {
+  height: 1.5em;
+}
