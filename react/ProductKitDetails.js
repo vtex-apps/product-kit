@@ -24,7 +24,6 @@ export default class ProductKitDetails extends PureComponent {
    * The price itself is calculated based on the discount that each product have separately.
    */
   calculatePrice = kitProducts => {
-    console.log('calculating')
     return kitProducts.reduce((kitPrice, kitProduct) => {
       const price = kitProduct.sku.seller.commertialOffer.Price
       return kitPrice + (price * (100.0 - kitProduct.discount)) / 100.0
