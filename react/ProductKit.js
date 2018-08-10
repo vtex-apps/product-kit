@@ -1,15 +1,16 @@
-import React, { Component, Fragment } from 'react'
+import './global.css';
 
-import ProductKitItem from './ProductKitItem'
-import ProductKitDetails from './ProductKitDetails'
-import ProductKitSeparator from './ProductKitSeparator'
+import { path } from 'ramda';
+import React, { Component, Fragment } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import ProductKitPropTypes from './productKitPropTypes'
-
-import './global.css'
-import { FormattedMessage } from 'react-intl'
+import ProductKitDetails from './ProductKitDetails';
+import ProductKitItem from './ProductKitItem';
+import ProductKitPropTypes from './productKitPropTypes';
+import ProductKitSeparator from './ProductKitSeparator';
 
 const MAX_ITEMS = 3
+const ITEMS_CONTENT_LOADER = 2
 
 /**
  * Product Kit component.
@@ -58,10 +59,10 @@ class ProductKit extends Component {
         },
         badgeText: showBadge
           ? {
-            type: 'string',
-            title: 'editor.productKit.badgeText',
-            isLayout: false,
-          }
+              type: 'string',
+              title: 'editor.productKit.badgeText',
+              isLayout: false,
+            }
           : {},
       },
     }
@@ -116,16 +117,18 @@ class ProductKit extends Component {
       badgeText,
     } = this.props
 
-    if (!product || !product.benefits || !product.benefits.length) {
+    const benefits = path(['benefits'], product)
+
+    if (benefits && benefits.length === 0) {
       return null
     }
 
-    const {
-      benefits: [benefit],
-    } = product
-    const kitProducts = benefit.items
-      .slice(0, MAX_ITEMS)
-      .map(this.prepareProduct)
+    const displayLoader = !path(['length'], benefits)
+    const kitProducts = displayLoader
+      ? Array(ITEMS_CONTENT_LOADER).fill(null)
+      : path(['0', 'items'], benefits)
+          .slice(0, MAX_ITEMS)
+          .map(this.prepareProduct)
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center">
@@ -137,7 +140,7 @@ class ProductKit extends Component {
             <Fragment key={index}>
               {index > 0 && (
                 <ProductKitSeparator>
-                  <span>+</span>
+                  <span>&#43;</span>
                 </ProductKitSeparator>
               )}
               <ProductKitItem
@@ -153,9 +156,12 @@ class ProductKit extends Component {
             </Fragment>
           ))}
           <ProductKitSeparator>
-            <span>=</span>
+            <span>&#61;</span>
           </ProductKitSeparator>
-          <ProductKitDetails kitProducts={kitProducts} />
+          <ProductKitDetails
+            loading={displayLoader}
+            kitProducts={kitProducts}
+          />
         </div>
       </div>
     )
