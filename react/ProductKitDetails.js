@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { BuyButton, ProductPrice } from 'vtex.store-components';
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+import { FormattedMessage } from 'react-intl'
+import { BuyButton, ProductPrice } from 'vtex.store-components'
 
-import propTypes from './productKitItemPropTypes';
+import propTypes from './productKitItemPropTypes'
 
 const priceLoaderStyles = {
   'vtex-price-list__container--loader': {
