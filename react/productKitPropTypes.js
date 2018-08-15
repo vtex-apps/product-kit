@@ -78,7 +78,7 @@ export default {
         PropTypes.shape({
           featured: PropTypes.bool.isRequired,
           name: PropTypes.string.isRequired,
-          items: PropTypes.arrayOf(
+          products: PropTypes.arrayOf(
             PropTypes.shape({
               product: PropTypes.shape({
                 /** Product id */
@@ -141,9 +141,9 @@ export default {
                   })
                 ).isRequired,
               }),
-            }),
+            })
           ),
-        }),
+        })
       ).isRequired,
     }),
   }).isRequired,

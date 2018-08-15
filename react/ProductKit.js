@@ -73,8 +73,8 @@ class ProductKit extends Component {
    * ProductKitItem component.
    */
   prepareProduct = kitProduct => {
-    const { benefitProduct, discount, minQuantity } = kitProduct
-    const newProduct = { ...benefitProduct }
+    const { product, discount, minimumQuantity } = kitProduct
+    const newProduct = { ...product }
 
     if (newProduct.items && newProduct.items.length) {
       newProduct.sku = { ...newProduct.items[0] }
@@ -104,7 +104,7 @@ class ProductKit extends Component {
       delete newProduct.items
     }
 
-    return { ...newProduct, discount, minQuantity }
+    return { ...newProduct, discount, minimumQuantity }
   }
 
   render() {
@@ -126,7 +126,7 @@ class ProductKit extends Component {
     const displayLoader = !path(['length'], benefits)
     const kitProducts = displayLoader
       ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : path(['0', 'items'], benefits)
+      : path(['0', 'products'], benefits)
           .slice(0, MAX_ITEMS)
           .map(this.prepareProduct)
 
