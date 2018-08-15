@@ -51,6 +51,6 @@ export default {
     /** Kit Discount applied to the product  */
     discount: PropTypes.number.isRequired,
     /** Minimum Quantity of the Product into the Kit */
-    minQuantity: PropTypes.number.isRequired,
+    minimumQuantity: PropTypes.number.isRequired,
   }),
 }

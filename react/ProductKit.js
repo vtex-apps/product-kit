@@ -1,13 +1,13 @@
-import './global.css';
+import './global.css'
 
-import { path } from 'ramda';
-import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { path } from 'ramda'
+import React, { Component, Fragment } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import ProductKitDetails from './ProductKitDetails';
-import ProductKitItem from './ProductKitItem';
-import ProductKitPropTypes from './productKitPropTypes';
-import ProductKitSeparator from './ProductKitSeparator';
+import ProductKitDetails from './ProductKitDetails'
+import ProductKitItem from './ProductKitItem'
+import ProductKitPropTypes from './productKitPropTypes'
+import ProductKitSeparator from './ProductKitSeparator'
 
 const MAX_ITEMS = 3
 const ITEMS_CONTENT_LOADER = 2
@@ -73,8 +73,8 @@ class ProductKit extends Component {
    * ProductKitItem component.
    */
   prepareProduct = kitProduct => {
-    const { benefitProduct, discount, minQuantity } = kitProduct
-    const newProduct = { ...benefitProduct }
+    const { product, discount, minimumQuantity } = kitProduct
+    const newProduct = { ...product }
 
     if (newProduct.items && newProduct.items.length) {
       newProduct.sku = { ...newProduct.items[0] }
@@ -104,7 +104,7 @@ class ProductKit extends Component {
       delete newProduct.items
     }
 
-    return { ...newProduct, discount, minQuantity }
+    return { ...newProduct, discount, minimumQuantity }
   }
 
   render() {
@@ -126,7 +126,7 @@ class ProductKit extends Component {
     const displayLoader = !path(['length'], benefits)
     const kitProducts = displayLoader
       ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : path(['0', 'items'], benefits)
+      : path(['0', 'products'], benefits)
           .slice(0, MAX_ITEMS)
           .map(this.prepareProduct)
 
