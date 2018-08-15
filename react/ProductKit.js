@@ -1,13 +1,13 @@
-import './global.css';
+import './global.css'
 
-import { path } from 'ramda';
-import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { path } from 'ramda'
+import React, { Component, Fragment } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import ProductKitDetails from './ProductKitDetails';
-import ProductKitItem from './ProductKitItem';
-import ProductKitPropTypes from './productKitPropTypes';
-import ProductKitSeparator from './ProductKitSeparator';
+import ProductKitDetails from './ProductKitDetails'
+import ProductKitItem from './ProductKitItem'
+import ProductKitPropTypes from './productKitPropTypes'
+import ProductKitSeparator from './ProductKitSeparator'
 
 const MAX_ITEMS = 3
 const ITEMS_CONTENT_LOADER = 2

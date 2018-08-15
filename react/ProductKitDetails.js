@@ -1,9 +1,21 @@
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { BuyButton, ProductPrice } from 'vtex.store-components'
 
 import propTypes from './productKitItemPropTypes'
-import { ProductPrice, BuyButton } from 'vtex.store-components'
+
+const priceLoaderStyles = {
+  'vtex-price-list__container--loader': {
+    height: 0,
+  },
+  'vtex-price-installments--loader': {
+    height: 0,
+  },
+  'vtex-price-selling--loader': {
+    height: '1.5em',
+  },
+}
 
 /**
  * Product Kit Details component.
@@ -56,6 +68,7 @@ export default class ProductKitDetails extends PureComponent {
         />
         <div className="pv4">
           <ProductPrice
+            styles={priceLoaderStyles}
             sellingPrice={!loading ? this.calculatePrice(kitProducts) : null}
             showInstallments={false}
             showListPrice={false}
