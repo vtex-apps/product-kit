@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- product SKU kit.
+- the possibility to display a specific SKU item as the a kit item.
 
 ## [0.2.0] - 2018-08-31
 ### Changed
