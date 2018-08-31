@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import ProductKitItemPropTypes from './productKitItemPropTypes'
+import React, { Component } from 'react'
 import { ProductSummary } from 'vtex.product-summary'
+
+import ProductKitItemPropTypes from '../prop-types/productKitItemPropTypes'
 
 /**
  * Product Kit Item component.
@@ -17,14 +17,11 @@ export default class ProductKitItem extends Component {
   }
 
   render() {
-    const {
-      product,
-      summaryProps,
-    } = this.props
+    const { product, summaryProps } = this.props
 
     return (
       <div className="vtex-product-kit__item">
-        <ProductSummary product={product} { ...summaryProps } hideBuyButton />
+        <ProductSummary product={product} {...summaryProps} hideBuyButton />
       </div>
     )
   }

@@ -4,10 +4,10 @@ import { path } from 'ramda'
 import React, { Component, Fragment } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import ProductKitDetails from './ProductKitDetails'
-import ProductKitItem from './ProductKitItem'
-import ProductKitPropTypes from './productKitPropTypes'
-import ProductKitSeparator from './ProductKitSeparator'
+import ProductKitDetails from './components/ProductKitDetails'
+import ProductKitItem from './components/ProductKitItem'
+import ProductKitSeparator from './components/ProductKitSeparator'
+import ProductKitPropTypes from './prop-types/productKitPropTypes'
 
 const MAX_ITEMS = 3
 const ITEMS_CONTENT_LOADER = 2
@@ -72,12 +72,13 @@ class ProductKit extends Component {
    * Extract and format the required information of a Product to be used into the
    * ProductKitItem component.
    */
-  prepareProduct = kitProduct => {
-    const { benefitProduct, discount, minQuantity } = kitProduct
+  prepareProductKit = productKit => {
+    const { benefitProduct, discount, minQuantity } = productKit
     const newProduct = { ...benefitProduct }
 
     if (newProduct.items && newProduct.items.length) {
       newProduct.sku = { ...newProduct.items[0] }
+      newProduct.productName = newProduct.sku.nameComplete
       if (newProduct.sku.sellers && newProduct.sku.sellers.length) {
         newProduct.sku.seller = newProduct.sku.sellers[0]
       } else {
@@ -107,6 +108,24 @@ class ProductKit extends Component {
     return { ...newProduct, discount, minQuantity }
   }
 
+  prepareProductSKUKit = productKit => {
+    let productSKUKit = []
+    productKit.forEach(productKitItem => {
+      const { benefitProduct: product, benefitSKUIds } = productKitItem
+      benefitSKUIds.forEach(skuId => {
+        product.items.forEach(item => {
+          if (skuId === item.itemId) {
+            productSKUKit.push({
+              ...productKitItem,
+              benefitProduct: { ...product, items: [item] },
+            })
+          }
+        })
+      })
+    })
+    return productSKUKit
+  }
+
   render() {
     const {
       productQuery: { product },
@@ -126,9 +145,9 @@ class ProductKit extends Component {
     const displayLoader = !path(['length'], benefits)
     const kitProducts = displayLoader
       ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : path(['0', 'items'], benefits)
+      : this.prepareProductSKUKit(path(['0', 'items'], benefits))
           .slice(0, MAX_ITEMS)
-          .map(this.prepareProduct)
+          .map(this.prepareProductKit)
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center">
