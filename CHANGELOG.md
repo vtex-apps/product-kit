@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-08-31
+### Changed
+- Update the `store-components` version.
+
 ## [0.1.6] - 2018-08-16
 ### Fixed
 - Content loader on Firefox.
