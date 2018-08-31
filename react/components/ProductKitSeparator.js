@@ -13,7 +13,7 @@ export default class ProductKitSeparator extends PureComponent {
 
   render() {
     return (
-      <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white br-100">
+      <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
         {this.props.children}
       </div>
     )
