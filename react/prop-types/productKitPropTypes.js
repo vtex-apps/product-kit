@@ -141,9 +141,9 @@ export default {
                   })
                 ).isRequired,
               }),
-            }),
+            })
           ),
-        }),
+        })
       ).isRequired,
     }),
   }).isRequired,

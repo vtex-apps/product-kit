@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
 /**
  * Product Kit Separator.
@@ -13,8 +13,8 @@ export default class ProductKitSeparator extends PureComponent {
 
   render() {
     return (
-      <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white br-100 bg-blue">
-        { this.props.children }
+      <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
+        {this.props.children}
       </div>
     )
   }
