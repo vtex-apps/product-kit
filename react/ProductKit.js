@@ -150,7 +150,7 @@ class ProductKit extends Component {
           .map(this.prepareProductKit)
 
     return (
-      <div className="vtex-product-kit flex flex-column items-center justify-center mb7">
+      <div className="vtex-product-kit vtex-page-padding flex flex-column items-center justify-center mb7">
         <h1 className="pv3 ph3">
           <FormattedMessage id="productKit.buyTogether" />
         </h1>
