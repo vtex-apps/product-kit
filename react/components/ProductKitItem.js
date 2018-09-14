@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { ProductSummary } from 'vtex.product-summary'
+import ProductSummary from 'vtex.product-summary/index'
 
 import ProductKitItemPropTypes from '../prop-types/productKitItemPropTypes'
 
