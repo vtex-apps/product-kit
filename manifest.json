@@ -19,7 +19,7 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
-    "vtex.product-summary": "0.x",
+    "vtex.product-summary": "1.x",
     "vtex.store-components": "2.x"
   }
 }
