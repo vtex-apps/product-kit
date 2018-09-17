@@ -18,11 +18,11 @@ export default {
       /** Main Product of the Kit */
       product: PropTypes.shape({
         /** Product's id */
-        productId: PropTypes.string.isRequired,
+        productId: PropTypes.string,
         /** Product's name */
-        productName: PropTypes.string.isRequired,
+        productName: PropTypes.string,
         /** Product's brand */
-        brand: PropTypes.string.isRequired,
+        brand: PropTypes.string,
         /** Product's SKUs */
         items: PropTypes.arrayOf(
           PropTypes.shape({

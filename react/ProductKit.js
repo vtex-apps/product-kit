@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import ProductKitDetails from './components/ProductKitDetails'
 import ProductKitItem from './components/ProductKitItem'
 import ProductKitSeparator from './components/ProductKitSeparator'
+import { extractItemsKit } from './helpers/ProductKitHelper'
 import ProductKitPropTypes from './prop-types/productKitPropTypes'
 import ProductKitSchema from './schema/productKitSchema'
 
@@ -23,64 +24,6 @@ class ProductKit extends Component {
   static defaultProps = ProductKitPropTypes.defaultProps
 
   static getSchema = ProductKitSchema
-
-  /**
-   * Extract and format the required information of a Product to be used into the
-   * ProductKitItem component.
-   */
-  prepareProductKit = productKit => {
-    const { benefitProduct, discount, minQuantity } = productKit
-    const newProduct = { ...benefitProduct }
-
-    if (newProduct.items && newProduct.items.length) {
-      newProduct.sku = { ...newProduct.items[0] }
-      newProduct.productName = newProduct.sku.nameComplete
-      if (newProduct.sku.sellers && newProduct.sku.sellers.length) {
-        newProduct.sku.seller = newProduct.sku.sellers[0]
-      } else {
-        newProduct.sku.seller = {
-          commertialOffer: {
-            Price: 0,
-            ListPrice: 0,
-          },
-        }
-      }
-      if (newProduct.sku.images && newProduct.sku.images.length) {
-        newProduct.sku.image = { ...newProduct.sku.images[0] }
-        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl.replace(
-          /^https?:/,
-          ''
-        )
-      }
-      newProduct.sku.referenceId = (newProduct.sku.referenceId &&
-        newProduct.sku.referenceId[0]) || {
-        Value: '',
-      }
-      delete newProduct.sku.sellers
-      delete newProduct.sku.images
-      delete newProduct.items
-    }
-
-    return { ...newProduct, discount, minQuantity }
-  }
-
-  prepareProductSKUKit = productKit => {
-    let productSKUKit = []
-    productKit.forEach(productKitItem => {
-      const { benefitProduct: product, benefitSKUIds } = productKitItem
-      benefitSKUIds.forEach(skuId => {
-        product.items.forEach(item => {
-          if (skuId === item.itemId) {
-            productSKUKit.push({
-              ...productKitItem,
-              benefitProduct: { ...product, items: [item] },
-            })
-          }
-        })
-      })
-    })
-    return productSKUKit
-  }
 
   render() {
     const {
@@ -101,9 +44,7 @@ class ProductKit extends Component {
     const displayLoader = !path(['length'], benefits)
     const kitProducts = displayLoader
       ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : this.prepareProductSKUKit(path(['0', 'items'], benefits))
-          .slice(0, MAX_ITEMS)
-          .map(this.prepareProductKit)
+      : extractItemsKit(path(['0', 'items'], benefits)).slice(0, MAX_ITEMS)
 
     return (
       <div className="vtex-product-kit vtex-page-padding flex flex-column items-center justify-center mb7">
