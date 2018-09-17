@@ -8,6 +8,7 @@ import ProductKitDetails from './components/ProductKitDetails'
 import ProductKitItem from './components/ProductKitItem'
 import ProductKitSeparator from './components/ProductKitSeparator'
 import ProductKitPropTypes from './prop-types/productKitPropTypes'
+import ProductKitSchema from './schema/productKitSchema'
 
 const MAX_ITEMS = 3
 const ITEMS_CONTENT_LOADER = 2
@@ -17,56 +18,11 @@ const ITEMS_CONTENT_LOADER = 2
  * Display a list of items which composes a kit.
  */
 class ProductKit extends Component {
-  static propTypes = ProductKitPropTypes
+  static propTypes = ProductKitPropTypes.props
 
-  static defaultProps = {
-    showListPrice: true,
-    showLabels: false,
-    showInstallments: false,
-    showBadge: false,
-    badgeText: '',
-  }
+  static defaultProps = ProductKitPropTypes.defaultProps
 
-  static getSchema = ({ showBadge }) => {
-    return {
-      title: 'editor.productKit.title',
-      description: 'editor.productKit.description',
-      type: 'object',
-      properties: {
-        showListPrice: {
-          type: 'boolean',
-          title: 'editor.productKit.showListPrice',
-          default: true,
-          isLayout: true,
-        },
-        showLabels: {
-          type: 'boolean',
-          title: 'editor.productKit.showLabels',
-          default: false,
-          isLayout: true,
-        },
-        showInstallments: {
-          type: 'boolean',
-          title: 'editor.productKit.showInstallments',
-          default: false,
-          isLayout: true,
-        },
-        showBadge: {
-          type: 'boolean',
-          title: 'editor.productKit.showBadge',
-          default: false,
-          isLayout: true,
-        },
-        badgeText: showBadge
-          ? {
-              type: 'string',
-              title: 'editor.productKit.badgeText',
-              isLayout: false,
-            }
-          : {},
-      },
-    }
-  }
+  static getSchema = ProductKitSchema
 
   /**
    * Extract and format the required information of a Product to be used into the
