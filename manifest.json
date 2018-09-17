@@ -11,9 +11,7 @@
   },
   "mustUpdateAt": "2019-06-12",
   "categories": [],
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "settingsSchema": {},
   "scripts": {
     "postreleasy": "vtex publish --verbose"

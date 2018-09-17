@@ -6,28 +6,35 @@ import { findIndex, propEq } from 'ramda'
 export function extractItemsKit(productsKit) {
   let itemsKit = []
 
-  productsKit.forEach(productKit => {
-    const { benefitProduct, benefitSKUIds, discount, minQuantity } = productKit
+  if (productsKit) {
+    productsKit.forEach(productKit => {
+      const {
+        benefitProduct,
+        benefitSKUIds,
+        discount,
+        minQuantity,
+      } = productKit
 
-    benefitSKUIds.forEach(skuId => {
-      const indexOfItem = findIndex(propEq('itemId', skuId))(
-        benefitProduct.items
-      )
-
-      if (indexOfItem !== -1) {
-        itemsKit.push(
-          extractKitItem({
-            discount,
-            minQuantity,
-            product: {
-              ...benefitProduct,
-              items: [benefitProduct.items[indexOfItem]],
-            },
-          })
+      benefitSKUIds.forEach(skuId => {
+        const indexOfItem = findIndex(propEq('itemId', skuId))(
+          benefitProduct.items
         )
-      }
+
+        if (indexOfItem !== -1) {
+          itemsKit.push(
+            extractKitItem({
+              discount,
+              minQuantity,
+              product: {
+                ...benefitProduct,
+                items: [benefitProduct.items[indexOfItem]],
+              },
+            })
+          )
+        }
+      })
     })
-  })
+  }
 
   return itemsKit
 }

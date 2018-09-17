@@ -11,17 +11,17 @@ import ProductKitItemPropTypes from '../prop-types/productKitItemPropTypes'
 export default class ProductKitItem extends Component {
   static propTypes = {
     /** Product to be displayed as an item of the kit */
-    product: ProductKitItemPropTypes.product,
+    item: ProductKitItemPropTypes.product,
     /** Props of Product Summary */
-    summaryProps: PropTypes.any.isRequired,
+    viewOptions: PropTypes.any.isRequired,
   }
 
   render() {
-    const { product, summaryProps } = this.props
+    const { item, viewOptions } = this.props
 
     return (
       <div className="vtex-product-kit__item">
-        <ProductSummary product={product} {...summaryProps} hideBuyButton />
+        <ProductSummary product={item} {...viewOptions} hideBuyButton />
       </div>
     )
   }
