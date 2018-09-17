@@ -2,86 +2,39 @@ import './global.css'
 
 import { path } from 'ramda'
 import React, { Component, Fragment } from 'react'
-import { FormattedMessage } from 'react-intl'
 
-import ProductKitDetails from './components/ProductKitDetails'
-import ProductKitItem from './components/ProductKitItem'
-import ProductKitSeparator from './components/ProductKitSeparator'
-import { extractItemsKit } from './helpers/ProductKitHelper'
+import ProductKitContent from './components/ProductKitContent'
 import ProductKitPropTypes from './prop-types/productKitPropTypes'
-import ProductKitSchema from './schema/productKitSchema'
-
-const MAX_ITEMS = 3
-const ITEMS_CONTENT_LOADER = 2
 
 /**
- * Product Kit component.
- * Display a list of items which composes a kit.
+ * ProductKit component.
+ *
+ * Wraps the ProductKitContent with a Fragment which has a key prop defined by
+ * the `slug` of the product carried by the productQuery to force inner components
+ * updates when a small change on the productQuery props occurs.
  */
-class ProductKit extends Component {
+export default class ProductKit extends Component {
   static propTypes = ProductKitPropTypes.props
-
-  static defaultProps = ProductKitPropTypes.defaultProps
-
-  static getSchema = ProductKitSchema
 
   render() {
     const {
       productQuery: { product },
-      showListPrice,
-      showLabels,
-      showInstallments,
-      showBadge,
-      badgeText,
     } = this.props
 
     const benefits = path(['benefits'], product)
 
-    if (benefits && benefits.length === 0) {
+    /** The product does'nt have any Kit associated with it, in this case the
+     * ProductKitContent should not be rendered  */
+    if (benefits && !benefits.length) {
       return null
     }
 
-    const displayLoader = !path(['length'], benefits)
-    const kitProducts = displayLoader
-      ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : extractItemsKit(path(['0', 'items'], benefits)).slice(0, MAX_ITEMS)
+    const slug = path(['slug'], product)
 
     return (
-      <div className="vtex-product-kit vtex-page-padding flex flex-column items-center justify-center mb7">
-        <h1 className="pv3 ph3">
-          <FormattedMessage id="productKit.buyTogether" />
-        </h1>
-        <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
-          {kitProducts.map((kitProduct, index) => (
-            <Fragment key={index}>
-              {index > 0 && (
-                <ProductKitSeparator>
-                  <span>&#43;</span>
-                </ProductKitSeparator>
-              )}
-              <ProductKitItem
-                product={kitProduct}
-                summaryProps={{
-                  showListPrice,
-                  showLabels,
-                  showInstallments,
-                  showBadge,
-                  badgeText,
-                }}
-              />
-            </Fragment>
-          ))}
-          <ProductKitSeparator>
-            <span>&#61;</span>
-          </ProductKitSeparator>
-          <ProductKitDetails
-            loading={displayLoader}
-            kitProducts={kitProducts}
-          />
-        </div>
-      </div>
+      <Fragment key={slug}>
+        <ProductKitContent {...this.props} loading={!benefits} />
+      </Fragment>
     )
   }
 }
-
-export default ProductKit

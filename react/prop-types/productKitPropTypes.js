@@ -88,7 +88,7 @@ export default {
                   /** Product name */
                   productName: PropTypes.string.isRequired,
                   /** Product's brand */
-                  brand: PropTypes.string.isRequired,
+                  brand: PropTypes.string,
                   /** Product's SKUs */
                   items: PropTypes.arrayOf(
                     PropTypes.shape({
@@ -147,9 +147,9 @@ export default {
               })
             ),
           })
-        ).isRequired,
+        ),
       }),
-    }).isRequired,
+    }),
   },
 
   /** Default prop types values */
