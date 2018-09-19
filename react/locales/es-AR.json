@@ -7,5 +7,6 @@
   "editor.productKit.showBadge": "Mostrar badge",
   "editor.productKit.badgeText": "Texto de badge",
   "productKit.numberOfProductsTitle": "Compre los {numberOfItems} productos",
-  "productKit.buyTogether": "Comprar Juntos"
+  "productKit.buyTogether": "Comprar Juntos",
+  "productKit.swapItem": "Intercambiar"
 }

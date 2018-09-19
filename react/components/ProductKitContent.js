@@ -9,6 +9,7 @@ import ProductKitSeparator from './ProductKitSeparator'
 
 const MAX_VISIBLE_ITEMS = 3
 const DEFAULT_VISIBLE_ITEMS = Array(MAX_VISIBLE_ITEMS).fill(null)
+
 /**
  * Product Kit component.
  * Display a list of items which composes a kit.
@@ -22,7 +23,7 @@ export default class ProductKitContent extends Component {
   componentDidUpdate(prevProps) {
     const { content } = this.props
 
-    if (content !== prevProps.content) {
+    if (!equals(content, prevProps.content)) {
       const itemsKit = extractItemsKit(content)
 
       this.setState({
@@ -50,7 +51,11 @@ export default class ProductKitContent extends Component {
                   <span>&#43;</span>
                 </ProductKitSeparator>
               )}
-              <ProductKitItem item={item} viewOptions={viewOptions} />
+              <ProductKitItem
+                item={item}
+                loading={loading}
+                viewOptions={viewOptions}
+              />
             </Fragment>
           ))}
           <ProductKitSeparator>
