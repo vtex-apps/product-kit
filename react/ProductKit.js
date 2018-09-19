@@ -1,7 +1,7 @@
 import './global.css'
 
 import { path } from 'ramda'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import ProductKitContent from './components/ProductKitContent'
 import ProductKitPropTypes from './prop-types/productKitPropTypes'
@@ -9,10 +9,6 @@ import ProductKitSchema from './schema/productKitSchema'
 
 /**
  * ProductKit component.
- *
- * Wraps the ProductKitContent with a Fragment which has a key prop defined by
- * the `slug` of the product carried by the productQuery to force inner components
- * updates when a small change on the productQuery props occurs.
  */
 export default class ProductKit extends Component {
   static propTypes = ProductKitPropTypes.props
@@ -24,13 +20,12 @@ export default class ProductKit extends Component {
   render() {
     const {
       slug,
-      productQuery: { product },
-
-      showListPrice,
-      showLabels,
-      showInstallments,
       showBadge,
       badgeText,
+      showLabels,
+      showListPrice,
+      showInstallments,
+      productQuery: { product },
     } = this.props
 
     const benefits = path(['benefits'], product)
@@ -46,19 +41,17 @@ export default class ProductKit extends Component {
     const content = path(['0', 'items'], benefits)
 
     return (
-      <Fragment key={slug}>
-        <ProductKitContent
-          loading={!benefits}
-          content={content}
-          viewOptions={{
-            showListPrice,
-            showLabels,
-            showInstallments,
-            showBadge,
-            badgeText,
-          }}
-        />
-      </Fragment>
+      <ProductKitContent
+        key={slug}
+        content={content}
+        viewOptions={{
+          showListPrice,
+          showLabels,
+          showInstallments,
+          showBadge,
+          badgeText,
+        }}
+      />
     )
   }
 }

@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import { extractItemsKit } from '../helpers/ProductKitHelper'
 import ProductKitDetails from './ProductKitDetails'
 import ProductKitItem from './ProductKitItem'
-import ProductKitSeparator from './ProductKitSeparator'
 
 const MAX_VISIBLE_ITEMS = 3
 const DEFAULT_VISIBLE_ITEMS = Array(MAX_VISIBLE_ITEMS).fill(null)
@@ -20,12 +19,10 @@ export default class ProductKitContent extends Component {
     hidenItems: [],
   }
 
-  componentDidUpdate(prevProps) {
-    const { content } = this.props
+  updateComponentState(content) {
+    const itemsKit = extractItemsKit(content)
 
-    if (!equals(content, prevProps.content)) {
-      const itemsKit = extractItemsKit(content)
-
+    if (itemsKit.length) {
       this.setState({
         shownItems: itemsKit.slice(0, MAX_VISIBLE_ITEMS),
         hidenItems: itemsKit.slice(MAX_VISIBLE_ITEMS),
@@ -33,9 +30,37 @@ export default class ProductKitContent extends Component {
     }
   }
 
+  componentDidMount() {
+    this.updateComponentState(this.props.content)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { content } = this.props
+    const { shownItems } = this.state
+
+    if (
+      !equals(prevProps.content, content) ||
+      equals(shownItems, DEFAULT_VISIBLE_ITEMS)
+    ) {
+      this.updateComponentState(content)
+    }
+  }
+
+  handleItemSwap = index => {
+    const { shownItems, hidenItems } = this.state
+    const swappedItem = shownItems[index]
+
+    shownItems[index] = hidenItems.shift()
+    hidenItems.push(swappedItem)
+
+    this.setState({
+      shownItems,
+      hidenItems,
+    })
+  }
+
   render() {
     const { shownItems, viewOptions } = this.state
-
     const loading = equals(shownItems, DEFAULT_VISIBLE_ITEMS)
 
     return (
@@ -47,20 +72,19 @@ export default class ProductKitContent extends Component {
           {shownItems.map((item, index) => (
             <Fragment key={index}>
               {index > 0 && (
-                <ProductKitSeparator>
+                <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
                   <span>&#43;</span>
-                </ProductKitSeparator>
+                </div>
               )}
               <ProductKitItem
                 item={item}
+                itemIndex={index}
                 loading={loading}
                 viewOptions={viewOptions}
+                onItemSwap={this.handleItemSwap}
               />
             </Fragment>
           ))}
-          <ProductKitSeparator>
-            <span>&#61;</span>
-          </ProductKitSeparator>
           <ProductKitDetails loading={loading} items={shownItems} />
         </div>
       </div>

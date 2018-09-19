@@ -28,16 +28,23 @@ export default class ProductKitItem extends Component {
   }
 
   render() {
-    const { item, allowSwap, loading, viewOptions } = this.props
+    const {
+      item,
+      itemIndex,
+      allowSwap,
+      loading,
+      onItemSwap,
+      viewOptions,
+    } = this.props
 
     return (
       <div className="vtex-product-kit__item">
         {!loading && allowSwap ? (
           <div className="relative dib">
-            <div className="flex items-center absolute left-0 white br1 z-max bg-action-primary">
-              <div
-                className="vtex-product-kit__item-swap-button flex flex-row items-center mh3 mv3"
-                onClick={() => console.log('swap')}>
+            <div
+              className="flex items-center absolute left-0 white br1 z-max bg-action-primary"
+              onClick={() => onItemSwap(itemIndex)}>
+              <div className="vtex-product-kit__item-swap-button flex flex-row items-center mh3 mv3">
                 <img src={swapIcon} />
                 <div className="dn ml3">
                   <FormattedMessage id="productKit.swapItem" />
