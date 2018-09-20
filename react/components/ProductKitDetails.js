@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
 
-import propTypes from '../prop-types/productKitItemPropTypes'
+import propTypes from '../props/productKitItemProps'
 
 const priceLoaderStyles = {
   'vtex-price-list__container--loader': {

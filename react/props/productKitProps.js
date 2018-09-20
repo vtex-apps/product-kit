@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 export default {
   /** PropTypes of ProductKit component */
-  props: {
+  propTypes: {
     /** Shows the product list price */
     showListPrice: PropTypes.bool,
     /** Set pricing labels' visibility */

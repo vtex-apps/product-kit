@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import ProductSummary from 'vtex.product-summary/index'
 
-import ProductKitItemPropTypes from '../prop-types/productKitItemPropTypes'
+import ProductKitItemProps from '../props/productKitItemProps'
 
 import swapIcon from '../images/swap-icon.svg'
 
@@ -14,7 +14,7 @@ import swapIcon from '../images/swap-icon.svg'
 export default class ProductKitItem extends Component {
   static propTypes = {
     /** Product to be displayed as an item of the kit */
-    item: ProductKitItemPropTypes.product,
+    item: ProductKitItemProps.product,
     /** Allow item swap flag */
     allowSwap: PropTypes.bool,
     /** Is component loading flag */

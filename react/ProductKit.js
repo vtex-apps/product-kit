@@ -4,16 +4,16 @@ import { path } from 'ramda'
 import React, { Component } from 'react'
 
 import ProductKitContent from './components/ProductKitContent'
-import ProductKitPropTypes from './prop-types/productKitPropTypes'
+import ProductKitProps from './props/productKitProps'
 import ProductKitSchema from './schema/productKitSchema'
 
 /**
  * ProductKit component.
  */
 export default class ProductKit extends Component {
-  static propTypes = ProductKitPropTypes.props
+  static propTypes = ProductKitProps.propTypes
 
-  static defaultProps = ProductKitPropTypes.defaultProps
+  static defaultProps = ProductKitProps.defaultProps
 
   static getSchema = ProductKitSchema
 
