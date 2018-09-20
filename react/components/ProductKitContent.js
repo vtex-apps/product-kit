@@ -73,7 +73,7 @@ export default class ProductKitContent extends Component {
             <Fragment key={index}>
               {index > 0 &&
                 !loading && (
-                  <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
+                  <div className="h2 w2 flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
                     <span>&#43;</span>
                   </div>
                 )}
