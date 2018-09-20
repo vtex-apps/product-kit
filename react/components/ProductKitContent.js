@@ -19,17 +19,6 @@ export default class ProductKitContent extends Component {
     hidenItems: [],
   }
 
-  updateComponentState(content) {
-    const itemsKit = extractItemsKit(content)
-
-    if (itemsKit.length) {
-      this.setState({
-        shownItems: itemsKit.slice(0, MAX_VISIBLE_ITEMS),
-        hidenItems: itemsKit.slice(MAX_VISIBLE_ITEMS),
-      })
-    }
-  }
-
   componentDidMount() {
     this.updateComponentState(this.props.content)
   }
@@ -43,6 +32,17 @@ export default class ProductKitContent extends Component {
       equals(shownItems, DEFAULT_VISIBLE_ITEMS)
     ) {
       this.updateComponentState(content)
+    }
+  }
+
+  updateComponentState(content) {
+    const itemsKit = extractItemsKit(content)
+
+    if (itemsKit.length) {
+      this.setState({
+        shownItems: itemsKit.slice(0, MAX_VISIBLE_ITEMS),
+        hidenItems: itemsKit.slice(MAX_VISIBLE_ITEMS),
+      })
     }
   }
 
@@ -71,11 +71,12 @@ export default class ProductKitContent extends Component {
         <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
           {shownItems.map((item, index) => (
             <Fragment key={index}>
-              {index > 0 && (
-                <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
-                  <span>&#43;</span>
-                </div>
-              )}
+              {index > 0 &&
+                !loading && (
+                  <div className="vtex-product-kit__separator flex items-center justify-center mh4 mv4 b white bg-action-primary br-100">
+                    <span>&#43;</span>
+                  </div>
+                )}
               <ProductKitItem
                 item={item}
                 itemIndex={index}
@@ -85,7 +86,7 @@ export default class ProductKitContent extends Component {
               />
             </Fragment>
           ))}
-          <ProductKitDetails loading={loading} items={shownItems} />
+          <ProductKitDetails loading={loading} items={this.state.shownItems} />
         </div>
       </div>
     )

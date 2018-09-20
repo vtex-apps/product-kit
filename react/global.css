@@ -1,6 +1,6 @@
 .vtex-product-kit__separator {
-  width: 40px;
-  height: 40px;
+  width: 2.5em;
+  height: 2.5em;
 }
 
 .vtex-product-kit__details {
@@ -17,15 +17,6 @@
 
 .vtex-product-kit__details .vtex-price-selling--loader {
   height: 1.5em;
-}
-
-.vtex-product-kit__item__swap-button {
-  width: 8.333em;
-  height: 4.167em;
-}
-
-.vtex-product-kit__item-swap-button img {
-  height: 1.667em;
 }
 
 .vtex-product-kit__item-swap-button:hover div {

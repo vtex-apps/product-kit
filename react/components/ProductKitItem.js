@@ -44,8 +44,8 @@ export default class ProductKitItem extends Component {
             <div
               className="flex items-center absolute left-0 white br1 z-max bg-action-primary"
               onClick={() => onItemSwap(itemIndex)}>
-              <div className="vtex-product-kit__item-swap-button flex flex-row items-center mh3 mv3">
-                <img src={swapIcon} />
+              <div className="vtex-product-kit__item-swap-button h2 flex flex-row items-center mh3 mv3">
+                <img className="w2 h2" src={swapIcon} />
                 <div className="dn ml3">
                   <FormattedMessage id="productKit.swapItem" />
                 </div>
