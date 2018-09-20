@@ -42,7 +42,7 @@ export default class ProductKitItem extends Component {
         {!loading && allowSwap ? (
           <div className="relative dib">
             <div
-              className="flex items-center absolute left-0 white br1 z-max bg-action-primary"
+              className="flex items-center absolute left-0 white br1 z-99 bg-action-primary"
               onClick={() => onItemSwap(itemIndex)}>
               <div className="vtex-product-kit__item-swap-button h2 flex flex-row items-center mh3 mv3">
                 <img className="w2 h2" src={swapIcon} />
