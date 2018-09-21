@@ -15,7 +15,7 @@ const DEFAULT_VISIBLE_ITEMS = Array(DEFAULT_MAX_VISIBLE_ITEMS).fill(null)
 
 /**
  * ProductKit component.
- * Wraps a ProductKitContent and manages de shown and hiden items kit.
+ * Wraps a ProductKitContent and manages the visibility of the items.
  */
 export default class ProductKit extends Component {
   static propTypes = propTypes
