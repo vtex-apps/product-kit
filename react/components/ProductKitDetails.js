@@ -1,27 +1,15 @@
 import PropTypes from 'prop-types'
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
 
 import propTypes from '../props/productKitItemProps'
 
-const priceLoaderStyles = {
-  'vtex-price-list__container--loader': {
-    height: 0,
-  },
-  'vtex-price-installments--loader': {
-    height: 0,
-  },
-  'vtex-price-selling--loader': {
-    height: '1.5em',
-  },
-}
-
 /**
  * Product Kit Details component.
  * Show the details (price and number of items) of the Kit.
  */
-export default class ProductKitDetails extends PureComponent {
+export default class ProductKitDetails extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(propTypes.product).isRequired,
     loading: PropTypes.bool,
@@ -33,9 +21,18 @@ export default class ProductKitDetails extends PureComponent {
 
   /**
    * Calculates the Kit Price according to the products that are being displayed.
+   */
+  calculateListPrice = items => {
+    return items.reduce((price, item) => {
+      return price + item.sku.seller.commertialOffer.Price
+    }, 0)
+  }
+
+  /**
+   * Calculates the Kit Price according to the products that are being displayed.
    * The price itself is calculated based on the discount that each product have separately.
    */
-  calculatePrice = items => {
+  calculateSellingPrice = items => {
     return items.reduce((price, item) => {
       return (
         price +
@@ -72,10 +69,9 @@ export default class ProductKitDetails extends PureComponent {
         )}
         <div className="pv4">
           <ProductPrice
-            styles={priceLoaderStyles}
-            sellingPrice={!loading ? this.calculatePrice(items) : null}
+            sellingPrice={!loading ? this.calculateSellingPrice(items) : null}
+            listPrice={!loading ? this.calculateListPrice(items) : null}
             showInstallments={false}
-            showListPrice={false}
           />
         </div>
         <BuyButton skuItems={!loading ? this.getSkuItems(items) : null}>
