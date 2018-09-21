@@ -63,7 +63,7 @@ export default class ProductKitDetails extends PureComponent {
     const { items, loading } = this.props
 
     return (
-      <div className="vtex-product-kit__details flex flex-column items-center justify-center mh7">
+      <div className="vtex-product-kit__details flex flex-column items-center justify-center mw5 mh7">
         {!loading && (
           <FormattedMessage
             id="productKit.numberOfProductsTitle"

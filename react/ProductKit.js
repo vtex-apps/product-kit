@@ -1,21 +1,26 @@
 import './global.css'
 
-import { path } from 'ramda'
 import React, { Component } from 'react'
 
-import ProductKitContent from './components/ProductKitContent'
-import ProductKitProps from './props/productKitProps'
-import ProductKitSchema from './schema/productKitSchema'
+import { path } from 'ramda'
+
+import { getSchema } from './schema'
+import { propTypes, defaultProps } from './props/productKitProps'
+
+import ProductKitContainer from './components/ProductKitContainer'
 
 /**
  * ProductKit component.
+ * 
+ * Retrieves the content of the a product kit from the product query 
+ * and passed it to the ProductKitContainer wrapped component.
  */
 export default class ProductKit extends Component {
-  static propTypes = ProductKitProps.propTypes
+  static propTypes = propTypes
 
-  static defaultProps = ProductKitProps.defaultProps
+  static defaultProps = defaultProps
 
-  static getSchema = ProductKitSchema
+  static getSchema = getSchema
 
   render() {
     const {
@@ -30,28 +35,28 @@ export default class ProductKit extends Component {
 
     const benefits = path(['benefits'], product)
 
-    // The product does not have any Kit associated with it, in this
-    // case the ProductKitContent should not be rendered
-    if (benefits && !benefits.length) {
+    /** The product does not have any Kit associated with it, in this case 
+     *  the ProductKitContent should not be rendered */
+    if (benefits && !benefits.length)
       return null
-    }
 
-    // The content of the ProductKitContent component will be defined by
-    // the first `item` of the set of benefits associated with the product
-    const content = path(['0', 'items'], benefits)
+    /** The content of the ProductKitContent component will be defined by 
+     *  the first `item` of the set of benefits associated with the product */
+    const items = path(['0', 'items'], benefits)
 
     return (
-      <ProductKitContent
-        key={slug}
-        content={content}
-        viewOptions={{
-          showListPrice,
-          showLabels,
-          showInstallments,
-          showBadge,
-          badgeText,
-        }}
-      />
+      <div className="vtex-page-padding" key={slug}>
+        <ProductKitContainer
+          items={items}
+          viewOptions={{
+            showListPrice,
+            showLabels,
+            showInstallments,
+            showBadge,
+            badgeText,
+          }}
+        />
+      </div>
     )
   }
 }

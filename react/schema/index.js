@@ -1,4 +1,4 @@
-export default function({ showBadge }) {
+export const getSchema = ({ showBadge }) =>  {
   return {
     title: 'editor.productKit.title',
     description: 'editor.productKit.description',

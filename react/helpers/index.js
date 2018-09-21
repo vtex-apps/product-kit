@@ -1,9 +1,9 @@
-import { findIndex, propEq } from 'ramda'
+import { propEq, findIndex } from 'ramda'
 
 /**
- * Extract the Kit Items of a Product Kit
+ * Helper functions to extract the Kit Items of a Product Kit.
  */
-export function extractItemsKit(productsKit) {
+export const extractItemsKit = productsKit => {
   let itemsKit = []
 
   if (productsKit) {
@@ -43,7 +43,7 @@ export function extractItemsKit(productsKit) {
  * Extract the required information of a Product to be used into the
  * ProductKitItem component.
  */
-function extractKitItem(productKit) {
+export const extractKitItem = productKit => {
   const { discount, minQuantity, product } = productKit
   const kitItem = { ...product }
 
