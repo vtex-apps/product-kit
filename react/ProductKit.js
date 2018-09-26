@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { path, equals } from 'ramda'
 import { extractItemsKit } from './helpers'
 
-import { getSchema } from './schema'
+import ProductKitSchema from './schema'
 import { propTypes, defaultProps } from './props/productKitProps'
 
 import ProductKitContent from './components/ProductKitContent'
@@ -22,7 +22,7 @@ export default class ProductKit extends Component {
 
   static defaultProps = defaultProps
 
-  static getSchema = getSchema
+  static getSchema = ProductKitSchema
 
   state = {
     shownItems: DEFAULT_VISIBLE_ITEMS,
