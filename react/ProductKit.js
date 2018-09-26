@@ -1,190 +1,139 @@
 import './global.css'
 
-import { path } from 'ramda'
-import React, { Component, Fragment } from 'react'
-import { FormattedMessage } from 'react-intl'
+import React, { Component } from 'react'
 
-import ProductKitDetails from './components/ProductKitDetails'
-import ProductKitItem from './components/ProductKitItem'
-import ProductKitSeparator from './components/ProductKitSeparator'
-import ProductKitPropTypes from './prop-types/productKitPropTypes'
+import { path, equals } from 'ramda'
+import { extractItemsKit } from './helpers'
 
-const MAX_ITEMS = 3
-const ITEMS_CONTENT_LOADER = 2
+import ProductKitSchema from './schema'
+import { propTypes, defaultProps } from './props/productKitProps'
+
+import ProductKitContent from './components/ProductKitContent'
+
+const DEFAULT_MAX_VISIBLE_ITEMS = 3
+const DEFAULT_VISIBLE_ITEMS = Array(DEFAULT_MAX_VISIBLE_ITEMS).fill(null)
 
 /**
- * Product Kit component.
- * Display a list of items which composes a kit.
+ * ProductKit component.
+ * Wraps a ProductKitContent and manages the visibility of the items.
  */
-class ProductKit extends Component {
-  static propTypes = ProductKitPropTypes
+export default class ProductKit extends Component {
+  static propTypes = propTypes
 
-  static defaultProps = {
-    showListPrice: true,
-    showLabels: false,
-    showInstallments: false,
-    showBadge: false,
-    badgeText: '',
+  static defaultProps = defaultProps
+
+  static getSchema = ProductKitSchema
+
+  state = {
+    shownItems: DEFAULT_VISIBLE_ITEMS,
+    hidenItems: [],
   }
 
-  static getSchema = ({ showBadge }) => {
-    return {
-      title: 'editor.productKit.title',
-      description: 'editor.productKit.description',
-      type: 'object',
-      properties: {
-        showListPrice: {
-          type: 'boolean',
-          title: 'editor.productKit.showListPrice',
-          default: true,
-          isLayout: true,
-        },
-        showLabels: {
-          type: 'boolean',
-          title: 'editor.productKit.showLabels',
-          default: false,
-          isLayout: true,
-        },
-        showInstallments: {
-          type: 'boolean',
-          title: 'editor.productKit.showInstallments',
-          default: false,
-          isLayout: true,
-        },
-        showBadge: {
-          type: 'boolean',
-          title: 'editor.productKit.showBadge',
-          default: false,
-          isLayout: true,
-        },
-        badgeText: showBadge
-          ? {
-              type: 'string',
-              title: 'editor.productKit.badgeText',
-              isLayout: false,
-            }
-          : {},
-      },
+  /**
+   * Retrieve the items of a product.
+   */
+  getItems = product => {
+    return path(['0', 'items'], path(['benefits'], product))
+  }
+
+  /**
+   * When the component mounts it must update the shown and hiden items
+   */
+  componentDidMount() {
+    this.updateComponentState(this.getItems(this.props.productQuery.product))
+  }
+
+  /**
+   * Checks if the items data has changed since the last component
+   * props update.
+   */
+  componentDidUpdate(prevProps) {
+    const items = this.getItems(this.props.productQuery.product)
+    const prevItems = this.getItems(prevProps.productQuery.product)
+
+    if (
+      equals(this.state.shownItems, DEFAULT_VISIBLE_ITEMS) ||
+      !equals(items, prevItems)
+    ) {
+      this.updateComponentState(items)
     }
   }
 
   /**
-   * Extract and format the required information of a Product to be used into the
-   * ProductKitItem component.
+   * Updates the shown and hiden items arrays with the content of the
+   * items array passed as an argument. This function uses the helper
+   * function to extract the items kit from the items data.
    */
-  prepareProductKit = productKit => {
-    const { benefitProduct, discount, minQuantity } = productKit
-    const newProduct = { ...benefitProduct }
+  updateComponentState = items => {
+    const itemsKit = extractItemsKit(items)
 
-    if (newProduct.items && newProduct.items.length) {
-      newProduct.sku = { ...newProduct.items[0] }
-      newProduct.productName = newProduct.sku.nameComplete
-      if (newProduct.sku.sellers && newProduct.sku.sellers.length) {
-        newProduct.sku.seller = newProduct.sku.sellers[0]
-      } else {
-        newProduct.sku.seller = {
-          commertialOffer: {
-            Price: 0,
-            ListPrice: 0,
-          },
-        }
-      }
-      if (newProduct.sku.images && newProduct.sku.images.length) {
-        newProduct.sku.image = { ...newProduct.sku.images[0] }
-        newProduct.sku.image.imageUrl = newProduct.sku.image.imageUrl.replace(
-          /^https?:/,
-          ''
-        )
-      }
-      newProduct.sku.referenceId = (newProduct.sku.referenceId &&
-        newProduct.sku.referenceId[0]) || {
-        Value: '',
-      }
-      delete newProduct.sku.sellers
-      delete newProduct.sku.images
-      delete newProduct.items
+    if (itemsKit.length) {
+      this.setState({
+        shownItems: itemsKit.slice(0, DEFAULT_MAX_VISIBLE_ITEMS),
+        hidenItems: itemsKit.slice(DEFAULT_MAX_VISIBLE_ITEMS),
+      })
     }
-
-    return { ...newProduct, discount, minQuantity }
   }
 
-  prepareProductSKUKit = productKit => {
-    let productSKUKit = []
-    productKit.forEach(productKitItem => {
-      const { benefitProduct: product, benefitSKUIds } = productKitItem
-      benefitSKUIds.forEach(skuId => {
-        product.items.forEach(item => {
-          if (skuId === item.itemId) {
-            productSKUKit.push({
-              ...productKitItem,
-              benefitProduct: { ...product, items: [item] },
-            })
-          }
-        })
-      })
+  /**
+   * Receives the index of the item of the shownItems array and swap it by the
+   * first item of the hidenItems array, the swapped item will be pushed at the end
+   * of the hidenItems.
+   */
+  handleItemSwap = index => {
+    const { shownItems, hidenItems } = this.state
+    const item = shownItems[index]
+
+    shownItems[index] = hidenItems.shift()
+    hidenItems.push(item)
+
+    this.setState({
+      shownItems,
+      hidenItems,
     })
-    return productSKUKit
   }
 
   render() {
     const {
-      productQuery: { product },
-      showListPrice,
-      showLabels,
-      showInstallments,
       showBadge,
       badgeText,
+      showLabels,
+      showListPrice,
+      showInstallments,
+      productQuery: { product },
     } = this.props
 
     const benefits = path(['benefits'], product)
 
-    if (benefits && benefits.length === 0) {
-      return null
-    }
+    /** The product does not have any Kit associated with it, in this case
+     *  the ProductKitContent should not be rendered */
+    if (benefits && !benefits.length) return null
 
-    const displayLoader = !path(['length'], benefits)
-    const kitProducts = displayLoader
-      ? Array(ITEMS_CONTENT_LOADER).fill(null)
-      : this.prepareProductSKUKit(path(['0', 'items'], benefits))
-          .slice(0, MAX_ITEMS)
-          .map(this.prepareProductKit)
+    /** Shown and Hiden items */
+    const { shownItems, hidenItems } = this.state
+
+    /** The component is loading if the shown items has the default content */
+    const loading = equals(shownItems, DEFAULT_VISIBLE_ITEMS)
+
+    /** Allow item swap only if there's hiden items */
+    const allowSwap = hidenItems.length > 0
 
     return (
-      <div className="vtex-product-kit vtex-page-padding flex flex-column items-center justify-center mb7">
-        <h1 className="pv3 ph3">
-          <FormattedMessage id="productKit.buyTogether" />
-        </h1>
-        <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
-          {kitProducts.map((kitProduct, index) => (
-            <Fragment key={index}>
-              {index > 0 && (
-                <ProductKitSeparator>
-                  <span>&#43;</span>
-                </ProductKitSeparator>
-              )}
-              <ProductKitItem
-                product={kitProduct}
-                summaryProps={{
-                  showListPrice,
-                  showLabels,
-                  showInstallments,
-                  showBadge,
-                  badgeText,
-                }}
-              />
-            </Fragment>
-          ))}
-          <ProductKitSeparator>
-            <span>&#61;</span>
-          </ProductKitSeparator>
-          <ProductKitDetails
-            loading={displayLoader}
-            kitProducts={kitProducts}
-          />
-        </div>
+      <div className="vtex-page-padding">
+        <ProductKitContent
+          loading={loading}
+          allowSwap={allowSwap}
+          itemsKit={shownItems}
+          viewOptions={{
+            showBadge,
+            badgeText,
+            showLabels,
+            showListPrice,
+            showInstallments,
+          }}
+          onItemSwap={this.handleItemSwap}
+        />
       </div>
     )
   }
 }
-
-export default ProductKit

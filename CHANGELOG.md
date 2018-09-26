@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-09-26
+### Added
+- Kit Item Swap feature.
+
 ## [0.3.2] - 2018-09-14
 ### Changed
 - Update the `vtex.product-summary` version.
