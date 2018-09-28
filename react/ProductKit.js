@@ -100,20 +100,17 @@ export default class ProductKit extends Component {
       showLabels,
       showListPrice,
       showInstallments,
-      productQuery: { product },
+      productQuery: { product, loading },
     } = this.props
 
     const benefits = path(['benefits'], product)
 
     /** The product does not have any Kit associated with it, in this case
      *  the ProductKitContent should not be rendered */
-    if (benefits && !benefits.length) return null
+    if (loading || (benefits && !benefits.length)) return null
 
     /** Shown and Hiden items */
     const { shownItems, hidenItems } = this.state
-
-    /** The component is loading if the shown items has the default content */
-    const loading = equals(shownItems, DEFAULT_VISIBLE_ITEMS)
 
     /** Allow item swap only if there's hiden items */
     const allowSwap = hidenItems.length > 0
@@ -121,7 +118,6 @@ export default class ProductKit extends Component {
     return (
       <div className="vtex-page-padding">
         <ProductKitContent
-          loading={loading}
           allowSwap={allowSwap}
           itemsKit={shownItems}
           viewOptions={{
