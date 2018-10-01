@@ -37,9 +37,9 @@ export default class ProductKitItem extends Component {
         ) : (
           <div className="relative dib">
             <div
-              className="flex itemsKIt-center absolute left-0 white pointer br1 z-999 bg-action-primary"
+              className="flex items-center absolute left-0 white pointer br1 z-999 bg-action-primary"
               onClick={() => onitemsKItwap(itemIndex)}>
-              <div className="vtex-product-kit__item-swap-button h1 flex flex-row itemsKIt-center mh3 mv3">
+              <div className="vtex-product-kit__item-swap-button h1 flex flex-row items-center mh3 mv3">
                 <img className="w1 h1" src={swapIcon} />
                 <div className="dn ml3">
                   <FormattedMessage id="productKit.swapItem" />
