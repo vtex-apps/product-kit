@@ -17,25 +17,18 @@ export default class ProductKitItem extends Component {
     item: ProductKitItemProps.product,
     /** Allow item swap flag */
     allowSwap: PropTypes.bool,
-    /** Is component loading flag */
-    loading: PropTypes.bool,
     /** Props of Product Summary */
     viewOptions: PropTypes.any,
   }
 
   render() {
-    const {
-      item,
-      itemIndex,
-      allowSwap,
-      loading,
-      onItemSwap,
-      viewOptions,
-    } = this.props
+    const { item, itemIndex, allowSwap, onItemSwap, viewOptions } = this.props
 
     return (
       <div className="vtex-product-kit__item">
-        {!loading && allowSwap ? (
+        {!allowSwap ? (
+          <ProductSummary product={item} {...viewOptions} hideBuyButton />
+        ) : (
           <div className="relative dib">
             <div
               className="flex items-center absolute left-0 white pointer br1 z-999 bg-action-primary"
@@ -49,8 +42,6 @@ export default class ProductKitItem extends Component {
             </div>
             <ProductSummary product={item} {...viewOptions} hideBuyButton />
           </div>
-        ) : (
-          <ProductSummary product={item} {...viewOptions} hideBuyButton />
         )}
       </div>
     )

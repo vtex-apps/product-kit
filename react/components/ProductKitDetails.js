@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
+import { path } from 'ramda'
 
 import propTypes from '../props/productKitItemProps'
 
@@ -11,12 +12,16 @@ import propTypes from '../props/productKitItemProps'
  */
 export default class ProductKitDetails extends Component {
   static propTypes = {
+    /** Array of items which composes the kit */
     items: PropTypes.arrayOf(propTypes.product).isRequired,
-    loading: PropTypes.bool,
   }
 
   static defaultProps = {
     items: [],
+  }
+
+  getPrice = item => {
+    return path(['sku', 'seller', 'commertialOffer', 'Price'], item)
   }
 
   /**
@@ -24,7 +29,7 @@ export default class ProductKitDetails extends Component {
    */
   calculateListPrice = items => {
     return items.reduce((price, item) => {
-      return price + item.sku.seller.commertialOffer.Price
+      return price + this.getPrice(item)
     }, 0)
   }
 
@@ -35,9 +40,7 @@ export default class ProductKitDetails extends Component {
   calculateSellingPrice = items => {
     return items.reduce((price, item) => {
       return (
-        price +
-        (item.sku.seller.commertialOffer.Price * (100.0 - item.discount)) /
-          100.0
+        price + (this.getPrice(item) * (100 - path(['discount'], item))) / 100
       )
     }, 0)
   }
@@ -47,34 +50,30 @@ export default class ProductKitDetails extends Component {
    * component.
    */
   getSkuItems = items => {
-    return items.map(item => {
-      return {
-        skuId: String(item.sku.itemId),
-        quantity: item.minQuantity,
-        seller: parseInt(item.sku.seller.sellerId),
-      }
-    })
+    return items.map(item => ({
+      skuId: String(path(['sku', 'itemId'], item)),
+      quantity: path(['minQuantity'], item),
+      seller: parseInt(path(['sku', 'seller', 'sellerId'], item)),
+    }))
   }
 
   render() {
-    const { items, loading } = this.props
+    const { items } = this.props
 
     return (
       <div className="vtex-product-kit__details flex flex-column items-center justify-center mw5 mh7">
-        {!loading && (
-          <FormattedMessage
-            id="productKit.numberOfProductsTitle"
-            values={{ numberOfItems: items.length }}
-          />
-        )}
+        <FormattedMessage
+          id="productKit.numberOfProductsTitle"
+          values={{ numberOfItems: items.length }}
+        />
         <div className="pv4">
           <ProductPrice
-            sellingPrice={!loading ? this.calculateSellingPrice(items) : null}
-            listPrice={!loading ? this.calculateListPrice(items) : null}
+            sellingPrice={this.calculateSellingPrice(items)}
+            listPrice={this.calculateListPrice(items)}
             showInstallments={false}
           />
         </div>
-        <BuyButton skuItems={!loading ? this.getSkuItems(items) : null}>
+        <BuyButton skuItems={this.getSkuItems(items)}>
           <FormattedMessage id="productKit.buyTogether" />
         </BuyButton>
       </div>

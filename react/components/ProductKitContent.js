@@ -11,7 +11,7 @@ import ProductKitItem from './ProductKitItem'
  */
 export default class ProductKitContent extends Component {
   render() {
-    const { itemsKit, allowSwap, viewOptions, loading, onItemSwap } = this.props
+    const { itemsKit, allowSwap, viewOptions, onItemSwap } = this.props
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center mb7">
@@ -21,23 +21,21 @@ export default class ProductKitContent extends Component {
         <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
           {itemsKit.map((item, index) => (
             <Fragment key={index}>
-              {index > 0 &&
-                !loading && (
-                  <div className="flex items-center justify-center mh4 mv4 b white bg-action-primary h2 w2 br-100">
-                    <span>&#43;</span>
-                  </div>
-                )}
+              {index > 0 && (
+                <div className="flex items-center justify-center mh4 mv4 b white bg-action-primary h2 w2 br-100">
+                  <span>&#43;</span>
+                </div>
+              )}
               <ProductKitItem
                 item={item}
                 itemIndex={index}
-                loading={loading}
                 allowSwap={allowSwap}
                 onItemSwap={onItemSwap}
                 viewOptions={viewOptions}
               />
             </Fragment>
           ))}
-          <ProductKitDetails loading={loading} items={itemsKit} />
+          <ProductKitDetails items={itemsKit} />
         </div>
       </div>
     )
