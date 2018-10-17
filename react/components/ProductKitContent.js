@@ -16,7 +16,7 @@ import ProductKitSeparator from './ProductKitSeparator';
  */
 export default class ProductKitContent extends Component {
   render() {
-    const { itemsKit, allowSwap, allowRemoval, viewOptions, onItemSwap } = this.props
+    const { itemsKit, allowSwap, allowRemoval, viewOptions, onItemSwap, onItemRemoval } = this.props
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center mb7">
@@ -33,6 +33,7 @@ export default class ProductKitContent extends Component {
                 item={item}
                 itemIndex={index}
                 onItemSwap={onItemSwap}
+                onItemRemoval={onItemRemoval}
                 viewOptions={viewOptions}
                 allowSwap={allowSwap && index > 0}
                 allowRemoval={allowRemoval && index > 0}

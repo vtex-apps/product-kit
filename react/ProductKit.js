@@ -25,6 +25,7 @@ export default class ProductKit extends Component {
   static getSchema = ProductKitSchema
 
   state = {
+    numberOfVisibleItems: DEFAULT_MAX_VISIBLE_ITEMS,
     shownItems: DEFAULT_VISIBLE_ITEMS,
     hidenItems: [],
   }
@@ -70,9 +71,11 @@ export default class ProductKit extends Component {
     const itemsKit = extractItemsKit(items, mainProductId)
 
     if (itemsKit.length) {
+      const { numberOfVisibleItems } = this.state
+
       this.setState({
-        shownItems: itemsKit.slice(0, DEFAULT_MAX_VISIBLE_ITEMS),
-        hidenItems: itemsKit.slice(DEFAULT_MAX_VISIBLE_ITEMS),
+        shownItems: itemsKit.slice(0, numberOfVisibleItems),
+        hidenItems: itemsKit.slice(numberOfVisibleItems),
       })
     }
   }
@@ -95,6 +98,23 @@ export default class ProductKit extends Component {
     })
   }
 
+  /**
+   * Receives the index of the item of the shownItems array and remove it from the 
+   * shownItems array, besides it push the removed element at the end of the hidenItems 
+   * array and display one less product in the kit.
+   */
+  handleItemRemoval = index => {
+    const { shownItems, hidenItems, numberOfVisibleItems } = this.state
+
+    hidenItems.push(shownItems.splice(index, 1)[0])
+
+    this.setState({
+      shownItems,
+      hidenItems,
+      numberOfVisibleItems: numberOfVisibleItems - 1
+    })
+  }
+
   render() {
     const {
       showBadge,
@@ -112,11 +132,11 @@ export default class ProductKit extends Component {
     if (loading || (benefits && !benefits.length)) return null
 
     /** Shown and Hiden items */
-    const { shownItems, hidenItems } = this.state
+    const { shownItems, hidenItems, numberOfVisibleItems } = this.state
 
     /** Allow item swap only if there's hiden items */
     const allowSwap = hidenItems.length > 0
-    const allowRemoval = hidenItems.length > 0
+    const allowRemoval = hidenItems.length > 0 && numberOfVisibleItems > 2
 
     return (
       <div className="vtex-page-padding">
@@ -132,6 +152,7 @@ export default class ProductKit extends Component {
             showInstallments,
           }}
           onItemSwap={this.handleItemSwap}
+          onItemRemoval={this.handleItemRemoval}
         />
       </div>
     )

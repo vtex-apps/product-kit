@@ -31,15 +31,15 @@ export default class ProductKitItem extends Component {
   }
 
   render() {
-    const { item, itemIndex, allowSwap, allowRemoval, onItemSwap, viewOptions } = this.props
+    const { item, itemIndex, allowSwap, allowRemoval, onItemSwap, onItemRemoval, viewOptions } = this.props
 
     return (
       <div className="vtex-product-kit__item">
         <div className="flex flex-row">
           <ProductSummary product={item} {...viewOptions} hideBuyButton />
-          <div className="flex flex-column items-center ma2 w2">
-            {allowRemoval && <ProductKitButton icon={defaultRemovalIcon} />}
-            {allowSwap && <ProductKitButton icon={defaultSwapIcon} />}
+          <div className="flex flex-column items-center w2">
+            {allowRemoval && <ProductKitButton icon={defaultRemovalIcon} onClick={() => onItemRemoval(itemIndex)} />}
+            {allowSwap && <ProductKitButton icon={defaultSwapIcon} onClick={() => onItemSwap(itemIndex)} />}
           </div>
         </div>
       </div>
