@@ -2,7 +2,7 @@ import './global.css'
 
 import React, { Component } from 'react'
 
-import { path, equals } from 'ramda'
+import { path, equals, findIndex, propEq } from 'ramda'
 import { extractItemsKit } from './helpers'
 
 import ProductKitSchema from './schema'
@@ -62,10 +62,12 @@ export default class ProductKit extends Component {
   /**
    * Updates the shown and hiden items arrays with the content of the
    * items array passed as an argument. This function uses the helper
-   * function to extract the items kit from the items data.
+   * function to extract the items kit from the items data and sets the 
+   * first item as the main item of the Kit.
    */
   updateComponentState = items => {
-    const itemsKit = extractItemsKit(items)
+    const mainProductId = path(['productQuery', 'product', 'productId'], this.props)
+    const itemsKit = extractItemsKit(items, mainProductId)
 
     if (itemsKit.length) {
       this.setState({

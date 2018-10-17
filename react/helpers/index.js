@@ -1,19 +1,24 @@
 import { propEq, findIndex } from 'ramda'
 
 /**
- * Helper functions to extract the Kit Items of a Product Kit.
+ * Helper functions to extract the Kit Items of a Product Kit and sets the first
+ * item as the main item according to the mainProductId passed as an argument.
  */
-export const extractItemsKit = productsKit => {
+export const extractItemsKit = (productsKit, mainProductId) => {
   let itemsKit = []
+  let indexOfMainProduct = -1
 
   if (productsKit) {
-    productsKit.forEach(productKit => {
+    productsKit.forEach((productKit, index) => {
       const {
         benefitProduct,
         benefitSKUIds,
         discount,
         minQuantity,
       } = productKit
+
+      if (benefitProduct.productId === mainProductId && indexOfMainProduct === -1)
+        indexOfMainProduct = index
 
       benefitSKUIds.forEach(skuId => {
         const indexOfItem = findIndex(propEq('itemId', skuId))(
@@ -34,6 +39,12 @@ export const extractItemsKit = productsKit => {
         }
       })
     })
+  }
+
+  if (indexOfMainProduct !== -1) {
+    const mainItem = itemsKit[indexOfMainProduct]
+    itemsKit[indexOfMainProduct] = itemsKit[0]
+    itemsKit[0] = mainItem
   }
 
   return itemsKit
@@ -72,8 +83,8 @@ export const extractKitItem = productKit => {
 
     kitItem.sku.referenceId = (kitItem.sku.referenceId &&
       kitItem.sku.referenceId[0]) || {
-      Value: '',
-    }
+        Value: '',
+      }
   }
 
   return { ...kitItem, discount, minQuantity }

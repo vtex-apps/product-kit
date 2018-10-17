@@ -29,9 +29,9 @@ export default class ProductKitContent extends Component {
               <ProductKitItem
                 item={item}
                 itemIndex={index}
-                allowSwap={allowSwap}
                 onItemSwap={onItemSwap}
                 viewOptions={viewOptions}
+                allowSwap={allowSwap && index > 0}
               />
             </Fragment>
           ))}
