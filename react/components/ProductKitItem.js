@@ -36,6 +36,7 @@ export default class ProductKitItem extends Component {
     return (
       <div className="vtex-product-kit__item">
         <div className="flex flex-row">
+          <div className="w2" />
           <ProductSummary product={item} {...viewOptions} hideBuyButton />
           <div className="flex flex-column items-center w2">
             {allowRemoval && <ProductKitButton icon={defaultRemovalIcon} onClick={() => onItemRemoval(itemIndex)} />}
