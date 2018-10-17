@@ -5,26 +5,29 @@ import { FormattedMessage } from 'react-intl'
 import ProductKitDetails from './ProductKitDetails'
 import ProductKitItem from './ProductKitItem'
 
+import defaultPlusIcon from '../images/default-plus-icon.svg'
+import defaultEqualsIcon from '../images/default-equals-icon.svg'
+
+import ProductKitSeparator from './ProductKitSeparator';
+
 /**
  * ProductKitContent component.
  * Displays a list of items which composes a kit.
  */
 export default class ProductKitContent extends Component {
   render() {
-    const { itemsKit, allowSwap, viewOptions, onItemSwap } = this.props
+    const { itemsKit, allowSwap, allowRemoval, viewOptions, onItemSwap } = this.props
 
     return (
       <div className="vtex-product-kit flex flex-column items-center justify-center mb7">
-        <h1 className="pv3 ph3">
-          <FormattedMessage id="productKit.buyTogether" />
-        </h1>
-        <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center">
+        <div className="b ttu f4 mv7">
+          <FormattedMessage id="productKit.mountYourKit" />
+        </div>
+        <div className="flex flex-column flex-wrap-l flex-row-l items-center justify-center ba b--black-05 pa5 w-100">
           {itemsKit.map((item, index) => (
-            <Fragment key={index}>
+            <div className="flex flex-row" key={index}>
               {index > 0 && (
-                <div className="flex items-center justify-center mh4 mv4 b white bg-action-primary h2 w2 br-100">
-                  <span>&#43;</span>
-                </div>
+                <ProductKitSeparator icon={defaultPlusIcon} />
               )}
               <ProductKitItem
                 item={item}
@@ -32,10 +35,12 @@ export default class ProductKitContent extends Component {
                 onItemSwap={onItemSwap}
                 viewOptions={viewOptions}
                 allowSwap={allowSwap && index > 0}
+                allowRemoval={allowRemoval && index > 0}
               />
-            </Fragment>
+            </div>
           ))}
-          <ProductKitDetails items={itemsKit} />
+          {/* <ProductKitSeparator icon={defaultEqualsIcon} /> */}
+          {/* <ProductKitDetails items={itemsKit} /> */}
         </div>
       </div>
     )

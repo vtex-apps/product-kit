@@ -116,11 +116,13 @@ export default class ProductKit extends Component {
 
     /** Allow item swap only if there's hiden items */
     const allowSwap = hidenItems.length > 0
+    const allowRemoval = hidenItems.length > 0
 
     return (
       <div className="vtex-page-padding">
         <ProductKitContent
           allowSwap={allowSwap}
+          allowRemoval={allowRemoval}
           itemsKit={shownItems}
           viewOptions={{
             showBadge,
