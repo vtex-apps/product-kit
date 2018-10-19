@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import { equals } from 'ramda'
 import { extractItemsKit } from '../helpers/index'
 
-import defaultPlusIcon from '../images/default-plus-icon.svg'
-
 import ProductKitItem from './ProductKitItem'
 import ProductKitSeparator from './ProductKitSeparator'
 
@@ -34,7 +32,7 @@ export default class ProductKitListItem extends Component {
   }
 
   updateComponentState = items => {
-    const itemsKit = extractItemsKit(items, this.props.mainProduct)
+    const itemsKit = extractItemsKit(items, this.props.baseProduct)
     const { numberOfVisibleItems } = this.state
 
     this.setState({
@@ -72,7 +70,7 @@ export default class ProductKitListItem extends Component {
   handleItemRemoval = index => {
     const { shownItems, hidenItems, numberOfVisibleItems } = this.state
 
-    hidenItems.push([shownItems.splice(index, 1)])
+    hidenItems.push(shownItems.splice(index, 1)[0])
 
     this.setState({
       shownItems,
@@ -83,45 +81,37 @@ export default class ProductKitListItem extends Component {
 
   render() {
     const {
-      showBadge,
-      badgeText,
-      showLabels,
-      showListPrice,
-      showInstallments,
-      allowSwap,
-      allowRemoval,
+      summaryProps,
+      separatorProps: { plusIcon, equalsIcon },
+      operationsProps: { allowRemoval, allowSwap, swapIcon, removalIcon },
     } = this.props
 
     const { shownItems } = this.state
 
     return (
-      <div className="vtex-product-kit">
-        <div className="flex flex-row items-center justify-center ba b--black-05 pa5 w-100">
-          {shownItems.map((item, index) => (
-            <div className="flex flex-row" key={index}>
-              {index > 0 && (
-                <ProductKitSeparator icon={defaultPlusIcon} />
-              )}
-              <ProductKitItem
-                item={item}
-                itemIndex={index}
-                onItemSwap={this.handleItemSwap}
-                onItemRemoval={this.handleItemRemoval}
-                viewOptions={{
-                  showBadge,
-                  badgeText,
-                  showLabels,
-                  showListPrice,
-                  showInstallments,
-                }}
-                allowSwap={allowSwap && index > 0}
-                allowRemoval={allowRemoval && index > 0}
-              />
-            </div>
-          ))}
-          {/* <ProductKitSeparator icon={defaultEqualsIcon} /> */}
-          {/* <ProductKitDetails items={itemsKit} /> */}
-        </div>
+      <div className="vtex-product-kit flex flex-row items-center justify-center ba b--black-05 pa5 w-100">
+        {shownItems.map((item, index) => (
+          <div className="flex flex-row" key={index}>
+            {index > 0 && (
+              <ProductKitSeparator icon={plusIcon} />
+            )}
+            <ProductKitItem
+              key={index}
+              item={item}
+              index={index}
+              summaryProps={summaryProps}
+              onItemSwap={this.handleItemSwap}
+              onItemRemoval={this.handleItemRemoval}
+              /** Index should be greater than zero to prevent swap and removal of the base product */
+              allowSwap={index > 0 && allowSwap}
+              allowRemoval={index > 0 && allowRemoval}
+              swapIcon={swapIcon}
+              removalIcon={removalIcon}
+            />
+          </div>
+        ))}
+        <ProductKitSeparator icon={equalsIcon} />
+        <ProductKitDetails items={itemsKit} />
       </div>
     )
   }

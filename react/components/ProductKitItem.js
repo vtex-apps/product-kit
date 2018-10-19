@@ -2,45 +2,64 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ProductSummary from 'vtex.product-summary/index'
 
-import ProductKitButton from './ProductKitButton'
-import ProductKitItemProps from '../props/productKitItemProps'
-
-import defaultSwapIcon from '../images/default-swap-icon.svg'
-import defaultRemovalIcon from '../images/default-removal-icon.svg'
-
 /**
- * Product Kit Item component.
- * Display and provides management for an item of the kit.
+ * ProductKitItem component.
+ * 
+ * Displays a product as an item of a kit of products and provides 
+ * the buttons to trigger the swap and removal item operations.
  */
 export default class ProductKitItem extends Component {
   static propTypes = {
-    /** Product to be displayed as an item of the kit */
-    item: ProductKitItemProps.product,
-    /** Allow item swap flag */
-    allowSwap: PropTypes.bool,
-    /** Allow item removal flag */
-    allowSwap: PropTypes.bool,
+    /** Product to be displayed */
+    // TODO: find a way to do that validation without rewrite the code
+    // item: ProductSummary.propTypes.product,
+    /** Flag to allow the item swap */
+    allowSwap: PropTypes.bool.isRequired,
+    /** Flag to allow the item removal */
+    allowRemoval: PropTypes.bool.isRequired,
+    /** Function to handle the swap of an item */
+    onItemSwap: PropTypes.func.isRequired,
+    /** Function to handle the removal of an item */
+    onItemRemoval: PropTypes.func.isRequired,
     /** Props of Product Summary */
-    viewOptions: PropTypes.any,
-  }
-
-  /** TODO: manter os allows false por default, tá assim só por fins de teste rápido */
-  static defaultProps = {
-    allowSwap: true,
-    allowRemoval: true,
+    summaryProps: PropTypes.object.isRequired,
   }
 
   render() {
-    const { item, itemIndex, allowSwap, allowRemoval, onItemSwap, onItemRemoval, viewOptions } = this.props
+    const {
+      item,
+      index,
+      allowSwap,
+      allowRemoval,
+      onItemSwap,
+      onItemRemoval,
+      summaryProps,
+      swapIcon,
+      removalIcon,
+    } = this.props
 
     return (
       <div className="vtex-product-kit__item">
         <div className="flex flex-row">
           <div className="w2" />
-          <ProductSummary product={item} {...viewOptions} hideBuyButton />
+          <ProductSummary
+            hideBuyButton
+            product={item}
+            {...summaryProps}
+          />
           <div className="flex flex-column items-center w2">
-            {allowRemoval && <ProductKitButton icon={defaultRemovalIcon} onClick={() => onItemRemoval(itemIndex)} />}
-            {allowSwap && <ProductKitButton icon={defaultSwapIcon} onClick={() => onItemSwap(itemIndex)} />}
+            {allowRemoval &&
+              <div className="flex items-center mh3 mv3"
+                onClick={() => onItemSwap(index)}>
+                <img className="w1 h1" src={swapIcon} />
+              </div>
+            }
+            {allowSwap &&
+              <div className="flex items-center mh3 mv3"
+                onClick={() => onItemRemoval(index)}>
+                <img className="w1 h1" src={removalIcon} />
+              </div>
+            }
           </div>
         </div>
       </div>
