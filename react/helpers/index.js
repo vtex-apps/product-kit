@@ -4,7 +4,7 @@ import { propEq, findIndex } from 'ramda'
  * Helper functions to extract the Kit Items of a Product Kit and sets the first
  * item as the main item according to the mainProductId passed as an argument.
  */
-export const extractItemsKit = (productsKit, mainProductId) => {
+export const extractItemsKit = (productsKit, mainProduct) => {
   let itemsKit = []
   let indexOfMainProduct = -1
 
@@ -17,7 +17,7 @@ export const extractItemsKit = (productsKit, mainProductId) => {
         minQuantity,
       } = productKit
 
-      if (benefitProduct.productId === mainProductId && indexOfMainProduct === -1)
+      if (benefitProduct.productId === mainProduct.productId && indexOfMainProduct === -1)
         indexOfMainProduct = index
 
       benefitSKUIds.forEach(skuId => {
