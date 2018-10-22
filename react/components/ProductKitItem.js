@@ -41,28 +41,29 @@ export default class ProductKitItem extends Component {
     return (
       <div className="vtex-product-kit__item">
         <div className="flex flex-row">
-          <div className="w2" />
-          <ProductSummary
-            hideBuyButton
-            product={item}
-            {...summaryProps}
-          />
+          <div className="pl7" >
+            <ProductSummary
+              hideBuyButton
+              product={item}
+              {...summaryProps}
+            />
+          </div>
           <div className="flex flex-column items-center w2">
-            {allowRemoval &&
-              <div className="flex items-center mh3 mv3"
-                onClick={() => onItemSwap(index)}>
-                <img className="w1 h1" src={swapIcon} />
-              </div>
-            }
             {allowSwap &&
               <div className="flex items-center mh3 mv3"
                 onClick={() => onItemRemoval(index)}>
                 <img className="w1 h1" src={removalIcon} />
               </div>
             }
+            {allowRemoval &&
+              <div className="flex items-center mh3 mv3"
+                onClick={() => onItemSwap(index)}>
+                <img className="w1 h1" src={swapIcon} />
+              </div>
+            }
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }

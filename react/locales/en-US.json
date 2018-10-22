@@ -10,12 +10,15 @@
   "editor.productKitList.dot": "Dot",
   "editor.productKitList.plusIcon": "Plus Icon",
   "editor.productKitList.equalsIcon": "Equals Icon",
+  "editor.productKitList.swapIcon": "Swap Icon",
+  "editor.productKitList.removalIcon": "Removal Icon",
   "editor.productKitList.showListPrice": "Show list price",
   "editor.productKitList.showLabels": "Show labels",
   "editor.productKitList.showInstallments": "Show installments",
   "editor.productKitList.showBadge": "Show badge",
   "editor.productKitList.badgeText": "Badge Text",
-  "productKitList.numberOfProductsTitle": "Buy this {numberOfItems} products",
+  "productKitList.takeAll": "Take all {numberOfItems} products",
   "productKitList.mountYourKit": "Mount your kit",
-  "productKitList.swapItem": "Swap"
+  "productKitList.swapItem": "Swap",
+  "productKitList.buyKit": "Buy Kit"
 }

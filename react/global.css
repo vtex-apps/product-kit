@@ -2,6 +2,22 @@
   display: inline;
 }
 
+.vtex-product-kit-list .vtex-product-summary--normal {
+  width: 240px;
+}
+
+.vtex-product-kit-list .vtex-price-list {
+  font-size: .875rem;
+}
+
+.vtex-product-kit-list .vtex-price-selling {
+  font-size: 1.25rem;
+}
+
+.vtex-product-kit-list__details {
+  width: 240px;
+}
+
 .vtex-product-kit-list .slick-slider {
   width: 100%;
 }

@@ -1,24 +1,24 @@
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
 import { path } from 'ramda'
 
-import propTypes from '../props/productKitItemProps'
+// import propTypes from '../props/productKitItemProps'
 
 /**
  * Product Kit Details component.
  * Show the details (price and number of items) of the Kit.
  */
 export default class ProductKitDetails extends Component {
-  static propTypes = {
-    /** Array of items which composes the kit */
-    items: PropTypes.arrayOf(propTypes.product).isRequired,
-  }
+  // static propTypes = {
+  //   /** Array of items which composes the kit */
+  //   // items: PropTypes.arrayOf(propTypes.product).isRequired,
+  // }
 
-  static defaultProps = {
-    items: [],
-  }
+  // static defaultProps = {
+  //   items: [],
+  // }
 
   getPrice = item => {
     return path(['sku', 'seller', 'commertialOffer', 'Price'], item)
@@ -61,22 +61,25 @@ export default class ProductKitDetails extends Component {
     const { items } = this.props
 
     return (
-      <div className="vtex-product-kit__details flex flex-column items-center justify-center mw5 mh7">
-        <FormattedMessage
-          id="productKit.numberOfProductsTitle"
-          values={{ numberOfItems: items.length }}
-        />
+      <div className="vtex-product-kit-list__details flex flex-column items-center justify-center tc ph7">
+        <div className="b ttu f5 mid-gray mv3">
+          <FormattedMessage
+            id="productKitList.takeAll"
+            values={{ numberOfItems: items.length }}
+          />
+        </div>
         <div className="pv4">
           <ProductPrice
             sellingPrice={this.calculateSellingPrice(items)}
             listPrice={this.calculateListPrice(items)}
             showInstallments={false}
+            showLabels={false}
           />
         </div>
         <BuyButton skuItems={this.getSkuItems(items)}>
-          <FormattedMessage id="productKit.buyTogether" />
+          <FormattedMessage id="productKitList.buyKit" />
         </BuyButton>
-      </div>
+      </div >
     )
   }
 }

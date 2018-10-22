@@ -1,81 +1,116 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { FormattedMessage } from 'react-intl'
+import { equals } from 'ramda'
+import { extractItemsKit } from '../helpers/index'
 
-import ProductKitDetails from './ProductKitDetails'
 import ProductKitItem from './ProductKitItem'
+import ProductKitDetails from './ProductKitDetails'
 
-import defaultPlusIcon from '../images/default-plus-icon.svg'
-import defaultEqualsIcon from '../images/default-equals-icon.svg'
+const DEFAULT_VISIBLE_ITEMS = 3
 
-import ProductKitSeparator from './ProductKitSeparator';
-
-import Slider from 'vtex.store-components/Slider'
-
-/**
- * ProductKitContent component.
- * Displays a list of items which composes a kit.
- */
 export default class ProductKitContent extends Component {
+  // static propTypes = {
+  //   // TODO: Update proptypes
+  //   productKit: PropTypes.any,
+  // }
+
+  // static defaultProps = {
+  //   allowSwap: true,
+  //   allowRemoval: true,
+  //   showBadge: true,
+  //   badgeText: '',
+  //   showLabels: true,
+  //   showListPrice: true,
+  //   showInstallments: true,
+  // }
+
+  state = {
+    shownItems: [],
+    hidenItems: [],
+    numberOfVisibleItems: DEFAULT_VISIBLE_ITEMS,
+  }
+
+  updateComponentState = items => {
+    const itemsKit = extractItemsKit(items, this.props.baseProduct)
+    const { numberOfVisibleItems } = this.state
+
+    this.setState({
+      shownItems: itemsKit.slice(0, numberOfVisibleItems),
+      hidenItems: itemsKit.slice(numberOfVisibleItems),
+    })
+  }
+
+  componentDidMount() {
+    this.updateComponentState(this.props.productKit.items)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { productKit: { items: curItems } } = this.props
+    const { productKit: { items: prevItems } } = prevProps
+
+    if (!this.state.shownItems.length || !equals(curItems, prevItems)) {
+      this.updateComponentState(curItems)
+    }
+  }
+
+  handleItemSwap = index => {
+    const { shownItems, hidenItems } = this.state
+    const item = shownItems[index]
+
+    shownItems[index] = hidenItems.shift()
+    hidenItems.push(item)
+
+    this.setState({
+      shownItems,
+      hidenItems,
+    })
+  }
+
+  handleItemRemoval = index => {
+    const { shownItems, hidenItems, numberOfVisibleItems } = this.state
+
+    hidenItems.push(shownItems.splice(index, 1)[0])
+
+    this.setState({
+      shownItems,
+      hidenItems,
+      numberOfVisibleItems: numberOfVisibleItems - 1,
+    })
+  }
+
   render() {
-    const { itemsKit, allowSwap, allowRemoval, viewOptions, onItemSwap, onItemRemoval } = this.props
+    const {
+      summaryProps,
+      separatorProps: { plusIcon, equalsIcon },
+      operationsProps: { allowRemoval, allowSwap, swapIcon, removalIcon },
+    } = this.props
+
+    const { shownItems } = this.state
 
     return (
-      <div className="vtex-product-kit dn flex-ns flex-ns flex-column-ns items-center-ns justify-center-ns mb7-ns">
-        <div className="b ttu f4 mv7">
-          <FormattedMessage id="productKit.mountYourKit" />
-        </div>
-        <Slider
-          sliderSettings={{
-            dots: true,
-            slidesToShow: 1
-          }}>
-          <div className="w-100">
-            <div className="flex flex-row items-center justify-center ba b--black-05 pa5 w-100">
-              {itemsKit.map((item, index) => (
-                <div className="flex flex-row" key={index}>
-                  {index > 0 && (
-                    <ProductKitSeparator icon={defaultPlusIcon} />
-                  )}
-                  <ProductKitItem
-                    item={item}
-                    itemIndex={index}
-                    onItemSwap={onItemSwap}
-                    onItemRemoval={onItemRemoval}
-                    viewOptions={viewOptions}
-                    allowSwap={allowSwap && index > 0}
-                    allowRemoval={allowRemoval && index > 0}
-                  />
-                </div>
-              ))}
-              {/* <ProductKitSeparator icon={defaultEqualsIcon} /> */}
-              {/* <ProductKitDetails items={itemsKit} /> */}
-            </div>
+      <div className="vtex-product-kit flex flex-row items-center justify-center ba b--black-05 br1 pv6 w-100">
+        {shownItems.map((item, index) => (
+          <div className="flex flex-row items-center justify-center" key={index}>
+            {index > 0 && (
+              <img className="w2" src={plusIcon} />
+            )}
+            <ProductKitItem
+              key={index}
+              item={item}
+              index={index}
+              summaryProps={summaryProps}
+              onItemSwap={this.handleItemSwap}
+              onItemRemoval={this.handleItemRemoval}
+              allowSwap={index > 0 && allowSwap}
+              allowRemoval={index > 0 && allowRemoval}
+              swapIcon={swapIcon}
+              removalIcon={removalIcon}
+            />
           </div>
-
-          <div className="w-100">
-            <div className="flex flex-row items-center justify-center ba b--black-05 pa5 w-100">
-              {itemsKit.map((item, index) => (
-                <div className="flex flex-row" key={index}>
-                  {index > 0 && (
-                    <ProductKitSeparator icon={defaultPlusIcon} />
-                  )}
-                  <ProductKitItem
-                    item={item}
-                    itemIndex={index}
-                    onItemSwap={onItemSwap}
-                    onItemRemoval={onItemRemoval}
-                    viewOptions={viewOptions}
-                    allowSwap={allowSwap && index > 0}
-                    allowRemoval={allowRemoval && index > 0}
-                  />
-                </div>
-              ))}
-              {/* <ProductKitSeparator icon={defaultEqualsIcon} /> */}
-              {/* <ProductKitDetails items={itemsKit} /> */}
-            </div>
-          </div>
-        </Slider>
+        ))}
+        <img className="w2" src={equalsIcon} />
+        <ProductKitDetails items={shownItems} />
       </div>
     )
   }
