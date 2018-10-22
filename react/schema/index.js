@@ -1,4 +1,4 @@
-export default ({ allowSwap, allowRemoval, showArrows, showDots, showBadge }) => {
+export const schema = ({ allowSwap, allowRemoval, showArrows, showDots, showBadge }) => {
   return {
     title: 'editor.productKitList.title',
     description: 'editor.productKitList.description',
@@ -122,6 +122,6 @@ export default ({ allowSwap, allowRemoval, showArrows, showDots, showBadge }) =>
           'ui:widget': 'image-uploader',
         },
       },
-    }
+    },
   }
 }

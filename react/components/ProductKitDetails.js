@@ -1,32 +1,27 @@
-// import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
-import { BuyButton, ProductPrice } from 'vtex.store-components'
-import { path } from 'ramda'
 
-// import propTypes from '../props/productKitItemProps'
+import { BuyButton, ProductPrice } from 'vtex.store-components'
+import { productShape } from '../props'
 
 /**
- * Product Kit Details component.
+ * ProductKitDetails component.
+ *
  * Show the details (price and number of items) of the Kit.
  */
 export default class ProductKitDetails extends Component {
-  // static propTypes = {
-  //   /** Array of items which composes the kit */
-  //   // items: PropTypes.arrayOf(propTypes.product).isRequired,
-  // }
-
-  // static defaultProps = {
-  //   items: [],
-  // }
-
-  getPrice = item => {
-    return path(['sku', 'seller', 'commertialOffer', 'Price'], item)
+  static propTypes = {
+    /** Array of items */
+    items: PropTypes.arrayOf(
+      productShape,
+    ),
   }
 
-  /**
-   * Calculates the Kit Price according to the products that are being displayed.
-   */
+  getPrice = item => {
+    return item.sku.seller.commertialOffer.Price
+  }
+
   calculateListPrice = items => {
     return items.reduce((price, item) => {
       return price + this.getPrice(item)
@@ -40,7 +35,7 @@ export default class ProductKitDetails extends Component {
   calculateSellingPrice = items => {
     return items.reduce((price, item) => {
       return (
-        price + (this.getPrice(item) * (100 - path(['discount'], item))) / 100
+        price + (this.getPrice(item) * (100 - item.discount)) / 100
       )
     }, 0)
   }
@@ -51,9 +46,9 @@ export default class ProductKitDetails extends Component {
    */
   getSkuItems = items => {
     return items.map(item => ({
-      skuId: String(path(['sku', 'itemId'], item)),
-      quantity: path(['minQuantity'], item),
-      seller: parseInt(path(['sku', 'seller', 'sellerId'], item)),
+      skuId: String(item.sku.itemId),
+      quantity: item.minQuantity,
+      seller: parseInt(item.sku.seller.sellerId),
     }))
   }
 

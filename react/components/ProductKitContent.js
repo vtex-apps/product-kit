@@ -2,28 +2,43 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { equals } from 'ramda'
+
 import { extractItemsKit } from '../helpers/index'
+import { benefitShape, summaryShape } from '../props/index'
 
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 
 const DEFAULT_VISIBLE_ITEMS = 3
 
+/**
+ * ProductKitContent component.
+ * Manages the operations over the items of a ProductKit.
+ */
 export default class ProductKitContent extends Component {
-  // static propTypes = {
-  //   // TODO: Update proptypes
-  //   productKit: PropTypes.any,
-  // }
-
-  // static defaultProps = {
-  //   allowSwap: true,
-  //   allowRemoval: true,
-  //   showBadge: true,
-  //   badgeText: '',
-  //   showLabels: true,
-  //   showListPrice: true,
-  //   showInstallments: true,
-  // }
+  static propTypes = {
+    /** Product kit */
+    productKit: benefitShape,
+    /** Base product of the kit */
+    baseProduct: PropTypes.shape({
+      /** Id of the product */
+      productId: PropTypes.string.isRequired,
+    }),
+    /** Product Summary Props */
+    summaryProps: summaryShape,
+    /** Plus icon */
+    plusIcon: PropTypes.any,
+    /** Equals icon */
+    equalsIcon: PropTypes.any,
+    /** Swap icon */
+    swapIcon: PropTypes.string,
+    /** Removal icon */
+    removalIcon: PropTypes.string,
+    /** Allow or not the item swap */
+    allowSwap: PropTypes.bool,
+    /** Allow or not the item removal */
+    allowRemoval: PropTypes.bool,
+  }
 
   state = {
     shownItems: [],
@@ -31,6 +46,11 @@ export default class ProductKitContent extends Component {
     numberOfVisibleItems: DEFAULT_VISIBLE_ITEMS,
   }
 
+  /**
+   * Updates the shown and hiden items arrays with the content of the
+   * items array passed as an argument. This function uses the helper
+   * function to extract the items kit from the items data.
+   */
   updateComponentState = items => {
     const itemsKit = extractItemsKit(items, this.props.baseProduct)
     const { numberOfVisibleItems } = this.state
@@ -41,10 +61,16 @@ export default class ProductKitContent extends Component {
     })
   }
 
+  /**
+   * When the component mounts it must update the shown and hiden items.
+   */
   componentDidMount() {
     this.updateComponentState(this.props.productKit.items)
   }
 
+  /**
+   * Checks if the items data has changed since the last update of the props.
+   */
   componentDidUpdate(prevProps) {
     const { productKit: { items: curItems } } = this.props
     const { productKit: { items: prevItems } } = prevProps
@@ -54,6 +80,11 @@ export default class ProductKitContent extends Component {
     }
   }
 
+  /**
+   * Receives the index of the item of the shownItems array and swap it by the
+   * first item of the hidenItems array, the swapped item will be pushed at the end
+   * of the hidenItems.
+   */
   handleItemSwap = index => {
     const { shownItems, hidenItems } = this.state
     const item = shownItems[index]
@@ -67,6 +98,11 @@ export default class ProductKitContent extends Component {
     })
   }
 
+  /**
+   * Receives the index of the item and handles the removal of it ProductKitItem wrapper component.
+   * An important observation here is that the item kit itself is not removed from the kit,
+   * it is just putted at the end of the hidenItems array.
+   */
   handleItemRemoval = index => {
     const { shownItems, hidenItems, numberOfVisibleItems } = this.state
 
@@ -82,8 +118,12 @@ export default class ProductKitContent extends Component {
   render() {
     const {
       summaryProps,
-      separatorProps: { plusIcon, equalsIcon },
-      operationsProps: { allowRemoval, allowSwap, swapIcon, removalIcon },
+      plusIcon,
+      equalsIcon,
+      allowRemoval,
+      allowSwap,
+      swapIcon,
+      removalIcon,
     } = this.props
 
     const { shownItems } = this.state
@@ -99,13 +139,13 @@ export default class ProductKitContent extends Component {
               key={index}
               item={item}
               index={index}
+              swapIcon={swapIcon}
+              removalIcon={removalIcon}
               summaryProps={summaryProps}
               onItemSwap={this.handleItemSwap}
               onItemRemoval={this.handleItemRemoval}
               allowSwap={index > 0 && allowSwap}
               allowRemoval={index > 0 && allowRemoval}
-              swapIcon={swapIcon}
-              removalIcon={removalIcon}
             />
           </div>
         ))}

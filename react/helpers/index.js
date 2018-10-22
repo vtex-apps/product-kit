@@ -5,7 +5,7 @@ import { propEq, findIndex } from 'ramda'
  * item as the main item according to the mainProductId passed as an argument.
  */
 export const extractItemsKit = (productsKit, mainProduct) => {
-  let itemsKit = []
+  const itemsKit = []
   let indexOfMainProduct = -1
 
   if (productsKit) {
@@ -17,8 +17,9 @@ export const extractItemsKit = (productsKit, mainProduct) => {
         minQuantity,
       } = productKit
 
-      if (benefitProduct.productId === mainProduct.productId && indexOfMainProduct === -1)
+      if (benefitProduct.productId === mainProduct.productId && indexOfMainProduct === -1) {
         indexOfMainProduct = index
+      }
 
       benefitSKUIds.forEach(skuId => {
         const indexOfItem = findIndex(propEq('itemId', skuId))(
@@ -81,10 +82,9 @@ export const extractKitItem = productKit => {
       )
     }
 
-    kitItem.sku.referenceId = (kitItem.sku.referenceId &&
-      kitItem.sku.referenceId[0]) || {
-        Value: '',
-      }
+    kitItem.sku.referenceId = (kitItem.sku.referenceId && kitItem.sku.referenceId[0]) || {
+      Value: '',
+    }
   }
 
   return { ...kitItem, discount, minQuantity }

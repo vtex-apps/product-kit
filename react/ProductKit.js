@@ -4,27 +4,25 @@ import React, { Component } from 'react'
 import { path } from 'ramda'
 import { FormattedMessage } from 'react-intl'
 
+import { schema } from './schema/index'
+import { propTypes, defaultProps } from './props/index'
+
 import Slider from 'vtex.store-components/Slider'
-
 import ProductKitContent from './components/ProductKitContent'
-
-import productKitPropTypes from './props/productKitPropTypes'
-import productKitDefaultProps from './props/productKitDefaultProps'
-import productKitSchema from './schema/index'
 
 /** Slick slider should display at most one Product Kit per time */
 const KITS_PER_TIME = 1
 
 /**
- * ProductKit component. 
+ * ProductKit component.
  * Display a list of Kits of Products inside a Slick Slider compone nt.
  */
 export default class ProductKit extends Component {
-  static propTypes = productKitPropTypes
+  static getSchema = schema
 
-  static defaultProps = productKitDefaultProps
+  static propTypes = propTypes
 
-  static getSchema = productKitSchema
+  static defaultProps = defaultProps
 
   render() {
     const {
@@ -50,7 +48,7 @@ export default class ProductKit extends Component {
 
     const productKitList = path(['benefits'], product)
 
-    /** The product does not have any kit of products associated with it, 
+    /** The product does not have any kit of products associated with it,
      * in this case the component should not be rendered */
     if (loading || (productKitList && !productKitList.length)) {
       return null
@@ -70,13 +68,19 @@ export default class ProductKit extends Component {
               nextArrow,
               dots: showDots,
               appendDots: dots,
-              slidesToShow: KITS_PER_TIME
+              slidesToShow: KITS_PER_TIME,
             }}>
             {productKitList.map((productKit, index) => (
               <ProductKitContent
                 key={index}
                 baseProduct={product}
                 productKit={productKit}
+                plusIcon={plusIcon}
+                equalsIcon={equalsIcon}
+                allowSwap={allowSwap}
+                allowRemoval={allowRemoval}
+                swapIcon={swapIcon}
+                removalIcon={removalIcon}
                 summaryProps={{
                   showListPrice,
                   showLabel,
@@ -84,16 +88,6 @@ export default class ProductKit extends Component {
                   showBadge,
                   badgeText,
                   showCollections,
-                }}
-                separatorProps={{
-                  plusIcon,
-                  equalsIcon,
-                }}
-                operationsProps={{
-                  allowSwap,
-                  allowRemoval,
-                  swapIcon,
-                  removalIcon,
                 }}
               />
             ))}

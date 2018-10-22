@@ -1,28 +1,36 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+
 import ProductSummary from 'vtex.product-summary/index'
+
+import { productShape, summaryShape } from '../props'
 
 /**
  * ProductKitItem component.
- * 
- * Displays a product as an item of a kit of products and provides 
+ *
+ * Displays a product as an item of a kit of products and provides
  * the buttons to trigger the swap and removal item operations.
  */
 export default class ProductKitItem extends Component {
   static propTypes = {
-    /** Product to be displayed */
-    // TODO: find a way to do that validation without rewrite the code
-    // item: ProductSummary.propTypes.product,
-    /** Flag to allow the item swap */
-    allowSwap: PropTypes.bool.isRequired,
-    /** Flag to allow the item removal */
-    allowRemoval: PropTypes.bool.isRequired,
-    /** Function to handle the swap of an item */
-    onItemSwap: PropTypes.func.isRequired,
-    /** Function to handle the removal of an item */
-    onItemRemoval: PropTypes.func.isRequired,
-    /** Props of Product Summary */
-    summaryProps: PropTypes.object.isRequired,
+    /** Product item */
+    item: productShape,
+    /** Index of the item */
+    index: PropTypes.number,
+    /** Function that is called to handle the item swap operation */
+    onItemSwap: PropTypes.func,
+    /** Function that is called to handle the item removal operation */
+    onItemRemoval: PropTypes.func,
+    /** Swap icon */
+    swapIcon: PropTypes.string,
+    /** Removal icon */
+    removalIcon: PropTypes.string,
+    /** Allow or not the item swap */
+    allowSwap: PropTypes.bool,
+    /** Allow or not the item removal */
+    allowRemoval: PropTypes.bool,
+    /** Product Summary Props */
+    summaryProps: summaryShape,
   }
 
   render() {
