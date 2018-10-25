@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { equals } from 'ramda'
 
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
-
-import { equals } from 'ramda'
-
 import { extractItemsKit } from '../helpers/index'
 import { benefitShape, summaryShape } from '../props/index'
 

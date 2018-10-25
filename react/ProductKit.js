@@ -2,11 +2,10 @@ import './global.css'
 
 import React, { Component } from 'react'
 import Slider from 'vtex.store-components/Slider'
-import ProductKitContent from './components/ProductKitContent'
-
-import { path } from 'ramda'
 import { FormattedMessage } from 'react-intl'
+import { path } from 'ramda'
 
+import ProductKitContent from './components/ProductKitContent'
 import { schema } from './schema/index'
 import { propTypes, defaultProps } from './props/index'
 
