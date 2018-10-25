@@ -57,14 +57,14 @@ export default class ProductKitItem extends Component {
             />
           </div>
           <div className="flex flex-column items-center w2">
-            {allowSwap &&
-              <div className="flex items-center mh3 mv3"
+            {allowRemoval &&
+              <div className="pointer flex items-center mh3 mv3"
                 onClick={() => onItemRemoval(index)}>
                 <img className="w1 h1" src={removalIcon} />
               </div>
             }
-            {allowRemoval &&
-              <div className="flex items-center mh3 mv3"
+            {allowSwap &&
+              <div className="pointer flex items-center mh3 mv3"
                 onClick={() => onItemSwap(index)}>
                 <img className="w1 h1" src={swapIcon} />
               </div>

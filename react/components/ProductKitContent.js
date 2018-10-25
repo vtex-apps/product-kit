@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import ProductKitItem from './ProductKitItem'
+import ProductKitDetails from './ProductKitDetails'
+
 import { equals } from 'ramda'
 
 import { extractItemsKit } from '../helpers/index'
 import { benefitShape, summaryShape } from '../props/index'
-
-import ProductKitItem from './ProductKitItem'
-import ProductKitDetails from './ProductKitDetails'
 
 const DEFAULT_VISIBLE_ITEMS = 3
 
@@ -120,13 +120,21 @@ export default class ProductKitContent extends Component {
       summaryProps,
       plusIcon,
       equalsIcon,
-      allowRemoval,
-      allowSwap,
       swapIcon,
       removalIcon,
     } = this.props
 
-    const { shownItems } = this.state
+    const {
+      shownItems,
+      hidenItems,
+      numberOfVisibleItems,
+    } = this.state
+
+    /** Allow swap operation if and only if there is hiden items */
+    const allowSwap = this.props.allowSwap && hidenItems.length > 0
+
+    /** Allow removal operation if and only if the kit has more than two visible items */
+    const allowRemoval = this.props.allowRemoval && numberOfVisibleItems > 2
 
     return (
       <div className="vtex-product-kit flex flex-row items-center justify-center ba b--black-05 br1 pv6 w-100">

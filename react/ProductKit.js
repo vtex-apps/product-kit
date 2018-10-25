@@ -1,14 +1,14 @@
 import './global.css'
 
 import React, { Component } from 'react'
+import Slider from 'vtex.store-components/Slider'
+import ProductKitContent from './components/ProductKitContent'
+
 import { path } from 'ramda'
 import { FormattedMessage } from 'react-intl'
 
 import { schema } from './schema/index'
 import { propTypes, defaultProps } from './props/index'
-
-import Slider from 'vtex.store-components/Slider'
-import ProductKitContent from './components/ProductKitContent'
 
 /** Slick slider should display at most one Product Kit per time */
 const KITS_PER_TIME = 1
