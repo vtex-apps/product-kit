@@ -1,9 +1,9 @@
-import './global.css'
-
 import React, { Component } from 'react'
 import Slider from 'vtex.store-components/Slider'
 import { FormattedMessage } from 'react-intl'
 import { path } from 'ramda'
+
+import './global.css'
 
 import ProductKitContent from './components/ProductKitContent'
 import { schema } from './schema/index'

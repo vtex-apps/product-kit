@@ -40,12 +40,12 @@ export default class ProductKitContent extends Component {
 
   state = {
     shownItems: [],
-    hidenItems: [],
+    hiddenItems: [],
     numberOfVisibleItems: DEFAULT_VISIBLE_ITEMS,
   }
 
   /**
-   * Updates the shown and hiden items arrays with the content of the
+   * Updates the shown and hidden items arrays with the content of the
    * items array passed as an argument. This function uses the helper
    * function to extract the items kit from the items data.
    */
@@ -55,12 +55,12 @@ export default class ProductKitContent extends Component {
 
     this.setState({
       shownItems: itemsKit.slice(0, numberOfVisibleItems),
-      hidenItems: itemsKit.slice(numberOfVisibleItems),
+      hiddenItems: itemsKit.slice(numberOfVisibleItems),
     })
   }
 
   /**
-   * When the component mounts it must update the shown and hiden items.
+   * When the component mounts it must update the shown and hidden items.
    */
   componentDidMount() {
     this.updateComponentState(this.props.productKit.items)
@@ -80,35 +80,35 @@ export default class ProductKitContent extends Component {
 
   /**
    * Receives the index of the item of the shownItems array and swap it by the
-   * first item of the hidenItems array, the swapped item will be pushed at the end
-   * of the hidenItems.
+   * first item of the hiddenItems array, the swapped item will be pushed at the end
+   * of the hiddenItems.
    */
   handleItemSwap = index => {
-    const { shownItems, hidenItems } = this.state
+    const { shownItems, hiddenItems } = this.state
     const item = shownItems[index]
 
-    shownItems[index] = hidenItems.shift()
-    hidenItems.push(item)
+    shownItems[index] = hiddenItems.shift()
+    hiddenItems.push(item)
 
     this.setState({
       shownItems,
-      hidenItems,
+      hiddenItems,
     })
   }
 
   /**
    * Receives the index of the item and handles the removal of it ProductKitItem wrapper component.
    * An important observation here is that the item kit itself is not removed from the kit,
-   * it is just putted at the end of the hidenItems array.
+   * it is just putted at the end of the hiddenItems array.
    */
   handleItemRemoval = index => {
-    const { shownItems, hidenItems, numberOfVisibleItems } = this.state
+    const { shownItems, hiddenItems, numberOfVisibleItems } = this.state
 
-    hidenItems.push(shownItems.splice(index, 1)[0])
+    hiddenItems.push(shownItems.splice(index, 1)[0])
 
     this.setState({
       shownItems,
-      hidenItems,
+      hiddenItems,
       numberOfVisibleItems: numberOfVisibleItems - 1,
     })
   }
@@ -124,12 +124,12 @@ export default class ProductKitContent extends Component {
 
     const {
       shownItems,
-      hidenItems,
+      hiddenItems,
       numberOfVisibleItems,
     } = this.state
 
-    /** Allow swap operation if and only if there is hiden items */
-    const allowSwap = this.props.allowSwap && hidenItems.length > 0
+    /** Allow swap operation if and only if there is hidden items */
+    const allowSwap = this.props.allowSwap && hiddenItems.length > 0
 
     /** Allow removal operation if and only if the kit has more than two visible items */
     const allowRemoval = this.props.allowRemoval && numberOfVisibleItems > 2
