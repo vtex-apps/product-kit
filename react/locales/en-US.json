@@ -18,7 +18,7 @@
   "editor.productKitList.showBadge": "Show badge",
   "editor.productKitList.badgeText": "Badge Text",
   "productKitList.takeAll": "Take all {numberOfItems} products",
-  "productKitList.mountYourKit": "Mount your kit",
+  "productKitList.mountYourKit": "Mount your Kit",
   "productKitList.swapItem": "Swap",
   "productKitList.buyKit": "Buy Kit"
 }

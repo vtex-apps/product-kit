@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New feature of Item Kit Swap.
 - New feature of Item Kit Removal.
 - Display the base product as the first in every product kits.
+- Design tokens.
 
 ## [0.4.1] - 2018-10-05
 ### Fixed

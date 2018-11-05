@@ -57,7 +57,7 @@ export default class ProductKitDetails extends Component {
 
     return (
       <div className="vtex-product-kit-list__details flex flex-column items-center justify-center tc ph7">
-        <div className="b ttu f5 mid-gray mv3">
+        <div className="t-body c-muted-1 mv3">
           <FormattedMessage
             id="productKitList.takeAll"
             values={{ numberOfItems: items.length }}
