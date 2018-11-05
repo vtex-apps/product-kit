@@ -10,13 +10,22 @@ You can check if others are experiencing similar issues [here](https://github.co
 
 ### General Props
 
-| Prop name          | Type              | Description                                                          |
-| ------------------ | ----------------- | -------------------------------------------------------------------- |
-| `price`            | `Number!`         | Price of the kit                                                     |
-| `products`         | `Array(Product)!` | Array of products which composes the kit                             |
-| `showListPrice`    | `Boolean`         | Shows the product list price                                         |
-| `showLabels`       | `Boolean`         | Set pricing label's visibility                                       |
-| `showInstallments` | `Boolean`         | Set installment's visibility                                         |
-| `showBadge`        | `Boolean`         | Set the discount badge's visibility                                  |
-| `badgeText`        | `String`          | Text shown on badge                                                  |
-
+| Prop name          | Type              | Description                                   |
+| ------------------ | ----------------- | --------------------------------------------- |
+| `showArrows`       | `Boolean`         | Show or not the arrows                        |
+| `showDots`         | `String`          | Show or not the dots                          |
+| `nextArrow`        | `String`          | Next arrow icon                               |
+| `prevArrow`        | `String`          | Previous arrow icon                           |
+| `dots`             | `String`          | Dots icon                                     |
+| `showListPrice`    | `Boolean`         | Show or not the list price                    |
+| `showLabel`        | `Boolean`         | Show or not the labels "from" and "to"        |
+| `showInstallments` | `Boolean`         | Show or not the installments                  |
+| `showBadge`        | `Boolean`         | Show or not the discount badge                |
+| `badgeText`        | `String`          | Text of the discount badge                    |
+| `showCollections`  | `Boolean`         | Show or not the collections badges            |
+| `plusIcon`         | `String`          | Plus icon                                     |
+| `equalsIcon`       | `String`          | Equals icon                                   |
+| `swapIcon`         | `String`          | Swap icon                                     |
+| `removalIcon`      | `String`          | Removal icon                                  |
+| `allowSwap`        | `Boolean`         | Allow or not the item swap                    |
+| `allowRemoval`     | `Boolean`         | Allow or not the item removal                 |

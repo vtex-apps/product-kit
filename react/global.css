@@ -1,3 +1,64 @@
-.vtex-product-kit__item-swap-button:hover div {
+.vtex-product-kit-list__item-swap-button:hover div {
   display: inline;
+}
+
+.vtex-product-kit-list .vtex-product-summary--normal {
+  width: 240px;
+}
+
+.vtex-product-kit-list .vtex-price-list {
+  font-size: .875rem;
+}
+
+.vtex-product-kit-list .vtex-price-selling {
+  font-size: 1.25rem;
+}
+
+.vtex-product-kit-list__details {
+  width: 240px;
+}
+
+.vtex-product-kit-list .slick-slider {
+  width: 100%;
+}
+
+/* Arrows */
+.vtex-product-kit-list .vtex-slider__arrow-left:before,
+.vtex-product-kit-list .vtex-slider__arrow-right:before {
+  font-size: 3vw;
+  color: black;
+}
+
+.vtex-product-kit-list .vtex-slider__arrow-left {
+  left: -4.2%;
+  z-index: 1;
+  top: 44%;
+}
+[dir='rtl'] .vtex-product-kit-list .vtex-slider__arrow-left {
+  left: auto;
+}
+
+.vtex-product-kit-list .vtex-slider__arrow-right {
+  top: 44%;
+}
+[dir='rtl'] .vtex-product-kit-list .vtex-slider__arrow-right {
+  right: auto;
+}
+
+/* Dots */
+.vtex-product-kit-list .vtex-slider__dots {
+  position: relative;
+  top: 5px;
+}
+
+.vtex-product-kit-list .vtex-slider__dots li button {
+  color: black;
+}
+
+.vtex-product-kit-list .vtex-slider__dots li button:before {
+  color: black;
+  font-size: 1vw;
+}
+.vtex-product-kit-list .vtex-slider__dots li.slick-active button:before {
+  color: black;
 }

@@ -1,49 +1,76 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
 import ProductSummary from 'vtex.product-summary/index'
 
-import ProductKitItemProps from '../props/productKitItemProps'
-
-import swapIcon from '../images/swap-icon.svg'
+import { productShape, summaryShape } from '../props'
 
 /**
- * Product Kit Item component.
- * Display and provides management for an item of the kit.
+ * ProductKitItem component.
+ *
+ * Displays a product as an item of a kit of products and provides
+ * the buttons to trigger the swap and removal item operations.
  */
 export default class ProductKitItem extends Component {
   static propTypes = {
-    /** Product to be displayed as an item of the kit */
-    item: ProductKitItemProps.product,
-    /** Allow item swap flag */
+    /** Product item */
+    item: productShape,
+    /** Index of the item */
+    index: PropTypes.number,
+    /** Function that is called to handle the item swap operation */
+    onItemSwap: PropTypes.func,
+    /** Function that is called to handle the item removal operation */
+    onItemRemoval: PropTypes.func,
+    /** Swap icon */
+    swapIcon: PropTypes.string,
+    /** Removal icon */
+    removalIcon: PropTypes.string,
+    /** Allow or not the item swap */
     allowSwap: PropTypes.bool,
-    /** Props of Product Summary */
-    viewOptions: PropTypes.any,
+    /** Allow or not the item removal */
+    allowRemoval: PropTypes.bool,
+    /** Product Summary Props */
+    summaryProps: summaryShape,
   }
 
   render() {
-    const { item, itemIndex, allowSwap, onItemSwap, viewOptions } = this.props
+    const {
+      item,
+      index,
+      allowSwap,
+      allowRemoval,
+      onItemSwap,
+      onItemRemoval,
+      summaryProps,
+      swapIcon,
+      removalIcon,
+    } = this.props
 
     return (
       <div className="vtex-product-kit__item">
-        {!allowSwap ? (
-          <ProductSummary product={item} {...viewOptions} hideBuyButton />
-        ) : (
-          <div className="relative dib">
-            <div
-              className="flex items-center absolute left-0 white pointer br1 z-999 bg-action-primary"
-              onClick={() => onItemSwap(itemIndex)}>
-              <div className="vtex-product-kit__item-swap-button h1 flex flex-row items-center mh3 mv3">
-                <img className="w1 h1" src={swapIcon} />
-                <div className="dn ml3">
-                  <FormattedMessage id="productKit.swapItem" />
-                </div>
-              </div>
-            </div>
-            <ProductSummary product={item} {...viewOptions} hideBuyButton />
+        <div className="flex flex-row">
+          <div className="pl7" >
+            <ProductSummary
+              hideBuyButton
+              product={item}
+              {...summaryProps}
+            />
           </div>
-        )}
-      </div>
+          <div className="flex flex-column items-center w2">
+            {allowRemoval &&
+              <div className="pointer flex items-center mh3 mv3"
+                onClick={() => onItemRemoval(index)}>
+                <img className="w1 h1" src={removalIcon} />
+              </div>
+            }
+            {allowSwap &&
+              <div className="pointer flex items-center mh3 mv3"
+                onClick={() => onItemSwap(index)}>
+                <img className="w1 h1" src={swapIcon} />
+              </div>
+            }
+          </div>
+        </div>
+      </div >
     )
   }
 }

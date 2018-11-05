@@ -1,134 +1,97 @@
+import React, { Component } from 'react'
+import Slider from 'vtex.store-components/Slider'
+import { FormattedMessage } from 'react-intl'
+import { path } from 'ramda'
+
 import './global.css'
 
-import React, { Component } from 'react'
-
-import { path, equals } from 'ramda'
-import { extractItemsKit } from './helpers'
-
-import ProductKitSchema from './schema'
-import { propTypes, defaultProps } from './props/productKitProps'
-
 import ProductKitContent from './components/ProductKitContent'
+import { schema } from './schema/index'
+import { propTypes, defaultProps } from './props/index'
 
-const DEFAULT_MAX_VISIBLE_ITEMS = 3
-const DEFAULT_VISIBLE_ITEMS = Array(DEFAULT_MAX_VISIBLE_ITEMS).fill(null)
+/** Slick slider should display at most one Product Kit per time */
+const KITS_PER_TIME = 1
 
 /**
  * ProductKit component.
- * Wraps a ProductKitContent and manages the visibility of the items.
+ * Display a list of Kits of Products inside a Slick Slider compone nt.
  */
 export default class ProductKit extends Component {
+  static getSchema = schema
+
   static propTypes = propTypes
 
   static defaultProps = defaultProps
 
-  static getSchema = ProductKitSchema
-
-  state = {
-    shownItems: DEFAULT_VISIBLE_ITEMS,
-    hidenItems: [],
-  }
-
-  /**
-   * Retrieve the items of a product.
-   */
-  getItems = product => {
-    return path(['0', 'items'], path(['benefits'], product))
-  }
-
-  /**
-   * When the component mounts it must update the shown and hiden items
-   */
-  componentDidMount() {
-    this.updateComponentState(this.getItems(this.props.productQuery.product))
-  }
-
-  /**
-   * Checks if the items data has changed since the last component
-   * props update.
-   */
-  componentDidUpdate(prevProps) {
-    const items = this.getItems(this.props.productQuery.product)
-    const prevItems = this.getItems(prevProps.productQuery.product)
-
-    if (
-      equals(this.state.shownItems, DEFAULT_VISIBLE_ITEMS) ||
-      !equals(items, prevItems)
-    ) {
-      this.updateComponentState(items)
-    }
-  }
-
-  /**
-   * Updates the shown and hiden items arrays with the content of the
-   * items array passed as an argument. This function uses the helper
-   * function to extract the items kit from the items data.
-   */
-  updateComponentState = items => {
-    const itemsKit = extractItemsKit(items)
-
-    if (itemsKit.length) {
-      this.setState({
-        shownItems: itemsKit.slice(0, DEFAULT_MAX_VISIBLE_ITEMS),
-        hidenItems: itemsKit.slice(DEFAULT_MAX_VISIBLE_ITEMS),
-      })
-    }
-  }
-
-  /**
-   * Receives the index of the item of the shownItems array and swap it by the
-   * first item of the hidenItems array, the swapped item will be pushed at the end
-   * of the hidenItems.
-   */
-  handleItemSwap = index => {
-    const { shownItems, hidenItems } = this.state
-    const item = shownItems[index]
-
-    shownItems[index] = hidenItems.shift()
-    hidenItems.push(item)
-
-    this.setState({
-      shownItems,
-      hidenItems,
-    })
-  }
-
   render() {
     const {
+      showArrows,
+      prevArrow,
+      nextArrow,
+      showDots,
+      dots,
+      showListPrice,
+      showLabel,
+      showInstallments,
       showBadge,
       badgeText,
-      showLabels,
-      showListPrice,
-      showInstallments,
+      showCollections,
+      allowSwap,
+      allowRemoval,
+      plusIcon,
+      equalsIcon,
+      swapIcon,
+      removalIcon,
       productQuery: { product, loading },
     } = this.props
 
-    const benefits = path(['benefits'], product)
+    const productKitList = path(['benefits'], product)
 
-    /** The product does not have any Kit associated with it, in this case
-     *  the ProductKitContent should not be rendered */
-    if (loading || (benefits && !benefits.length)) return null
+    /** The product does not have any kit of products associated with it,
+     * in this case the component should not be rendered */
+    if (loading || (productKitList && !productKitList.length)) {
+      return null
+    }
 
-    /** Shown and Hiden items */
-    const { shownItems, hidenItems } = this.state
-
-    /** Allow item swap only if there's hiden items */
-    const allowSwap = hidenItems.length > 0
-
+    /** The component should be displayed only in large screens for a while */
     return (
-      <div className="vtex-page-padding">
-        <ProductKitContent
-          allowSwap={allowSwap}
-          itemsKit={shownItems}
-          viewOptions={{
-            showBadge,
-            badgeText,
-            showLabels,
-            showListPrice,
-            showInstallments,
-          }}
-          onItemSwap={this.handleItemSwap}
-        />
+      <div className="vtex-product-kit-list vtex-page-padding dn db-ns">
+        <div className="flex flex-column items-center justify-center">
+          <div className="t-heading-3 mv7">
+            <FormattedMessage id="productKitList.mountYourKit" />
+          </div>
+          <Slider
+            sliderSettings={{
+              arrows: showArrows,
+              prevArrow,
+              nextArrow,
+              dots: showDots,
+              appendDots: dots,
+              slidesToShow: KITS_PER_TIME,
+            }}>
+            {productKitList.map((productKit, index) => (
+              <ProductKitContent
+                key={index}
+                baseProduct={product}
+                productKit={productKit}
+                plusIcon={plusIcon}
+                equalsIcon={equalsIcon}
+                allowSwap={allowSwap}
+                allowRemoval={allowRemoval}
+                swapIcon={swapIcon}
+                removalIcon={removalIcon}
+                summaryProps={{
+                  showListPrice,
+                  showLabel,
+                  showInstallments,
+                  showBadge,
+                  badgeText,
+                  showCollections,
+                }}
+              />
+            ))}
+          </Slider>
+        </div>
       </div>
     )
   }
