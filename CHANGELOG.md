@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.2] - 2018-12-12
+### Fixed
+- Remove dependency of `vtex.product-details` app.
+- Remove overpast `vtex-page-padding` class.
+
+### Changed
+- Update the `vtex.product-summary` and `vtex.store-components` versions.
+
 ## [1.0.1] - 2018-11-05
 ### Added
 - New design.

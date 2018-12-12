@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "product-kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "VTEX Product Kit",
   "description": "The VTEX Product Kit which display a list of Products as a kit",
   "defaultLocale": "pt-BR",
@@ -19,8 +19,7 @@
     "postreleasy": "vtex publish --verbose"
   },
   "dependencies": {
-    "vtex.product-summary": "1.x",
-    "vtex.store-components": "2.x",
-    "vtex.product-details": "0.8.1"
+    "vtex.product-summary": "2.x",
+    "vtex.store-components": "3.x"
   }
 }

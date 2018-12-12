@@ -55,7 +55,7 @@ export default class ProductKit extends Component {
 
     /** The component should be displayed only in large screens for a while */
     return (
-      <div className="vtex-product-kit-list vtex-page-padding dn db-ns">
+      <div className="vtex-product-kit-list dn db-ns">
         <div className="flex flex-column items-center justify-center">
           <div className="t-heading-3 mv7">
             <FormattedMessage id="productKitList.mountYourKit" />
