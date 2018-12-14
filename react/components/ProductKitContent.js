@@ -6,6 +6,7 @@ import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 import { extractItemsKit } from '../helpers/index'
 import { benefitShape, summaryShape } from '../props/index'
+import productKit from '../productkit.css'
 
 const DEFAULT_VISIBLE_ITEMS = 3
 
@@ -135,7 +136,7 @@ export default class ProductKitContent extends Component {
     const allowRemoval = this.props.allowRemoval && numberOfVisibleItems > 2
 
     return (
-      <div className="vtex-product-kit flex flex-row items-center justify-center b--muted-5 pv3 w-100">
+      <div className={`${productKit.container} flex flex-row items-center justify-center b--muted-5 pv3 w-100`}>
         {shownItems.map((item, index) => (
           <div className="flex flex-row items-center justify-center" key={index}>
             {index > 0 && (

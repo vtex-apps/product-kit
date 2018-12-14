@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
 
 import { productShape } from '../props'
+import productKit from '../productkit.css'
 
 /**
  * ProductKitDetails component.
@@ -56,7 +57,7 @@ export default class ProductKitDetails extends Component {
     const { items } = this.props
 
     return (
-      <div className="vtex-product-kit-list__details flex flex-column items-center justify-center tc ph7">
+      <div className={`${productKit.listDetails} flex flex-column items-center justify-center tc ph7`}>
         <div className="t-body c-muted-1 mv3">
           <FormattedMessage
             id="productKitList.takeAll"
