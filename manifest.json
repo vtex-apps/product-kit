@@ -1,20 +1,20 @@
 {
   "vendor": "vtex",
   "name": "product-kit",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "title": "VTEX Product Kit",
   "description": "The VTEX Product Kit which display a list of Products as a kit",
   "defaultLocale": "pt-BR",
   "builders": {
     "pages": "0.x",
-    "react": "2.x"
+    "react": "2.x",
+    "messages": "0.x"
   },
   "mustUpdateAt": "2019-06-12",
   "categories": [],
   "registries": [
     "smartcheckout"
   ],
-  "settingsSchema": {},
   "scripts": {
     "postreleasy": "vtex publish --verbose"
   },
