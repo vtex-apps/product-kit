@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-intl": "^2.7.2",
+    "ramda": "^0.26.1"
+  }
+}
