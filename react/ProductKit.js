@@ -49,7 +49,7 @@ export default class ProductKit extends Component {
 
     /** The product does not have any kit of products associated with it,
      * in this case the component should not be rendered */
-    if (loading || (productKitList && !productKitList.length)) {
+    if (loading || (!productKitList || !productKitList.length)) {
       return null
     }
 
