@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.2] - 2019-01-08
+
+## [1.1.1] - 2019-01-08
+### Fixed
+- fix a bug when productKitList is null or undefined
+
 ## [1.1.0] - 2018-12-20
 ### Added
 - Support to messages builder.
