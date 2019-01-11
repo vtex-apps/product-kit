@@ -56,7 +56,7 @@ export default class ProductKit extends Component {
     /** The component should be displayed only in large screens for a while */
     return (
       <Container className="vtex-product-kit-list dn db-ns flex-column">
-        <div className="t-heading-3 mv4 flex items-center justify-center">
+        <div className="t-heading-3 c-muted-1 fw3 mv4 flex items-center justify-center">
           <FormattedMessage id="productKitList.mountYourKit" />
         </div>
         <Slider
