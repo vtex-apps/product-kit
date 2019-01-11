@@ -48,7 +48,7 @@ export default class ProductKitItem extends Component {
     return (
       <div className="vtex-product-kit__item">
         <div className="flex flex-row">
-          <div className="pl7" >
+          <div className="pl4" >
             <ProductSummary
               hideBuyButton
               product={item}

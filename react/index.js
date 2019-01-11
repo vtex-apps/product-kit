@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Slider from 'vtex.store-components/Slider'
+import { Slider, Container } from 'vtex.store-components'
 import { FormattedMessage } from 'react-intl'
 import { path } from 'ramda'
 
@@ -55,44 +55,42 @@ export default class ProductKit extends Component {
 
     /** The component should be displayed only in large screens for a while */
     return (
-      <div className="vtex-product-kit-list dn db-ns">
-        <div className="flex flex-column items-center justify-center">
-          <div className="t-heading-3 mv7">
-            <FormattedMessage id="productKitList.mountYourKit" />
-          </div>
-          <Slider
-            sliderSettings={{
-              arrows: showArrows,
-              prevArrow,
-              nextArrow,
-              dots: showDots,
-              appendDots: dots,
-              slidesToShow: KITS_PER_TIME,
-            }}>
-            {productKitList.map((productKit, index) => (
-              <ProductKitContent
-                key={index}
-                baseProduct={product}
-                productKit={productKit}
-                plusIcon={plusIcon}
-                equalsIcon={equalsIcon}
-                allowSwap={allowSwap}
-                allowRemoval={allowRemoval}
-                swapIcon={swapIcon}
-                removalIcon={removalIcon}
-                summaryProps={{
-                  showListPrice,
-                  showLabel,
-                  showInstallments,
-                  showBadge,
-                  badgeText,
-                  showCollections,
-                }}
-              />
-            ))}
-          </Slider>
+      <Container className="vtex-product-kit-list dn db-ns flex-column">
+        <div className="t-heading-3 mv4 flex items-center justify-center">
+          <FormattedMessage id="productKitList.mountYourKit" />
         </div>
-      </div>
+        <Slider
+          sliderSettings={{
+            arrows: showArrows,
+            prevArrow,
+            nextArrow,
+            dots: showDots,
+            appendDots: dots,
+            slidesToShow: KITS_PER_TIME,
+          }}>
+          {productKitList.map((productKit, index) => (
+            <ProductKitContent
+              key={index}
+              baseProduct={product}
+              productKit={productKit}
+              plusIcon={plusIcon}
+              equalsIcon={equalsIcon}
+              allowSwap={allowSwap}
+              allowRemoval={allowRemoval}
+              swapIcon={swapIcon}
+              removalIcon={removalIcon}
+              summaryProps={{
+                showListPrice,
+                showLabel,
+                showInstallments,
+                showBadge,
+                badgeText,
+                showCollections,
+              }}
+            />
+          ))}
+        </Slider>
+      </Container>
     )
   }
 }
