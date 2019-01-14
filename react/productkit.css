@@ -5,3 +5,60 @@
 .container {}
 
 .item {}
+
+.list-container .vtex-product-summary--normal {
+  width: 240px;
+}
+
+.list-container .vtex-price-list {
+  font-size: .875rem;
+}
+
+.list-container .vtex-price-selling {
+  font-size: 1.25rem;
+}
+
+.list-container .slick-slider {
+  width: 100%;
+}
+
+/* Arrows */
+.list-container .vtex-slider__arrow-left:before,
+.list-container .vtex-slider__arrow-right:before {
+  font-size: 3vw;
+  color: black;
+}
+
+.list-container .vtex-slider__arrow-left {
+  left: -4.2%;
+  z-index: 1;
+  top: 44%;
+}
+[dir='rtl'] .list-container .vtex-slider__arrow-left {
+  left: auto;
+}
+
+.list-container .vtex-slider__arrow-right {
+  top: 44%;
+}
+[dir='rtl'] .list-container .vtex-slider__arrow-right {
+  right: auto;
+}
+
+/* Dots */
+.list-container .vtex-slider__dots {
+  position: relative;
+  top: 5px;
+}
+
+.list-container .vtex-slider__dots li button {
+  color: black;
+}
+
+.list-container .vtex-slider__dots li button:before {
+  color: black;
+  font-size: 1vw;
+}
+.list-container .vtex-slider__dots li.slick-active button:before {
+  color: black;
+}
