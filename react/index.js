@@ -6,7 +6,7 @@ import { path } from 'ramda'
 import ProductKitContent from './components/ProductKitContent'
 import { schema } from './schema/index'
 import { propTypes, defaultProps } from './props/index'
-import productKit from '../productkit.css'
+import productKit from './productkit.css'
 
 /** Slick slider should display at most one Product Kit per time */
 const KITS_PER_TIME = 1
