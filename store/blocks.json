@@ -1,6 +1,5 @@
 {
-    "product-kit": {
-        "blocks": [],
-        "inheritComponent": true
-    }
+	"product-kit": {
+		"inheritComponent": true
+	}
 }

@@ -1,7 +1,5 @@
 {
-    "product-kit": {
-        "required": [],
-        "allowed": [],
-        "component": "index"
-    }
+  "product-kit": {
+    "component": "index"
+  }
 }
