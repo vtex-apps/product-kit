@@ -7,7 +7,7 @@
   "defaultLocale": "pt-BR",
   "builders": {
     "store": "0.x",
-    "react": "2.x",
+    "react": "3.x",
     "messages": "0.x"
   },
   "mustUpdateAt": "2019-06-12",
