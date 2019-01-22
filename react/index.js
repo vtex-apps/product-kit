@@ -47,6 +47,7 @@ export default class ProductKit extends Component {
     } = this.props
 
     const productKitList = path(['benefits'], product)
+    const productSummaryClasses = "w5"
 
     /** The product does not have any kit of products associated with it,
      * in this case the component should not be rendered */
@@ -61,6 +62,8 @@ export default class ProductKit extends Component {
           <FormattedMessage id="productKitList.mountYourKit" />
         </div>
         <Slider
+          leftArrowClasses="z-2"
+          dotsClasses="top-0 relative f6"
           sliderSettings={{
             arrows: showArrows,
             prevArrow,
@@ -81,6 +84,7 @@ export default class ProductKit extends Component {
               swapIcon={swapIcon}
               removalIcon={removalIcon}
               summaryProps={{
+                className: productSummaryClasses,
                 showListPrice,
                 showLabel,
                 showInstallments,

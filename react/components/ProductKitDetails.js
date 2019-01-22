@@ -68,6 +68,8 @@ export default class ProductKitDetails extends Component {
           <ProductPrice
             sellingPrice={this.calculateSellingPrice(items)}
             listPrice={this.calculateListPrice(items)}
+            listPriceClass="t-heading-5--small strike"
+            sellingPriceClass="t-heading-5"
             showInstallments={false}
             showLabels={false}
           />

@@ -47,7 +47,7 @@ export default class ProductKitItem extends Component {
     } = this.props
 
     return (
-      <div className={`${productKit.item}`}>
+      <div className={productKit.item}>
         <div className="flex flex-row">
           <div className="pl4" >
             <ProductSummary
