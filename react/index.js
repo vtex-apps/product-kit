@@ -7,7 +7,7 @@ import ProductKitContent from './components/ProductKitContent'
 import { schema } from './schema/index'
 import { propTypes, defaultProps } from './props/index'
 
-import productKit from './productkit.css'
+import productKit from './styles.css'
 import './global.css'
 
 /** Slick slider should display at most one Product Kit per time */
@@ -47,7 +47,6 @@ export default class ProductKit extends Component {
     } = this.props
 
     const productKitList = path(['benefits'], product)
-    const productSummaryClasses = "w5"
 
     /** The product does not have any kit of products associated with it,
      * in this case the component should not be rendered */
@@ -84,7 +83,7 @@ export default class ProductKit extends Component {
               swapIcon={swapIcon}
               removalIcon={removalIcon}
               summaryProps={{
-                className: productSummaryClasses,
+                displayMode: 'parallel',
                 showListPrice,
                 showLabel,
                 showInstallments,

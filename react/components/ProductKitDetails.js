@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { BuyButton, ProductPrice } from 'vtex.store-components'
 
 import { productShape } from '../props'
-import productKit from '../productkit.css'
+import productKit from '../styles.css'
 
 /**
  * ProductKitDetails component.

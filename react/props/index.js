@@ -18,8 +18,8 @@ export const summaryShape = PropTypes.shape({
   badgeText: PropTypes.string,
   /** Show or not the collections badges */
   showCollections: PropTypes.bool,
-  /** Product summary classes */
-  productSummaryClasses: PropTypes.string,
+  /** Display mode of summary */
+  displayMode: PropTypes.string,
 })
 
 export const productShape = PropTypes.shape({

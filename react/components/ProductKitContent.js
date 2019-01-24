@@ -6,7 +6,7 @@ import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 import { extractItemsKit } from '../helpers/index'
 import { benefitShape, summaryShape } from '../props/index'
-import productKit from '../productkit.css'
+import productKit from '../styles.css'
 
 const DEFAULT_VISIBLE_ITEMS = 3
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import ProductSummary from 'vtex.product-summary/index'
 
 import { productShape, summaryShape } from '../props'
-import productKit from '../productkit.css'
+import productKit from '../styles.css'
 
 /**
  * ProductKitItem component.
