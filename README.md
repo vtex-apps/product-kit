@@ -2,6 +2,12 @@
 
 Product kit is a canonical component that any VTEX store can install. 
 
+## Release schedule
+| Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
+| :--:     | :---:               |  :---:          | :---:                 | :---:       | :---: 
+| [0.x]    | **Maintenance LTS** |  2018-07-06     | 2018-11-05            | March 2019  | 1.x
+| [1.x]    | **Current Release** |  2018-11-05     |                       |             | 2.x
+
 ## Troubleshooting
 
 You can check if others are experiencing similar issues [here](https://github.com/vtex-apps/product-kit/issues). Also feel free to [open issues](https://github.com/vtex-apps/product-kit/issues/new).
