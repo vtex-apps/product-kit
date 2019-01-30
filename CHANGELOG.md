@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0] - 2019-01-30
+### Changed
+- Suport to CSS Modules.
+
 ## [1.4.1] - 2019-01-29
 ### Fixed
 - Remove `inheritComponent` from blocks.

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ProductSummary from 'vtex.product-summary/index'
 
 import { productShape, summaryShape } from '../props'
+import styles from '../styles.css'
 
 /**
  * ProductKitItem component.
@@ -46,7 +47,7 @@ export default class ProductKitItem extends Component {
     } = this.props
 
     return (
-      <div className="vtex-product-kit__item">
+      <div className={styles.item}>
         <div className="flex flex-row">
           <div className="pl4" >
             <ProductSummary
