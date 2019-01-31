@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+
 import ProductSummary from 'vtex.product-summary/index'
+import { IconRemove, IconSwap } from 'vtex.dreamstore-icons'
 
 import { productShape, summaryShape } from '../props'
 import styles from '../styles.css'
@@ -21,10 +23,6 @@ export default class ProductKitItem extends Component {
     onItemSwap: PropTypes.func,
     /** Function that is called to handle the item removal operation */
     onItemRemoval: PropTypes.func,
-    /** Swap icon */
-    swapIcon: PropTypes.string,
-    /** Removal icon */
-    removalIcon: PropTypes.string,
     /** Allow or not the item swap */
     allowSwap: PropTypes.bool,
     /** Allow or not the item removal */
@@ -42,8 +40,6 @@ export default class ProductKitItem extends Component {
       onItemSwap,
       onItemRemoval,
       summaryProps,
-      swapIcon,
-      removalIcon,
     } = this.props
 
     return (
@@ -58,15 +54,15 @@ export default class ProductKitItem extends Component {
           </div>
           <div className="flex flex-column items-center w2">
             {allowRemoval &&
-              <div className="pointer flex items-center mh3 mv3"
+              <div className="pointer flex items-center mh3 mv3 c-on-base"
                 onClick={() => onItemRemoval(index)}>
-                <img className="w1 h1" src={removalIcon} />
+                <IconRemove size={21} viewBox="0 0 21 21" className="w1 h1" />
               </div>
             }
             {allowSwap &&
-              <div className="pointer flex items-center mh3 mv3"
+              <div className="pointer flex items-center mh3 mv3 c-on-base"
                 onClick={() => onItemSwap(index)}>
-                <img className="w1 h1" src={swapIcon} />
+                <IconSwap size={21} viewBox="0 0 21 21" className="w1 h1" />
               </div>
             }
           </div>

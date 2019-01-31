@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.0] - 2019-01-30
+### Changed
+- Use icons from `vtex.dreamstore-icons`. 
+
 ## [1.5.0] - 2019-01-30
 ### Changed
 - Suport to CSS Modules.

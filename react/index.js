@@ -39,10 +39,6 @@ export default class ProductKit extends Component {
       showCollections,
       allowSwap,
       allowRemoval,
-      plusIcon,
-      equalsIcon,
-      swapIcon,
-      removalIcon,
       productQuery: { product, loading },
     } = this.props
 
@@ -76,12 +72,8 @@ export default class ProductKit extends Component {
               key={index}
               baseProduct={product}
               productKit={productKit}
-              plusIcon={plusIcon}
-              equalsIcon={equalsIcon}
               allowSwap={allowSwap}
               allowRemoval={allowRemoval}
-              swapIcon={swapIcon}
-              removalIcon={removalIcon}
               summaryProps={{
                 displayMode: 'parallel',
                 showListPrice,
