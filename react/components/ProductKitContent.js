@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { equals } from 'ramda'
 
+import { IconPlus, IconEquals } from 'vtex.dreamstore-icons'
+
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
 import { extractItemsKit } from '../helpers/index'
@@ -25,14 +27,6 @@ export default class ProductKitContent extends Component {
     }),
     /** Product Summary Props */
     summaryProps: summaryShape,
-    /** Plus icon */
-    plusIcon: PropTypes.any,
-    /** Equals icon */
-    equalsIcon: PropTypes.any,
-    /** Swap icon */
-    swapIcon: PropTypes.string,
-    /** Removal icon */
-    removalIcon: PropTypes.string,
     /** Allow or not the item swap */
     allowSwap: PropTypes.bool,
     /** Allow or not the item removal */
@@ -117,10 +111,6 @@ export default class ProductKitContent extends Component {
   render() {
     const {
       summaryProps,
-      plusIcon,
-      equalsIcon,
-      swapIcon,
-      removalIcon,
     } = this.props
 
     const {
@@ -138,16 +128,14 @@ export default class ProductKitContent extends Component {
     return (
       <div className={`${styles.container} flex flex-row items-center justify-center b--muted-5 pv3 w-100`}>
         {shownItems.map((item, index) => (
-          <div className="flex flex-row items-center justify-center" key={index}>
+          <div className="flex flex-row items-center justify-center c-muted-1" key={index}>
             {index > 0 && (
-              <img className="w2" src={plusIcon} />
+              <IconPlus size={45} className="w2" />
             )}
             <ProductKitItem
               key={index}
               item={item}
               index={index}
-              swapIcon={swapIcon}
-              removalIcon={removalIcon}
               summaryProps={summaryProps}
               onItemSwap={this.handleItemSwap}
               onItemRemoval={this.handleItemRemoval}
@@ -156,7 +144,9 @@ export default class ProductKitContent extends Component {
             />
           </div>
         ))}
-        <img className="w2" src={equalsIcon} />
+        <span className="c-muted-1">
+          <IconEquals size={44} viewBox="0 0 44 22" className="w2" />
+        </span>
         <ProductKitDetails items={shownItems} />
       </div>
     )

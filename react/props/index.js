@@ -1,10 +1,5 @@
 import PropTypes from 'prop-types'
 
-import defaultPlusIcon from '../images/default-plus-icon.svg'
-import defaultEqualsIcon from '../images/default-equals-icon.svg'
-import defaultSwapIcon from '../images/default-swap-icon.svg'
-import defaultRemovalIcon from '../images/default-removal-icon.svg'
-
 export const summaryShape = PropTypes.shape({
   /** Show or not the list price */
   showListPrice: PropTypes.bool,
@@ -191,14 +186,6 @@ export const propTypes = {
   badgeText: PropTypes.string,
   /** Show or not the collections badges */
   showCollections: PropTypes.bool,
-  /** Plus icon */
-  plusIcon: PropTypes.any,
-  /** Equals icon */
-  equalsIcon: PropTypes.any,
-  /** Swap icon */
-  swapIcon: PropTypes.string,
-  /** Removal icon */
-  removalIcon: PropTypes.string,
   /** Allow or not the item swap */
   allowSwap: PropTypes.bool,
   /** Allow or not the item removal */
@@ -229,8 +216,4 @@ export const defaultProps = {
   showCollections: true,
   allowSwap: true,
   allowRemoval: true,
-  swapIcon: defaultSwapIcon,
-  removalIcon: defaultRemovalIcon,
-  plusIcon: defaultPlusIcon,
-  equalsIcon: defaultEqualsIcon,
 }

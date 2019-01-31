@@ -29,9 +29,5 @@ You can check if others are experiencing similar issues [here](https://github.co
 | `showBadge`        | `Boolean`         | Show or not the discount badge                |
 | `badgeText`        | `String`          | Text of the discount badge                    |
 | `showCollections`  | `Boolean`         | Show or not the collections badges            |
-| `plusIcon`         | `String`          | Plus icon                                     |
-| `equalsIcon`       | `String`          | Equals icon                                   |
-| `swapIcon`         | `String`          | Swap icon                                     |
-| `removalIcon`      | `String`          | Removal icon                                  |
 | `allowSwap`        | `Boolean`         | Allow or not the item swap                    |
 | `allowRemoval`     | `Boolean`         | Allow or not the item removal                 |

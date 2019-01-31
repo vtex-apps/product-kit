@@ -1,4 +1,4 @@
-export const schema = ({ allowSwap, allowRemoval, showArrows, showDots, showBadge }) => {
+export const schema = ({ showArrows, showDots, showBadge }) => {
   return {
     title: 'editor.productKitList.title',
     description: 'editor.productKitList.description',
@@ -10,30 +10,12 @@ export const schema = ({ allowSwap, allowRemoval, showArrows, showDots, showBadg
         default: true,
         isLayout: false,
       },
-      swapIcon: allowSwap ? {
-        type: 'string',
-        title: 'editor.productKitList.swapIcon',
-        isLayout: false,
-        default: '',
-        widget: {
-          'ui:widget': 'image-uploader',
-        },
-      } : {},
       allowRemoval: {
         type: 'boolean',
         title: 'editor.productKitList.allowRemoval',
         default: true,
         isLayout: false,
       },
-      removalIcon: allowRemoval ? {
-        type: 'string',
-        title: 'editor.productKitList.reomvalIcon',
-        isLayout: false,
-        default: '',
-        widget: {
-          'ui:widget': 'image-uploader',
-        },
-      } : {},
       showArrows: {
         type: 'boolean',
         title: 'editor.productKitList.showArrows',
@@ -104,24 +86,6 @@ export const schema = ({ allowSwap, allowRemoval, showArrows, showDots, showBadg
           isLayout: false,
         }
         : {},
-      plusIcon: {
-        type: 'string',
-        title: 'editor.productKitList.plusIcon',
-        isLayout: false,
-        default: '',
-        widget: {
-          'ui:widget': 'image-uploader',
-        },
-      },
-      equalsIcon: {
-        type: 'string',
-        title: 'editor.productKitList.equalsIcon',
-        isLayout: false,
-        default: '',
-        widget: {
-          'ui:widget': 'image-uploader',
-        },
-      },
     },
   }
 }
