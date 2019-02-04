@@ -1,3 +1,4 @@
+import { path } from 'ramda'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
@@ -50,6 +51,10 @@ export default class ProductKitDetails extends Component {
       skuId: String(item.sku.itemId),
       quantity: item.minQuantity,
       seller: parseInt(item.sku.seller.sellerId),
+      name: item.productName,
+      price: path(['sku', 'seller', 'commertialOffer', 'Price'], item),
+      variant: item.sku.name,
+      brand: item.brand,
     }))
   }
 
@@ -77,7 +82,7 @@ export default class ProductKitDetails extends Component {
         <BuyButton skuItems={this.getSkuItems(items)}>
           <FormattedMessage id="productKitList.buyKit" />
         </BuyButton>
-      </div >
+      </div>
     )
   }
 }
