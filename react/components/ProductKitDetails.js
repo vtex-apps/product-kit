@@ -55,12 +55,9 @@ export default class ProductKitDetails extends Component {
       price: path(['sku', 'seller', 'commertialOffer', 'Price'], item),
       variant: item.sku.name,
       brand: item.brand,
-
-      /* Optimistic props */
       detailUrl: `/${item.linkText}/p`,
       imageUrl: path(['sku', 'image', 'imageUrl'], item),
       listPrice: path(['sku', 'seller', 'commertialOffer', 'ListPrice'], item),
-      /* End Optimistic props */
     }))
   }
 
