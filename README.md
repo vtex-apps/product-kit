@@ -72,8 +72,8 @@ Below, we describe the tokens, their explanation and the component where it is l
 
 | Token name         | Component          | Description                                            |
 | ------------------ | ----------         |------------------------------------------------------- |
-| `listContainer`        | [index](https://github.com/vtex-apps/product-kit/blob/master/react/index.js)           | The main section of the product kit                         |
-| `container`        | [ProductKitContent](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitContent.js)           | The content of all the usable area                         |
+| `listContainer`        | [index](https://github.com/vtex-apps/product-kit/blob/master/react/index.js)           | A wrapper that envolves all the elements of the product kit, responsible for the main margins and paddings                         |
+| `container`        | [ProductKitContent](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitContent.js)           | The container for the products and final prices                         |
 | `item`        | [ProductKitItem](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitItem.js)           | The container of one product                         |
 | `listDetails`        | [ListDetails](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitDetails.js)           | The container for the total price of the kit                         |
 
@@ -85,7 +85,7 @@ To override the default CSS, you need to import `styles` on your manifest:
   }
 ```
 
-Also, create a `vtex.product-kit.css` file in `styles/css` for your handlers customization.
+Also, create a `vtex.productKit.css` file in `styles/css` for your handlers customization.
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/product-kit/issues). Also feel free to [open issues](https://github.com/vtex-apps/product-kit/issues/new) or contribute with pull requests.
