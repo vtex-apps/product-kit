@@ -1,7 +1,7 @@
 # VTEX Product Kit
 
 ## Description
-The VTEX product kit app is ... and this app is used by Dreamstore product.
+The VTEX product kit app shows two or more products as a kit. Usually these products are sold together and offer a discount. This app is used by Dreamstore product.
 
 :loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
 
@@ -63,7 +63,29 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `allowRemoval`     | `Boolean`         | Allow or not the item removal                 |
 
 ### Styles API
-:construction: :construction: :construction:
+This app has CSS customization through CSS Modules. CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules here .
+
+We use it css-loader to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and major version. Like container token declared in product-kit, generate the classname vtex.product-kit-1-x-container.
+
+Below, we describe the tokens, their explanation and the component where it is located.
+
+
+| Token name         | Component          | Description                                            |
+| ------------------ | ----------         |------------------------------------------------------- |
+| `listContainer`        | [index](https://github.com/vtex-apps/product-kit/blob/master/react/index.js)           | The main section of the product kit                         |
+| `container`        | [ProductKitContent](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitContent.js)           | The content of all the usable area                         |
+| `item`        | [ProductKitItem](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitItem.js)           | The container of one product                         |
+| `listDetails`        | [ListDetails](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitDetails.js)           | The container for the total price of the kit                         |
+
+To override the default CSS, you need to import `styles` on your manifest:
+
+```json
+  "builders": {
+    "styles": "1.x"
+  }
+```
+
+Also, create a `vtex.product-kit.css` file in `styles/css` for your handlers customization.
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/product-kit/issues). Also feel free to [open issues](https://github.com/vtex-apps/product-kit/issues/new) or contribute with pull requests.
