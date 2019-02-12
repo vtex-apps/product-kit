@@ -63,19 +63,9 @@ Through the Storefront, you can change the minicart's behavior and interface. Ho
 | `allowRemoval`     | `Boolean`         | Allow or not the item removal                 |
 
 ### Styles API
-This app has CSS customization through CSS Modules. CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules here .
+This app has CSS customization through `CSS Modules`. CSS Modules is a CSS file in which all class names and animation names are scoped locally by default. You can read more about CSS Modules [here](https://github.com/css-modules/css-modules).
 
-We use it css-loader to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and major version. Like container token declared in product-kit, generate the classname vtex.product-kit-1-x-container.
-
-Below, we describe the tokens, their explanation and the component where it is located.
-
-
-| Token name         | Component          | Description                                            |
-| ------------------ | ----------         |------------------------------------------------------- |
-| `listContainer`        | [index](https://github.com/vtex-apps/product-kit/blob/master/react/index.js)           | A wrapper that envolves all the elements of the product kit, responsible for the main margins and paddings                         |
-| `container`        | [ProductKitContent](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitContent.js)           | The container for the products and final prices                         |
-| `item`        | [ProductKitItem](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitItem.js)           | The container of one product                         |
-| `listDetails`        | [ListDetails](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitDetails.js)           | The container for the total price of the kit                         |
+We use it css-loader to generate a CSS token on a HTML element. For example, the builder generate a CSS token based on app vendor, name and major version. Like `container` token declared in product-kit, generate the classname vtex.product-kit-1-x-container.
 
 To override the default CSS, you need to import `styles` on your manifest:
 
@@ -86,6 +76,16 @@ To override the default CSS, you need to import `styles` on your manifest:
 ```
 
 Also, create a `vtex.productKit.css` file in `styles/css` for your handlers customization.
+
+Below, we describe the tokens, their explanation and the component where it is located.
+
+
+| Token name         | Component          | Description                                            |
+| ------------------ | ----------         |------------------------------------------------------- |
+| `listContainer`        | [index](https://github.com/vtex-apps/product-kit/blob/master/react/index.js)           | A wrapper that envolves all the elements of the product kit, responsible for the main margins and paddings                         |
+| `container`        | [ProductKitContent](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitContent.js)           | The container for the products and final prices                         |
+| `item`        | [ProductKitItem](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitItem.js)           | The container of one product                         |
+| `listDetails`        | [ListDetails](https://github.com/vtex-apps/product-kit/blob/master/react/components/ProductKitDetails.js)           | The container for the total price of the kit                         |
 
 ## Troubleshooting
 You can check if others are passing through similar issues [here](https://github.com/vtex-apps/product-kit/issues). Also feel free to [open issues](https://github.com/vtex-apps/product-kit/issues/new) or contribute with pull requests.
