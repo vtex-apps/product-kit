@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "product-kit",
-  "version": "1.8.0",
+  "version": "1.8.2",
   "title": "VTEX Product Kit",
   "description": "The VTEX Product Kit which display a list of Products as a kit",
   "defaultLocale": "pt-BR",
