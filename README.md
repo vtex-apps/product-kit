@@ -25,7 +25,7 @@ See our [LTS policy](https://github.com/vtex-apps/awesome-io#lts-policy) for mor
 ## Usage
 This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
 
-We add the product-kit as a block in our [Store Header](https://github.com/vtex-apps/store-header/blob/master/store/interfaces.json).
+We add the product-kit as a block in our [Store](https://github.com/vtex-apps/store/blob/master/store/interfaces.json).
 
 To configure or customize this app, you need to import it in your dependencies in `manifest.json`.
 
