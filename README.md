@@ -82,18 +82,18 @@ Through the Storefront you can change the behavior and interface of `ProductKit`
 | `showArrows`       | `Boolean`         | Show or not the arrows                        | true |
 | `nextArrow`        | `String`          | Next arrow icon                               | `''` |
 | `prevArrow`        | `String`          | Previous arrow icon                           | `''` |
-| `showDots`         | `Boolean`          | Show or not the dots                          | true |
-| `dots`             | `String`          | Dots icon                                     | `''` |
+| `showDots`         | `Boolean`         | Show or not the slider dots                   | true |
+| `dots`             | `String`          | Slider dots icon                              | `''` |
 | `showListPrice`    | `Boolean`         | Show or not the list price                    | true |
-| `showLabels`        | `Boolean`         | Show or not the labels "from" and "to"        | false |
+| `showLabels`       | `Boolean`         | Show or not the labels "from" and "to"        | false |
 | `showInstallments` | `Boolean`         | Show or not the installments                  | false |
 | `showBadge`        | `Boolean`         | Show or not the discount badge                | false |
-| `badgeText`        | `String`          | Text of the discount badge                    | `Texto da badge/Badge Text/Texto de badge` |
+| `badgeText`        | `String`          | Text of the discount badge                    | `Badge Text/Texto de badge/Texto da badge`|
 | `showCollections`  | `Boolean`         | Show or not the collections badges            | true |
 | `allowSwap`        | `Boolean`         | Allow or not the item swap                    | true |
 | `allowRemoval`     | `Boolean`         | Allow or not the item removal                 | true |
 
-Also, you can configure the product summary that is defined on minicart. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
+Also, you can configure the product summary that is defined on product-kit. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API. 
 
 ### Styles API
 
