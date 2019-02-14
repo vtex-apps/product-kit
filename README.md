@@ -6,7 +6,7 @@ The VTEX product kit app shows two or more products as a kit. Usually these prod
 :loudspeaker: **Disclaimer:** Don't fork this project, use, contribute, or open issue with your feature request.
 
 ## Release schedule
-| Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Dreamstore Compatibility
+| Release  | Status              | Initial Release | Maintenance LTS Start | End-of-life | Store Compatibility
 | :--:     | :---:               |  :---:          | :---:                 | :---:       | :---: 
 | [1.x]    | **Current Release** |  2018-11-05     |                       |             | 2.x
 | [0.x]    | **Maintenance LTS** |  2018-07-06     | 2018-11-05            | March 2019  | 1.x
