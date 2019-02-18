@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import ProductSummary from 'vtex.product-summary/index'
+import { ExtensionPoint } from 'vtex.render-runtime'
 import { IconRemove, IconSwap } from 'vtex.dreamstore-icons'
 
 import { productShape, summaryShape } from '../props'
@@ -45,29 +45,34 @@ export default class ProductKitItem extends Component {
     return (
       <div className={styles.item}>
         <div className="flex flex-row">
-          <div className="pl4" >
-            <ProductSummary
-              hideBuyButton
+          <div className="pl4">
+            <ExtensionPoint
+              id="product-summary"
               product={item}
               {...summaryProps}
+              hideBuyButton
             />
           </div>
           <div className="flex flex-column items-center w2">
-            {allowRemoval &&
-              <div className="pointer flex items-center mh3 mv3 c-on-base"
-                onClick={() => onItemRemoval(index)}>
+            {allowRemoval && (
+              <div
+                className="pointer flex items-center mh3 mv3 c-on-base"
+                onClick={() => onItemRemoval(index)}
+              >
                 <IconRemove size={21} viewBox="0 0 21 21" className="w1 h1" />
               </div>
-            }
-            {allowSwap &&
-              <div className="pointer flex items-center mh3 mv3 c-on-base"
-                onClick={() => onItemSwap(index)}>
+            )}
+            {allowSwap && (
+              <div
+                className="pointer flex items-center mh3 mv3 c-on-base"
+                onClick={() => onItemSwap(index)}
+              >
                 <IconSwap size={21} viewBox="0 0 21 21" className="w1 h1" />
               </div>
-            }
+            )}
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }
