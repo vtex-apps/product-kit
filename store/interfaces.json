@@ -1,5 +1,6 @@
 {
   "product-kit": {
+    "required": ["product-summary"],
     "component": "index"
   }
 }
