@@ -17,7 +17,10 @@ export const extractItemsKit = (productsKit, mainProduct) => {
         minQuantity,
       } = productKit
 
-      if (benefitProduct.productId === mainProduct.productId && indexOfMainProduct === -1) {
+      if (
+        benefitProduct.productId === mainProduct.productId &&
+        indexOfMainProduct === -1
+      ) {
         indexOfMainProduct = index
       }
 
@@ -82,7 +85,8 @@ export const extractKitItem = productKit => {
       )
     }
 
-    kitItem.sku.referenceId = (kitItem.sku.referenceId && kitItem.sku.referenceId[0]) || {
+    kitItem.sku.referenceId = (kitItem.sku.referenceId &&
+      kitItem.sku.referenceId[0]) || {
       Value: '',
     }
   }

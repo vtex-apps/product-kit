@@ -66,7 +66,8 @@ export default class ProductKit extends Component {
             dots: showDots,
             appendDots: dots,
             slidesToShow: KITS_PER_TIME,
-          }}>
+          }}
+        >
           {productKitList.map((productKit, index) => (
             <ProductKitContent
               key={index}
@@ -75,7 +76,6 @@ export default class ProductKit extends Component {
               allowSwap={allowSwap}
               allowRemoval={allowRemoval}
               summaryProps={{
-                displayMode: 'parallel',
                 showListPrice,
                 showLabel,
                 showInstallments,
