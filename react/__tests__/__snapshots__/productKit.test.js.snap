@@ -44,7 +44,7 @@ exports[`<ProductSummary /> component should match the snapshot 1`] = `
           class="c-muted-1"
         >
           <svg
-            class="undefined-oritentation-mock w2 IconEquals"
+            class="w2 IconEquals"
             height="44"
             width="44"
           >
