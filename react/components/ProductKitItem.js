@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { IconRemove, IconSwap } from 'vtex.dreamstore-icons'
+import { IconRemove, IconSwap } from 'vtex.store-icons'
 
 import { productShape, summaryShape } from '../props'
 import styles from '../styles.css'

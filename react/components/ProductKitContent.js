@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { equals } from 'ramda'
 
-import { IconPlus, IconEquals } from 'vtex.dreamstore-icons'
+import { IconPlus, IconEquals } from 'vtex.store-icons'
 
 import ProductKitItem from './ProductKitItem'
 import ProductKitDetails from './ProductKitDetails'
@@ -65,8 +65,12 @@ export default class ProductKitContent extends Component {
    * Checks if the items data has changed since the last update of the props.
    */
   componentDidUpdate(prevProps) {
-    const { productKit: { items: curItems } } = this.props
-    const { productKit: { items: prevItems } } = prevProps
+    const {
+      productKit: { items: curItems },
+    } = this.props
+    const {
+      productKit: { items: prevItems },
+    } = prevProps
 
     if (!this.state.shownItems.length || !equals(curItems, prevItems)) {
       this.updateComponentState(curItems)
@@ -109,15 +113,9 @@ export default class ProductKitContent extends Component {
   }
 
   render() {
-    const {
-      summaryProps,
-    } = this.props
+    const { summaryProps } = this.props
 
-    const {
-      shownItems,
-      hiddenItems,
-      numberOfVisibleItems,
-    } = this.state
+    const { shownItems, hiddenItems, numberOfVisibleItems } = this.state
 
     /** Allow swap operation if and only if there is hidden items */
     const allowSwap = this.props.allowSwap && hiddenItems.length > 0
@@ -126,12 +124,17 @@ export default class ProductKitContent extends Component {
     const allowRemoval = this.props.allowRemoval && numberOfVisibleItems > 2
 
     return (
-      <div className={`${styles.container} flex flex-row items-center justify-center b--muted-5 pv3 w-100`}>
+      <div
+        className={`${
+          styles.container
+        } flex flex-row items-center justify-center b--muted-5 pv3 w-100`}
+      >
         {shownItems.map((item, index) => (
-          <div className="flex flex-row items-center justify-center c-muted-1" key={index}>
-            {index > 0 && (
-              <IconPlus size={45} className="w2" />
-            )}
+          <div
+            className="flex flex-row items-center justify-center c-muted-1"
+            key={index}
+          >
+            {index > 0 && <IconPlus size={45} className="w2" />}
             <ProductKitItem
               key={index}
               item={item}
