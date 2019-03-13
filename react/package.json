@@ -5,7 +5,8 @@
   "scripts": {
     "pretest": "yarn",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "tsc --noEmit --pretty && tslint -c tslint.json './**/*.ts'"
   },
   "author": "VTEX",
   "license": "ISC",
@@ -14,21 +15,27 @@
     "react-intl": "^2.7.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.3.1",
-    "@types/node": "^10.12.21",
-    "@types/prop-types": "^15.5.8",
-    "@types/react": "^16.8.1",
     "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@types/node": "^11.11.3",
+    "@types/prop-types": "^15.5.8",
+    "@types/ramda": "^0.26.3",
+    "@types/react": "^16.8.8",
     "babel-jest": "^24.1.0",
     "babel-preset-react-app": "^7.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.1.0",
+    "jest-dom": "^3.0.0",
     "jest-transform-graphql": "^2.1.0",
     "react": "^16.3.1",
     "react-dom": "^16.8.3",
-    "jest-dom": "^3.0.0",
     "react-testing-library": "^5.9.0",
-    "regenerator-runtime": "^0.13.1"
+    "regenerator-runtime": "^0.13.1",
+    "tslint": "^5.14.0",
+    "tslint-config-vtex": "^2.1.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.3.3333",
+    "typescript-babel-jest": "^1.0.6"
   },
   "resolutions": {
     "babel-core": "^7.0.0-bridge.0"
@@ -36,21 +43,24 @@
   "jest": {
     "verbose": true,
     "setupFilesAfterEnv": [
-      "<rootDir>/testUtils/setupTests.js"
+      "<rootDir>/testUtils/setupTests.tsx"
     ],
     "transform": {
-      "\\.(gql|graphql)$": "jest-transform-graphql",
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.(ts|tsx)$": "typescript-babel-jest"
     },
-    "moduleDirectories": [
-      "node_modules",
-      "testUtils"
-    ],
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
+    "modulePaths": [
+      "<rootDir>/testUtils"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__test__/fileMock.js",
       "\\.(css|less|scss)$": "identity-obj-proxy"
     }
   }
