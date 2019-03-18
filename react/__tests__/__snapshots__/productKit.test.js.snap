@@ -40,39 +40,6 @@ exports[`<ProductSummary /> component should match the snapshot 1`] = `
             </div>
           </div>
         </div>
-        <div
-          class="flex flex-row items-center justify-center c-muted-1"
-        >
-          <svg
-            class="w2 IconPlus"
-            height="45"
-            width="45"
-          >
-            IconPlus
-            <rect
-              height="45"
-              width="45"
-            />
-          </svg>
-          <div
-            class="item"
-          >
-            <div
-              class="flex flex-row"
-            >
-              <div
-                class="pl4"
-              >
-                <div
-                  class="extension-point-mock"
-                />
-              </div>
-              <div
-                class="flex flex-column items-center w2"
-              />
-            </div>
-          </div>
-        </div>
         <span
           class="c-muted-1"
         >
@@ -95,7 +62,7 @@ exports[`<ProductSummary /> component should match the snapshot 1`] = `
             class="t-body c-muted-1 mv3"
           >
             <span>
-              Take all 2 products
+              Take all 1 products
             </span>
           </div>
           <div

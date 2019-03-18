@@ -4,8 +4,8 @@ import { productMock } from '../__mocks__/productMock'
 import ProductKit from '../index'
 
 describe('<ProductSummary /> component', () => {
-  function renderComponent(customProps) {
-    return render(<ProductKit {...productMock} {...customProps} />)
+  function renderComponent(customProps, itemNumber = 1) {
+    return render(<ProductKit {...productMock(itemNumber)} {...customProps} />)
   }
 
   it('should be rendered', () => {
@@ -21,20 +21,23 @@ describe('<ProductSummary /> component', () => {
   })
 
   it('should match the snapshot with removal and swap', () => {
-    const { asFragment } = renderComponent({
-      allowSwap: true,
-      allowRemoval: true,
-    })
+    const { asFragment } = renderComponent(
+      {
+        allowSwap: true,
+        allowRemoval: true,
+      },
+      2
+    )
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('should render the 2 itens', () => {
-    const { getByText } = renderComponent()
+    const { getByText } = renderComponent({}, 2)
     expect(getByText(/Take all 2 products/)).toBeTruthy()
   })
 
   it('should remove an item from the kit', () => {
-    const { getByText } = renderComponent({ allowRemoval: true })
+    const { getByText } = renderComponent({ allowRemoval: true }, 2)
     expect(getByText(/Take all 2 products/)).toBeTruthy()
 
     act(() => {
