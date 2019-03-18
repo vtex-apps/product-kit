@@ -8,10 +8,10 @@ export const Container = ({ children }) => {
   return <section className="container-mock">{children}</section>
 }
 
-export const ProductPrice = () => {
-  return <div className="product-price-mock" />
+export const ProductPrice = ({ children }) => {
+  return <div className="product-price-mock">{children}</div>
 }
 
-export const BuyButton = () => {
-  return <div className="buybutton-mock" />
+export const BuyButton = ({ children }) => {
+  return <div className="buybutton-mock">{children}</div>
 }

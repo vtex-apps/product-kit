@@ -34,5 +34,5 @@ npm-debug.log
 .build/
 lib
 .eslintrc
-
+coverage/
 .vscode
