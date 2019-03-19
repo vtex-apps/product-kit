@@ -37,11 +37,11 @@ describe('<ProductSummary /> component', () => {
   })
 
   it('should remove an item from the kit', () => {
-    const { getByText } = renderComponent({ allowRemoval: true }, 2)
+    const { getByText, container } = renderComponent({ allowRemoval: true }, 2)
     expect(getByText(/Take all 2 products/)).toBeTruthy()
 
     act(() => {
-      fireEvent.click(getByText(/IconRemove/))
+      fireEvent.click(container.querySelector('.IconRemove'))
     })
 
     expect(getByText(/Take all 1 products/)).toBeTruthy()

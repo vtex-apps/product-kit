@@ -48,7 +48,6 @@ exports[`<ProductSummary /> component should match the snapshot 1`] = `
             height="44"
             width="44"
           >
-            IconEquals
             <rect
               height="44"
               width="44"
@@ -134,7 +133,6 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
             height="45"
             width="45"
           >
-            IconPlus
             <rect
               height="45"
               width="45"
@@ -164,7 +162,6 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
                     height="21"
                     width="21"
                   >
-                    IconRemove
                     <rect
                       height="21"
                       width="21"
@@ -183,7 +180,6 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
             height="44"
             width="44"
           >
-            IconEquals
             <rect
               height="44"
               width="44"

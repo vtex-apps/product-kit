@@ -3,7 +3,6 @@ import React from 'react'
 const iconMock = (size, className, name) => {
   return (
     <svg className={`${className} ${name}`} width={size} height={size}>
-      {name}
       <rect width={size} height={size} />
     </svg>
   )
