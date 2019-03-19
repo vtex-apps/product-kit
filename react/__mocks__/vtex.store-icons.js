@@ -13,3 +13,9 @@ export const IconEquals = ({ size, className }) =>
 
 export const IconPlus = ({ size, className }) =>
   iconMock(size, className, 'IconPlus')
+
+export const IconRemove = ({ size, className }) =>
+  iconMock(size, className, 'IconRemove')
+
+export const IconSwap = ({ size, className }) =>
+  iconMock(size, className, 'IconSwap')
