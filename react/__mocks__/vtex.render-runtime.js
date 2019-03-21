@@ -1,5 +1,5 @@
 import React from 'react'
 
-export function ExtensionPoint() {
-  return <div className="extension-point-mock" />
+export const ExtensionPoint = ({ id, product }) => {
+  return <div className={`extension-point-${id}`}>{product.sku.name}</div>
 }

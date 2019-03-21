@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProductSummary /> component should match the snapshot 1`] = `
+exports[`<ProductSummary /> component should match the snapshot with no removal and swap 1`] = `
 <DocumentFragment>
   <section
     class="container-mock"
@@ -31,8 +31,10 @@ exports[`<ProductSummary /> component should match the snapshot 1`] = `
                 class="pl4"
               >
                 <div
-                  class="extension-point-mock"
-                />
+                  class="extension-point-product-summary"
+                >
+                  name-1
+                </div>
               </div>
               <div
                 class="flex flex-column items-center w2"
@@ -116,8 +118,10 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
                 class="pl4"
               >
                 <div
-                  class="extension-point-mock"
-                />
+                  class="extension-point-product-summary"
+                >
+                  name-1
+                </div>
               </div>
               <div
                 class="flex flex-column items-center w2"
@@ -148,8 +152,10 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
                 class="pl4"
               >
                 <div
-                  class="extension-point-mock"
-                />
+                  class="extension-point-product-summary"
+                >
+                  name-2
+                </div>
               </div>
               <div
                 class="flex flex-column items-center w2"
@@ -159,6 +165,83 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
                 >
                   <svg
                     class="w1 h1 IconRemove"
+                    height="21"
+                    width="21"
+                  >
+                    <rect
+                      height="21"
+                      width="21"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="pointer flex items-center mh3 mv3 c-on-base"
+                >
+                  <svg
+                    class="w1 h1 IconSwap"
+                    height="21"
+                    width="21"
+                  >
+                    <rect
+                      height="21"
+                      width="21"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-row items-center justify-center c-muted-1"
+        >
+          <svg
+            class="w2 IconPlus"
+            height="45"
+            width="45"
+          >
+            <rect
+              height="45"
+              width="45"
+            />
+          </svg>
+          <div
+            class="item"
+          >
+            <div
+              class="flex flex-row"
+            >
+              <div
+                class="pl4"
+              >
+                <div
+                  class="extension-point-product-summary"
+                >
+                  name-3
+                </div>
+              </div>
+              <div
+                class="flex flex-column items-center w2"
+              >
+                <div
+                  class="pointer flex items-center mh3 mv3 c-on-base"
+                >
+                  <svg
+                    class="w1 h1 IconRemove"
+                    height="21"
+                    width="21"
+                  >
+                    <rect
+                      height="21"
+                      width="21"
+                    />
+                  </svg>
+                </div>
+                <div
+                  class="pointer flex items-center mh3 mv3 c-on-base"
+                >
+                  <svg
+                    class="w1 h1 IconSwap"
                     height="21"
                     width="21"
                   >
@@ -193,7 +276,7 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
             class="t-body c-muted-1 mv3"
           >
             <span>
-              Take all 2 products
+              Take all 3 products
             </span>
           </div>
           <div
