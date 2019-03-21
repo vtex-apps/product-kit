@@ -1,3 +1,5 @@
+import { map, range } from 'ramda'
+
 export const productMock = itemNumber => {
   const itemMock = name => {
     return {
@@ -87,21 +89,15 @@ export const productMock = itemNumber => {
       product: {
         benefits: [
           {
-            items: [],
+            items: map(
+              index => itemMock(`name-${index}`),
+              range(1, itemNumber + 1)
+            ),
           },
         ],
         productId: '1',
       },
     },
-  }
-
-  let customNameCount = 0
-
-  while (mock.productQuery.product.benefits[0].items.length < itemNumber) {
-    customNameCount++
-    mock.productQuery.product.benefits[0].items = mock.productQuery.product.benefits[0].items.concat(
-      itemMock(`name-${customNameCount}`)
-    )
   }
 
   return mock
