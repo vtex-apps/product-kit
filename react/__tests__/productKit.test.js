@@ -50,7 +50,10 @@ describe('<ProductSummary /> component', () => {
   /** It will swap the first swapable (name-2) for the one left over (name-4).
    * If swapped again, it should retrieve the previous one. */
   it('should swap an item from the kit', () => {
-    const { getByText, container } = renderComponent({ allowSwap: true }, 4)
+    const { getByText, container, queryByText } = renderComponent(
+      { allowSwap: true },
+      4
+    )
     expect(getByText('name-2')).toBeTruthy()
 
     act(() => {
@@ -58,7 +61,7 @@ describe('<ProductSummary /> component', () => {
     })
 
     expect(getByText('name-4')).toBeTruthy()
-    expect(getByText('name-2')).toBeFalsy()
+    expect(queryByText('name-2')).toBeNull()
 
     act(() => {
       fireEvent.click(container.querySelector('.IconSwap'))
