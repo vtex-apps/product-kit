@@ -54,7 +54,7 @@ export default class ProductKit extends Component {
     return (
       <Container className={`${styles.listContainer} dn db-ns flex-column`}>
         <div className="t-heading-3 c-muted-1 fw3 mv4 flex items-center justify-center">
-          <FormattedMessage id="store/productKitList.mountYourKit" />
+          <FormattedMessage id="store/productKitList.buildYourBundle" />
         </div>
         <Slider
           leftArrowClasses="z-2"

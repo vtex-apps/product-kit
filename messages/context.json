@@ -14,7 +14,7 @@
   "admin/editor.productKitList.showBadge": "admin/editor.productKitList.showBadge",
   "admin/editor.productKitList.badgeText": "admin/editor.productKitList.badgeText",
   "store/productKitList.takeAll": "store/productKitList.takeAll",
-  "store/productKitList.mountYourKit": "store/productKitList.mountYourKit",
+  "store/productKitList.buildYourBundle": "store/productKitList.buildYourBundle",
   "store/productKitList.swapItem": "store/productKitList.swapItem",
   "store/productKitList.buyKit": "store/productKitList.buyKit"
 }

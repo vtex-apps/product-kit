@@ -1,6 +1,6 @@
 {
   "admin/editor.productKitList.title": "Product Kit",
-  "admin/editor.productKitList.description": "The Product Kit component display a horizontal list of Products of the kit",
+  "admin/editor.productKitList.description": "The Product Kit component display a horizontal list of products to buy together",
   "admin/editor.productKitList.allowSwap": "Allow Swap",
   "admin/editor.productKitList.allowRemoval": "Allow Removal",
   "admin/editor.productKitList.showArrows": "Show Arrows",
@@ -14,7 +14,7 @@
   "admin/editor.productKitList.showBadge": "Show badge",
   "admin/editor.productKitList.badgeText": "Badge Text",
   "store/productKitList.takeAll": "Take all {numberOfItems} products",
-  "store/productKitList.mountYourKit": "Mount your Kit",
+  "store/productKitList.buildYourBundle": "Build your bundle",
   "store/productKitList.swapItem": "Swap",
   "store/productKitList.buyKit": "Buy Kit"
 }
