@@ -1,30 +1,30 @@
 export const schema = ({ showArrows, showDots, showBadge }) => {
   return {
-    title: 'editor.productKitList.title',
-    description: 'editor.productKitList.description',
+    title: 'admin/editor.productKitList.title',
+    description: 'admin/editor.productKitList.description',
     type: 'object',
     properties: {
       allowSwap: {
         type: 'boolean',
-        title: 'editor.productKitList.allowSwap',
+        title: 'admin/editor.productKitList.allowSwap',
         default: true,
         isLayout: false,
       },
       allowRemoval: {
         type: 'boolean',
-        title: 'editor.productKitList.allowRemoval',
+        title: 'admin/editor.productKitList.allowRemoval',
         default: true,
         isLayout: false,
       },
       showArrows: {
         type: 'boolean',
-        title: 'editor.productKitList.showArrows',
+        title: 'admin/editor.productKitList.showArrows',
         default: true,
         isLayout: true,
       },
       nextArrow: showArrows ? {
         type: 'string',
-        title: 'editor.productKitList.nextArrow',
+        title: 'admin/editor.productKitList.nextArrow',
         default: '',
         isLayout: false,
         widget: {
@@ -33,7 +33,7 @@ export const schema = ({ showArrows, showDots, showBadge }) => {
       } : {},
       prevArrow: showArrows ? {
         type: 'string',
-        title: 'editor.productKitList.prevArrow',
+        title: 'admin/editor.productKitList.prevArrow',
         default: '',
         isLayout: false,
         widget: {
@@ -42,13 +42,13 @@ export const schema = ({ showArrows, showDots, showBadge }) => {
       } : {},
       showDots: {
         type: 'boolean',
-        title: 'editor.productKitList.showDots',
+        title: 'admin/editor.productKitList.showDots',
         default: true,
         isLayout: true,
       },
       dots: showDots ? {
         type: 'string',
-        title: 'editor.productKitList.dot',
+        title: 'admin/editor.productKitList.dot',
         default: '',
         isLayout: false,
         widget: {
@@ -57,32 +57,32 @@ export const schema = ({ showArrows, showDots, showBadge }) => {
       } : {},
       showListPrice: {
         type: 'boolean',
-        title: 'editor.productKitList.showListPrice',
+        title: 'admin/editor.productKitList.showListPrice',
         default: true,
         isLayout: true,
       },
       showLabels: {
         type: 'boolean',
-        title: 'editor.productKitList.showLabels',
+        title: 'admin/editor.productKitList.showLabels',
         default: false,
         isLayout: true,
       },
       showInstallments: {
         type: 'boolean',
-        title: 'editor.productKitList.showInstallments',
+        title: 'admin/editor.productKitList.showInstallments',
         default: false,
         isLayout: true,
       },
       showBadge: {
         type: 'boolean',
-        title: 'editor.productKitList.showBadge',
+        title: 'admin/editor.productKitList.showBadge',
         default: false,
         isLayout: true,
       },
       badgeText: showBadge
         ? {
           type: 'string',
-          title: 'editor.productKitList.badgeText',
+          title: 'admin/editor.productKitList.badgeText',
           isLayout: false,
         }
         : {},
