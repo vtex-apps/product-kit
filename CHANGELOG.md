@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+
+- Translation file names.
+- English translation.
+
+### Added
+
+- Scope messages.
 
 ## [1.9.2] - 2019-06-04
 ### Fixed
