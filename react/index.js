@@ -39,9 +39,9 @@ export default class ProductKit extends Component {
       showCollections,
       allowSwap,
       allowRemoval,
-      productQuery: { product, loading },
+      productQuery,
     } = this.props
-
+    const { product, loading } = productQuery || {}
     const productKitList = path(['benefits'], product)
 
     /** The product does not have any kit of products associated with it,

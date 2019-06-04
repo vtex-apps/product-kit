@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.2] - 2019-06-04
+### Fixed
+
+- Fix crash on navigation while productQuery is undefined.
+
 ## [1.9.1] - 2019-03-01
 
 ### Changed
