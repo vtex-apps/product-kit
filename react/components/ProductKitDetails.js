@@ -68,7 +68,7 @@ export default class ProductKitDetails extends Component {
       <div className={`${styles.listDetails} flex flex-column items-center justify-center tc ph7`}>
         <div className="t-body c-muted-1 mv3">
           <FormattedMessage
-            id="productKitList.takeAll"
+            id="store/productKitList.takeAll"
             values={{ numberOfItems: items.length }}
           />
         </div>
@@ -83,7 +83,7 @@ export default class ProductKitDetails extends Component {
           />
         </div>
         <BuyButton skuItems={this.getSkuItems(items)}>
-          <FormattedMessage id="productKitList.buyKit" />
+          <FormattedMessage id="store/productKitList.buyKit" />
         </BuyButton>
       </div>
     )

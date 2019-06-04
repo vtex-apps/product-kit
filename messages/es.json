@@ -1,0 +1,20 @@
+{
+  "admin/editor.productKitList.title": "Kit de Productos",
+  "admin/editor.productKitList.allowSwap": "Pemitir Permuta",
+  "admin/editor.productKitList.allowRemoval": "Pemitir Remoción",
+  "admin/editor.productKitList.showArrows": "Mostrar Flechas",
+  "admin/editor.productKitList.nextArrow": "Flecha Siguiente",
+  "admin/editor.productKitList.prevArrow": "Flecha Anterior",
+  "admin/editor.productKitList.showDots": "Mostrar Puntos",
+  "admin/editor.productKitList.dot": "Punto",
+  "admin/editor.productKitList.description": "El component de kit de productos muestra una lista horizontal de productos que pertenecen al kit",
+  "admin/editor.productKitList.showListPrice": "Mostrar lista de precios",
+  "admin/editor.productKitList.showLabels": "Mostrar las etiquetas",
+  "admin/editor.productKitList.showInstallments": "Mostrar parcelas",
+  "admin/editor.productKitList.showBadge": "Mostrar badge",
+  "admin/editor.productKitList.badgeText": "Texto de badge",
+  "store/productKitList.takeAll": "Ileve los {numberOfItems} productos",
+  "store/productKitList.buildYourBundle": "Monte su Kit",
+  "store/productKitList.swapItem": "Intercambiar",
+  "store/productKitList.buyKit": "Comprar Kit"
+}

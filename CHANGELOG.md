@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.3] - 2019-06-04
+### Fixed
+
+- Translation file names.
+- English translation.
+
+### Added
+
+- Scope messages.
+
 ## [1.9.2] - 2019-06-04
 ### Fixed
 

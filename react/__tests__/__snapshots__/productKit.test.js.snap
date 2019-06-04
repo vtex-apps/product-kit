@@ -9,7 +9,7 @@ exports[`<ProductSummary /> component should match the snapshot with no removal 
       class="t-heading-3 c-muted-1 fw3 mv4 flex items-center justify-center"
     >
       <span>
-        Mount your Kit
+        Build your bundle
       </span>
     </div>
     <div
@@ -96,7 +96,7 @@ exports[`<ProductSummary /> component should match the snapshot with removal and
       class="t-heading-3 c-muted-1 fw3 mv4 flex items-center justify-center"
     >
       <span>
-        Mount your Kit
+        Build your bundle
       </span>
     </div>
     <div
