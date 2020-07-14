@@ -1,6 +1,6 @@
 {
   "name": "product-kit",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "A Product kit component.",
   "scripts": {
     "pretest": "yarn",
