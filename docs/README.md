@@ -1,6 +1,8 @@
-# VTEX Product Kit ![https://img.shields.io/badge/-Deprecated-red](https://img.shields.io/badge/-Deprecated-red)
+# VTEX Product Kit 
 
-⚠️ **The Product Kit app has been deprecated.** Despite this, support for it is still granted.
+![https://img.shields.io/badge/-Deprecated-red](https://img.shields.io/badge/-Deprecated-red)
+
+> ⚠️ ***The Product Kit app has been deprecated.** Although support for this app is still granted by VTEX, we strongly recommend you to update your store theme in order to keep up with the framework's evolution!*
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
