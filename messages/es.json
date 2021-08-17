@@ -1,5 +1,6 @@
 {
   "admin/editor.productKitList.title": "Kit de Productos",
+  "admin/editor.productKitList.description": "El component de kit de productos muestra una lista horizontal de productos que pertenecen al kit",
   "admin/editor.productKitList.allowSwap": "Pemitir Permuta",
   "admin/editor.productKitList.allowRemoval": "Pemitir Remoción",
   "admin/editor.productKitList.showArrows": "Mostrar Flechas",
@@ -7,7 +8,6 @@
   "admin/editor.productKitList.prevArrow": "Flecha Anterior",
   "admin/editor.productKitList.showDots": "Mostrar Puntos",
   "admin/editor.productKitList.dot": "Punto",
-  "admin/editor.productKitList.description": "El component de kit de productos muestra una lista horizontal de productos que pertenecen al kit",
   "admin/editor.productKitList.showListPrice": "Mostrar lista de precios",
   "admin/editor.productKitList.showLabels": "Mostrar las etiquetas",
   "admin/editor.productKitList.showInstallments": "Mostrar parcelas",
