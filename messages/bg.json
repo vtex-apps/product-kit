@@ -1,0 +1,20 @@
+{
+  "admin/editor.productKitList.title": "Product Kit",
+  "admin/editor.productKitList.description": "The Product Kit component display a horizontal list of products to buy together",
+  "admin/editor.productKitList.allowSwap": "Allow Swap",
+  "admin/editor.productKitList.allowRemoval": "Allow Removal",
+  "admin/editor.productKitList.showArrows": "Show Arrows",
+  "admin/editor.productKitList.nextArrow": "Next Arrow",
+  "admin/editor.productKitList.prevArrow": "Prev Arrow",
+  "admin/editor.productKitList.showDots": "Show Dots",
+  "admin/editor.productKitList.dot": "Dot",
+  "admin/editor.productKitList.showListPrice": "Show list price",
+  "admin/editor.productKitList.showLabels": "Show labels",
+  "admin/editor.productKitList.showInstallments": "Show installments",
+  "admin/editor.productKitList.showBadge": "Show badge",
+  "admin/editor.productKitList.badgeText": "Badge Text",
+  "store/productKitList.takeAll": "Take all {numberOfItems} products",
+  "store/productKitList.buildYourBundle": "Build your bundle",
+  "store/productKitList.swapItem": "Swap",
+  "store/productKitList.buyKit": "Buy Kit"
+}
